@@ -12,17 +12,17 @@ pipeline {
 
     parameters  {
         choice(
-            name: 'BRANCH_NAME',
+            name: 'branchName',
             choices: branches(),
             description: 'Choose branch name'
         )
         string(
-            name: 'SERVICE_NAME',
+            name: 'serviceName',
             defaultValue: '0',
             description: 'Put the service name'
         )
         string(
-            name: 'BUILD_NUMBER',
+            name: 'buildName',
             defaultValue: '0',
             description: 'Put the build number'
         )
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy on Dev') {
             when {
                 expression {
-                    ${BRANCH_NAME} != null && ${SERVICE_NAME} != null && ${BUILD_NUMBER} != null
+                    ${params.branchName} != null && ${params.serviceName} != null && ${params.buildName} != null
                 }
             }
             steps {
