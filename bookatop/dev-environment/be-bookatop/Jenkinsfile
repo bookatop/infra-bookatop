@@ -1,6 +1,6 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
-declare services = ["auth"]
+services = ["auth"]
 
 def copy_services(list) {
    services.each {
