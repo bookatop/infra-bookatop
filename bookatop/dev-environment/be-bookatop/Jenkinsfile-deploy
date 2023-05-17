@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Deploy on Dev') {
             steps {
-                scripts {
+                script {
                     properties([
                         parameters([
                             choice(
