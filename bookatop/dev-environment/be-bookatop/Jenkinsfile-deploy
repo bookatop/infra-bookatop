@@ -4,12 +4,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Clean/Build/Test') {
-            steps {
-                sh 'ls'
-                sh 'gradle clean build test'
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'Deploy the main branch on dev environment'
