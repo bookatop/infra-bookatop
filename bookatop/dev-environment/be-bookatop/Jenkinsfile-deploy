@@ -20,13 +20,15 @@ pipeline {
             name: 'serviceName',
             defaultValue: 'auth',
             description: 'Put the service name*',
+            failedValidationMessage: 'Service name is empty',
             regex: /^.+$/
         )
         validatingString(
             name: 'buildName',
             defaultValue: '1',
             description: 'Put the build number*',
-            regex: /^.+$/
+            failedValidationMessage: 'Build number is empty',
+            regex: /^[0-9]+$/
         )
     }
 
