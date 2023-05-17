@@ -4,8 +4,8 @@ pipeline {
     agent any
 
     environment {
-        BUILD_SERVICE_PATH = 'services'
-        RELEASE_PATH = '/path/dev-env/be-bookatop/releases'
+        SOUR_PATH = 'services'
+        DEST_PATH = '/path/dev-env/be-bookatop/releases'
     }
 
     stages {
@@ -24,8 +24,14 @@ pipeline {
                     services.each { item ->
                           sh """
                             echo Fetch service ${item}
-                            FILE = ${BUILD_SERVICE_PATH}/${auth}/build/libs/${auth}-service.jar
-                            [ -f FILE ] && echo "$FILE exists" || echo "$FILE not exist"
+                            SOUR_FILE = ${SOUR_PATH}/${auth}/build/libs/${auth}-service.jar
+                            DEST_FILE = ${DEST_PATH}/${auth}-service-${BUILD_NUMBER}.jar
+                            if ! [[ -f $SOUR_FILE ]]; then
+                                exit 1
+                            fi
+                            echo Paths
+                            echo $SOUR_FILE
+                            echo $DEST_FILE
                           """
                     }
                 }
