@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy on Dev') {
             when {
                 expression {
-                    ${params.branchName} != null && ${params.serviceName} != null && ${params.buildName} != null
+                    params.branchName != null && params.serviceName != null && params.buildName != null
                 }
             }
             steps {
