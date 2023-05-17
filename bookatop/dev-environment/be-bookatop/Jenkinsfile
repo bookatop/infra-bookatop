@@ -29,9 +29,7 @@ pipeline {
                             if ! [[ -f ${SOUR_FILE} ]]; then
                                 exit 1
                             fi
-                            echo Paths
-                            echo ${SOUR_FILE}
-                            echo ${DEST_FILE}
+
                           """
                     }
                 }
