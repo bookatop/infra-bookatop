@@ -19,13 +19,13 @@ pipeline {
         )
         string(
             name: 'serviceName',
-            defaultValue: '0',
+            defaultValue: 'auth',
             description: 'Put the service name',
             required: true
         )
         string(
             name: 'buildName',
-            defaultValue: '0',
+            defaultValue: '1',
             description: 'Put the build number',
             required: true
         )
