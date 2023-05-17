@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Release') {
             steps {
-                sh 'ls'
+                echo 'Copy built on branch on dev environment'
             }
         }
     }
