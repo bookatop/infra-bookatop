@@ -4,22 +4,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clean/Build') {
+        stage('Clean/Build/Test') {
             steps {
-                sh 'gradle clean build -x test'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'gradle test'
-            }
-        }
-        stage('Deploy') {
-            when {
-                branch 'main'
-            }
-            steps {
-                echo 'Deploy main branch'
+                sh 'gradle clean build test'
             }
         }
     }
