@@ -23,9 +23,9 @@ pipeline {
 
                     services.each { item ->
                           echo "Fetch ${item} service"
-                          sh '''
-                             echo Fetch service ${item}
-                          '''
+                          sh """
+                            echo Fetch service ${item}
+                          """
                     }
                 }
 
