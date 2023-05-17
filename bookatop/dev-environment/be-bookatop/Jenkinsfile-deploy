@@ -8,12 +8,11 @@ pipeline {
             steps {
                 script {
                     properties([
-                        parameters([
-                            choice(
-                                choices: ['build 1', 'build 2', 'build 3'],
-                                name: 'BUILD_NUMBER'
-                            )
-                        ])
+                        string(
+                            name: 'BUILD_NUMBER',
+                            defaultValue: '0',
+                            description: 'Put the build number'
+                        )
                     ])
                 }
                 echo 'Deploy the main branch on dev environment'
