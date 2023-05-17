@@ -16,6 +16,7 @@ pipeline {
             choices: branches(),
             description: 'Choose branch name*'
         )
+        /*
         validatingString(
             name: 'serviceName',
             defaultValue: 'auth',
@@ -30,16 +31,17 @@ pipeline {
             failedValidationMessage: 'Build number is empty',
             regex: /^[0-9]+$/
         )
+        */
     }
 
     stages {
         stage('Deploy on Dev') {
-            when {
+            /*when {
                 expression {
                     equals(actual: currentBuild.number, expected: 1)
                     params.branchName != null && params.serviceName != null && params.buildName != null
                 }
-            }
+            }*/
             steps {
                 echo "Deploy ${params.BRANCH_NUMBER}:${params.SERVICE_NAME}:${params.BUILD_NUMBER} on dev environment"
             }
