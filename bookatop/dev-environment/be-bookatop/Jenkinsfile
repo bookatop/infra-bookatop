@@ -21,12 +21,11 @@ pipeline {
                 script {
                     def services = ['auth']
 
-                    services.each { item -> {
+                    services.each { item ->
                           echo "Fetch ${item} service"
                           sh '''
                              echo Fetch service ${item}
                           '''
-                       }
                     }
                 }
 
