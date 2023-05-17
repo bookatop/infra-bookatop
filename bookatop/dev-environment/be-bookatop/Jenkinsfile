@@ -24,7 +24,7 @@ pipeline {
                     services.each { item ->
                           varSourceFile = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                           varDestFile = "${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar"
-                          sh '''
+                          sh """
                             #!/bin/bash
                             echo Fetch service ${item}
                             if ! [[ -f "${varSourceFile}" ]]; then
@@ -33,7 +33,7 @@ pipeline {
                             echo Paths
                             echo ${varSourceFile}
                             echo ${varDestFile}
-                          '''
+                          """
                     }
                 }
 
