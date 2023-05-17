@@ -40,7 +40,7 @@ pipeline {
     stages {
         stage('Deploy on Dev') {
             steps {
-                echo "Deploy params.branchName:params.serviceName:params.buildName on dev environment"
+                echo "Deploy ${params.branchName}:${params.serviceName}:${params.buildName} on dev environment"
 
                 script {
                     echo "Deploy params.branchName:params.serviceName:params.buildName on dev environment"
