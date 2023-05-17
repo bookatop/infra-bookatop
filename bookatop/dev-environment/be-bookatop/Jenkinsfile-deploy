@@ -31,6 +31,11 @@ pipeline {
 
     stages {
         stage('Deploy on Dev') {
+            when {
+                expression {
+                    ${BRANCH_NAME} != null && ${SERVICE_NAME} != null && ${BUILD_NUMBER} != null
+                }
+            }
             steps {
                 echo "Deploy ${params.BRANCH_NUMBER}:${params.SERVICE_NAME}:${params.BUILD_NUMBER} on dev environment"
             }
