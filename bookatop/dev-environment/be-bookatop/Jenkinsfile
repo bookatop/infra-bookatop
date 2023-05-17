@@ -3,6 +3,12 @@
 pipeline {
     agent any
 
+    environment {
+        BUILD_SERVICE_PATH = 'services'
+        RELEASE_PATH = '/path/dev-env/be-bookatop/releases'
+        SERVICE_LIST = ''
+    }
+
     stages {
         stage('Clean/Build/Test') {
             steps {
@@ -12,6 +18,10 @@ pipeline {
         stage('Prepare release for dev environment') {
             steps {
                 echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev environment"
+
+                sh '''
+                    echo 'Fetch services'
+                '''
             }
         }
     }
