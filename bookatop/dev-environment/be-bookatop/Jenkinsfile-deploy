@@ -10,7 +10,7 @@ pipeline {
                     properties([
                         parameters([
                             choice(
-                                choices: ['build 1', 'build 2'],
+                                choices: ['build 1', 'build 2', 'build 2'],
                                 name: 'BUILD_NUMBER'
                             )
                         ])
