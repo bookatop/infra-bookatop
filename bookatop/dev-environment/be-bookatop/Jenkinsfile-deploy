@@ -4,8 +4,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy') {
+        stage('Deploy on Dev') {
             steps {
+                scripts {
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['build 1', 'build 2'],
+                                name: 'BUILD_NUMBER'
+                            )
+                        ])
+                    ])
+                }
                 echo 'Deploy the main branch on dev environment'
             }
         }
