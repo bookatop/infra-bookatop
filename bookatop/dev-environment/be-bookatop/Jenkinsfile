@@ -9,5 +9,10 @@ pipeline {
                 sh 'gradle clean build test'
             }
         }
+        stage('Release') {
+            steps {
+                sh 'ls'
+            }
+        }
     }
 }
