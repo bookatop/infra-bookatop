@@ -5,7 +5,8 @@ pipeline {
 
     environment {
         SOUR_PATH = 'services'
-        DEST_PATH = '/path/dev-env/be-bookatop/releases'
+        DEST_PATH = '/path/dev-env/be-bookatop/releases/${BRANCH_NAME}'
+        SERVICES = ['auth']
     }
 
     stages {
@@ -19,8 +20,6 @@ pipeline {
                 echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev environment"
 
                 script {
-                    def services = ['auth']
-
                     sh """
                       #Check the destination directory exists
                       if ! [ -d ]; then
@@ -29,7 +28,7 @@ pipeline {
                     """
 
                     /* Fetch defined services to be released */
-                    services.each { item ->
+                    SERVICES.each { item ->
                           varSourceFile = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                           varDestFile = "${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar"
                           sh """
