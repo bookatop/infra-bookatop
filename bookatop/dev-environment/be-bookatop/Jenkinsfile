@@ -21,17 +21,28 @@ pipeline {
                 script {
                     def services = ['auth']
 
+                    sh """
+                      #Check the destination directory exists
+                      if ! [ -d ]; then
+                          mkdir -p ${DEST_PATH}
+                      fi
+                    """
+
+                    /* Fetch defined services to be released */
                     services.each { item ->
                           varSourceFile = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                           varDestFile = "${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar"
                           sh """
-                            echo Fetch service ${item}
+                            echo Fetched service ${item}
+
+                            #Check if the file is exist
                             if ! [ -f ${varSourceFile} ]; then
+                                echo Oops! The file ${varSourceFile} is not exist!
                                 exit 1
                             fi
-                            ls
-                            echo ${varSourceFile}
-                            echo ${varDestFile}
+
+                            echo Copied the file ${varDestFile}
+                            cp ${varSourceFile} ${varDestFile}
                           """
                     }
                 }
