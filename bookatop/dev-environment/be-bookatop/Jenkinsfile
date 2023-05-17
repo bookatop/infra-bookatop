@@ -26,7 +26,7 @@ pipeline {
 }
 
 def copy_services(list) {
-   services.each {
+   ["auth"].each {
       item ->
          sh '''
             echo "Fetch service ${item}"
