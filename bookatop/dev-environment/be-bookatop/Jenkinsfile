@@ -29,7 +29,7 @@ pipeline {
                             if ! [ -f ${varSourceFile} ]; then
                                 exit 1
                             fi
-                            echo Paths
+                            ls
                             echo ${varSourceFile}
                             echo ${varDestFile}
                           """
