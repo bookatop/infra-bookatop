@@ -2,6 +2,15 @@
 
 declare services = ["auth"]
 
+def copy_services(list) {
+   services.each {
+      item ->
+         sh '''
+            echo 'Fetch service ${item}'
+            '''
+   }
+}
+
 pipeline {
     agent any
 
@@ -19,14 +28,7 @@ pipeline {
         stage('Prepare release for dev environment') {
             steps {
                 echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev environment"
-
-                services.each {
-                    item ->
-                    sh '''
-                         echo 'Fetch service ${item}'
-                       '''
-                }
-
+                copy_services(services)
             }
         }
     }
