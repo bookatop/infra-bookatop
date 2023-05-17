@@ -1,0 +1,18 @@
+/* Introduces steps to build and test the be-bookatop on dev environment */
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Clean/Build') {
+            steps {
+                sh 'gradle clean build -x test'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'gradle test'
+            }
+        }
+    }
+}
