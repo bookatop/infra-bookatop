@@ -16,7 +16,6 @@ pipeline {
             choices: branches(),
             description: 'Choose branch name*'
         )
-        /*
         validatingString(
             name: 'serviceName',
             defaultValue: 'auth',
@@ -31,7 +30,6 @@ pipeline {
             failedValidationMessage: 'Build number is empty',
             regex: /^[0-9]+$/
         )
-        */
     }
 
     stages {
