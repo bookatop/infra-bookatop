@@ -12,7 +12,7 @@ pipeline {
 
     environment {
         SOUR_PATH = '/path/dev-env/be-bookatop/releases/${params.branchName}'
-        DEST_PATH = '/path/prod-env/be-bookatop'
+        DEST_PATH = '/path/dev-env/be-bookatop/releases/libs'
     }
 
     parameters  {
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 echo "Deploy params.branchName:params.serviceName:params.buildName on dev environment"
 
-                varSourceFile = ${SOUR_PATH}/${params.branchName}/${params.serviceName}-${params.buildName}.jar
+                varSourceFile = ${SOUR_PATH}/${params.serviceName}-${params.buildName}.jar
                 varDestFile = ${DEST_PATH}/${params.serviceName}-${params.branchName}-${params.buildName}.jar
 
                 echo ${varSourceFile}
