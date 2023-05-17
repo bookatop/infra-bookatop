@@ -14,5 +14,13 @@ pipeline {
                 sh 'gradle test'
             }
         }
+        stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploy main branch'
+            }
+        }
     }
 }
