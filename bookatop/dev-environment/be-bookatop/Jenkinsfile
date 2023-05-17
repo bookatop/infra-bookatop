@@ -24,14 +24,14 @@ pipeline {
                     services.each { item ->
                           sh """
                             echo Fetch service ${item}
-                            SOUR_FILE = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
-                            DEST_FILE = "${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar"
+                            SOUR_FILE = ${SOUR_PATH}/${item}/build/libs/${item}-service.jar
+                            DEST_FILE = ${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar
                             if ! [[ -f $SOUR_FILE ]]; then
                                 exit 1
                             fi
                             echo Paths
-                            echo $SOUR_FILE
-                            echo $DEST_FILE
+                            echo "$SOUR_FILE"
+                            echo "$DEST_FILE"
                           """
                     }
                 }
