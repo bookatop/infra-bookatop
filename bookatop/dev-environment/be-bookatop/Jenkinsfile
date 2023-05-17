@@ -22,9 +22,10 @@ pipeline {
                     def services = ['auth']
 
                     services.each { item ->
-                          echo "Fetch ${item} service"
                           sh """
                             echo Fetch service ${item}
+                            FILE = ${BUILD_SERVICE_PATH}/${auth}/build/libs/${auth}-service.jar
+                            [ -f FILE ] && echo "$FILE exists" || echo "$FILE not exist"
                           """
                     }
                 }
