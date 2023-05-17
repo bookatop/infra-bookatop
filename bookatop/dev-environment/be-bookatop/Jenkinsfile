@@ -29,7 +29,7 @@ def copy_services(list) {
    ['auth'].each {
       item ->
          sh '''
-            echo "Fetch service ${item}"
+            echo Fetch service ${item}
             '''
    }
 }
