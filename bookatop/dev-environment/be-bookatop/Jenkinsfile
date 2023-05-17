@@ -1,7 +1,5 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
-services = ['auth']
-
 pipeline {
     agent any
 
@@ -19,16 +17,18 @@ pipeline {
         stage('Prepare release for dev environment') {
             steps {
                 echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev environment"
-                fetch_services(services)
+
+                script {
+                    def services = ['auth']
+
+                    list.each { item ->
+                          sh '''
+                             echo Fetch service ${item}
+                          '''
+                       }
+                }
+
             }
         }
     }
-}
-
-def fetch_services(list) {
-   list.each { item ->
-      sh '''
-         echo Fetch service ${item}
-      '''
-   }
 }
