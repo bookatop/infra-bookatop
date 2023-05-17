@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Deploy on Dev') {
             steps {
-                echo "Deploy build ${params.BUILD_NUMBER} number of the main branch on dev environment"
+                echo "Deploy build:main:${params.BUILD_NUMBER} on dev environment"
             }
         }
     }
