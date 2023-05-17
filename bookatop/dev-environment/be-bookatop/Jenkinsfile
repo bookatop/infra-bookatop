@@ -22,18 +22,18 @@ pipeline {
                     def services = ['auth']
 
                     services.each { item ->
-                          sh """
+                          sh '''
                             #!/bin/bash
                             echo Fetch service ${item}
                             varSourceFile = ${SOUR_PATH}/${item}/build/libs/${item}-service.jar
                             varDestFile = ${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar
-                            if ! [[ -f $varSourceFile ]]; then
+                            if ! [[ -f "${varSourceFile}" ]]; then
                                 exit 1
                             fi
                             echo Paths
-                            echo $varSourceFile
-                            echo $varDestFile
-                          """
+                            echo "${varSourceFile}"
+                            echo "${varDestFile}"
+                          '''
                     }
                 }
 
