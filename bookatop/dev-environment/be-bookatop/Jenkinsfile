@@ -9,9 +9,9 @@ pipeline {
                 sh 'gradle clean build test'
             }
         }
-        stage('Release') {
+        stage('Prepare release for dev environment') {
             steps {
-                echo 'Copy built on branch on dev environment'
+                echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev environment"
             }
         }
     }
