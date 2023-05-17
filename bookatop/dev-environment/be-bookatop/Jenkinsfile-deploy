@@ -3,19 +3,18 @@
 pipeline {
     agent any
 
+    parameters  {
+        string(
+            name: 'BUILD_NUMBER',
+            defaultValue: '0',
+            description: 'Put the build number'
+        )
+    }
+
     stages {
         stage('Deploy on Dev') {
             steps {
-                script {
-                    properties([
-                        string(
-                            name: 'BUILD_NUMBER',
-                            defaultValue: '0',
-                            description: 'Put the build number'
-                        )
-                    ])
-                }
-                echo 'Deploy the main branch on dev environment'
+                echo 'Deploy build ${params.BUILD_NUMBER} number of the main branch on dev environment'
             }
         }
     }
