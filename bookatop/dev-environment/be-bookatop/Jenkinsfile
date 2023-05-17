@@ -25,9 +25,8 @@ pipeline {
                           varSourceFile = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                           varDestFile = "${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar"
                           sh """
-                            #!/bin/bash
                             echo Fetch service ${item}
-                            if ! [[ -f "${varSourceFile}" ]]; then
+                            if ! [ -f ${varSourceFile} ]; then
                                 exit 1
                             fi
                             echo Paths
