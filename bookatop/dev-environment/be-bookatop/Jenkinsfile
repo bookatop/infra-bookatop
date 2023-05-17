@@ -27,7 +27,7 @@ pipeline {
                           sh '''
                             #!/bin/bash
                             echo Fetch service ${item}
-                            if ! [[ -f ${varSourceFile} ]]; then
+                            if ! [[ -f "${varSourceFile}" ]]; then
                                 exit 1
                             fi
                             echo Paths
