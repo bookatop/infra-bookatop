@@ -2,15 +2,6 @@
 
 services = ["auth"]
 
-def copy_services(list) {
-   services.each {
-      item ->
-         sh '''
-            echo 'Fetch service ${item}'
-            '''
-   }
-}
-
 pipeline {
     agent any
 
@@ -32,4 +23,13 @@ pipeline {
             }
         }
     }
+}
+
+def copy_services(list) {
+   services.each {
+      item ->
+         sh '''
+            echo "Fetch service ${item}"
+            '''
+   }
 }
