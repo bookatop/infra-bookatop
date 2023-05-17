@@ -10,6 +10,11 @@ def branches() {
 pipeline {
     agent any
 
+    environment {
+        SOUR_PATH = '/path/dev-env/be-bookatop/releases/${params.branchName}'
+        DEST_PATH = '/path/prod-env/be-bookatop'
+    }
+
     parameters  {
         choice(
             name: 'branchName',
@@ -27,21 +32,21 @@ pipeline {
             name: 'buildName',
             defaultValue: '1',
             description: 'Put the build number*',
-            failedValidationMessage: 'Build number is empty',
+            failedValidationMessage: 'Build number is invalid',
             regex: /^[0-9]+$/
         )
     }
 
     stages {
         stage('Deploy on Dev') {
-            /*when {
-                expression {
-                    equals(actual: currentBuild.number, expected: 1)
-                    params.branchName != null && params.serviceName != null && params.buildName != null
-                }
-            }*/
             steps {
-                echo "Deploy ${params.BRANCH_NUMBER}:${params.SERVICE_NAME}:${params.BUILD_NUMBER} on dev environment"
+                echo "Deploy params.branchName:params.serviceName:params.buildName on dev environment"
+
+                varSourceFile = ${SOUR_PATH}/${params.branchName}/${params.serviceName}-${params.buildName}.jar
+                varDestFile = ${DEST_PATH}/${params.serviceName}-${params.branchName}-${params.buildName}.jar
+
+                echo ${varSourceFile}
+                echo ${varDestFile}
             }
         }
     }
