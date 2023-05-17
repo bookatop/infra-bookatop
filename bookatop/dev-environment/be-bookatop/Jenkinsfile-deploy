@@ -19,12 +19,14 @@ pipeline {
         validatingString(
             name: 'serviceName',
             defaultValue: 'auth',
-            description: 'Put the service name*'
+            description: 'Put the service name*',
+            regex: /^.+$/
         )
         validatingString(
             name: 'buildName',
             defaultValue: '1',
-            description: 'Put the build number*'
+            description: 'Put the build number*',
+            regex: /^.+$/
         )
     }
 
