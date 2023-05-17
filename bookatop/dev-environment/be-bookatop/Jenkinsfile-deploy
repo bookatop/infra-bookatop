@@ -14,19 +14,21 @@ pipeline {
         choice(
             name: 'branchName',
             choices: branches(),
-            description: 'Choose branch name'
+            description: 'Choose branch name',
+            required: true
         )
         string(
             name: 'serviceName',
             defaultValue: '0',
-            description: 'Put the service name'
+            description: 'Put the service name',
+            required: true
         )
         string(
             name: 'buildName',
             defaultValue: '0',
-            description: 'Put the build number'
+            description: 'Put the build number',
+            required: true
         )
-
     }
 
     stages {
