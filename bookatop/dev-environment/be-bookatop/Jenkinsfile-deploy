@@ -43,7 +43,7 @@ pipeline {
 
                 script {
                     varSourceFile = "${SOUR_PATH}/${serviceName}-${buildName}.jar"
-                    varDestFile = "${DEST_PATH}/${serviceName}-${branchName}-${buildName}.jar"
+                    varDestFile = "${DEST_PATH}/${serviceName}-service/${serviceName}-${branchName}-${buildName}.jar"
 
                     echo varSourceFile
                     echo varDestFile
