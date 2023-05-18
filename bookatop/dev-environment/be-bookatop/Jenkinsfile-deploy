@@ -36,21 +36,31 @@ pipeline {
         stage('Deploy on Dev') {
             environment {
                 SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
-                DEST_PATH = '/path/dev-env/be-bookatop/releases/libs'
+                DEST_PATH = "/path/dev-env/be-bookatop/releases/libs/${serviceName}-service"
             }
             steps {
                 echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
 
                 script {
-                    varSourceFileName = "${serviceName}-${buildName}.jar"
-                    varDestFileName = "${serviceName}-${branchName}-${buildName}.jar"
-
-                    varSourceFile = "${SOUR_PATH}/${varSourceFileName}"
-                    varDestFile = "${DEST_PATH}/${serviceName}-service/${varDestFileName}"
+                    varSourceFile = "${SOUR_PATH}/${serviceName}-${buildName}.jar"
+                    varDestFile = "${DEST_PATH}/${serviceName}-${branchName}-${buildName}.jar"
 
                     sh """
-                      echo Deploy release ${varDestFileName} on dev
+                      echo Deploy release ${varDestFile} on dev
 
+                      #Check if the file is exist
+                      if ! [ -f ${varSourceFile} ]; then
+                         echo Oops! The file ${varSourceFile} is not exist!
+                         exit 1
+                      fi
+                      
+                      #Make the destination directory exists
+                      if ! [ -d ${DEST_PATH} ]; then
+                          mkdir -p ${DEST_PATH}
+                      fi
+
+                      echo Copy the file ${varDestFile}
+                      cp ${varSourceFile} ${varDestFile}
                     """
                 }
             }
