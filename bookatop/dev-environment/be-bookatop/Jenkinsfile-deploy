@@ -33,12 +33,12 @@ pipeline {
     }
 
     stages {
-        environment {
-            SOUR_PATH = '/path/dev-env/be-bookatop/releases/${params.branchName}'
-            DEST_PATH = '/path/dev-env/be-bookatop/releases/libs'
-        }
         stage('Deploy on Dev') {
             steps {
+                environment {
+                    SOUR_PATH = '/path/dev-env/be-bookatop/releases/${params.branchName}'
+                    DEST_PATH = '/path/dev-env/be-bookatop/releases/libs'
+                }
                 echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
 
                 script {
