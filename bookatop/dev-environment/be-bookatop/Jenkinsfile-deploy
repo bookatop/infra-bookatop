@@ -35,8 +35,10 @@ pipeline {
     stages {
         stage('Deploy on Dev') {
             environment {
+                BACKEND_URL = "http://localhost:8081"
                 SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
                 DEST_PATH = "/path/dev-env/be-bookatop/releases/libs/${serviceName}-service"
+                TRY_COUNT = 10
             }
             steps {
                 echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
@@ -44,10 +46,33 @@ pipeline {
                 script {
                     varSourceFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
                     varDestFile = "${DEST_PATH}/${serviceName}-service-${branchName}-${buildName}.jar"
+                    varServiceName = "${serviceName}-service"
 
+                    echo "Stop the service ${varServiceName}"
+                    sh """         
+                      #!/bin/sh                      
+                      i=0
+                      while [ "$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status')" = "UP" ] 
+                      do
+                        echo "Try $i stop service ${varServiceName}"
+                        if [ $i -eq ${TRY_COUNT} ]; 
+                        then
+                          echo "Could not stop service ${varServiceName}. Try do it later."
+                          exit 1
+                        fe
+                        curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
+                        #Sleep 1 second
+                        sleep 1  
+                        i=$(($i+1))                          
+                      done
+                    """
+
+                    /*--------------------------------------------------*/
+                    /*
+
+                    echo "Deploy release ${varDestFile} on dev"
                     sh """
-                      echo Deploy release ${varDestFile} on dev
-
+                      #!/bin/sh
                       #Check if the file is exist
                       if ! [ -f ${varSourceFile} ]; then
                          echo Oops! The file ${varSourceFile} is not exist!
@@ -65,7 +90,7 @@ pipeline {
                       echo Launch the service ${varDestFile}
                       java -jar ${varDestFile} &
 
-                      sleep 20    
+                      */
                     """
                 }
             }
