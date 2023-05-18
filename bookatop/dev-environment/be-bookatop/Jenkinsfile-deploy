@@ -46,11 +46,15 @@ pipeline {
                 script {
                     varSourceFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
                     varDestFile = "${DEST_PATH}/${serviceName}-service-${branchName}-${buildName}.jar"
-                    varServiceName = "${serviceName}-service"
+                    /*varServiceName = "${serviceName}-service"*/
 
-                    sh """
-                      echo Stop the service ${varServiceName}            
+                    sh """         
+                      #!/bin/sh
+                      varServiceName=${serviceName}-service
                       i=0
+
+                      echo Stop the service ${varServiceName}            
+                      
                       while [ "$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status')" = "UP" ] 
                       do
                         echo Try ${i} stop service ${varServiceName}
