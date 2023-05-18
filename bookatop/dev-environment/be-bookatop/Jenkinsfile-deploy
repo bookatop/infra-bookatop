@@ -61,6 +61,9 @@ pipeline {
 
                       echo Copy the file ${varDestFile}
                       cp ${varSourceFile} ${varDestFile}
+
+                      echo Launch the service ${varDestFile}
+                      java -jar ${varDestFile}    
                     """
                 }
             }
