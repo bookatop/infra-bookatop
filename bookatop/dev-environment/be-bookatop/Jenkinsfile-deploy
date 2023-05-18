@@ -48,51 +48,59 @@ pipeline {
                     varDestFile = "${DEST_PATH}/${serviceName}-service-${branchName}-${buildName}.jar"
                     varServiceName = "${serviceName}-service"
 
+                    /*-------------Check if new service is exist to be replaced--------------*/
+
+                    sh '''
+                      #!/bin/sh
+                      echo Check if new service $varSourceFile is exist to be replaced
+                      if ! [ -f ${varSourceFile} ]; then
+                         echo Oops! The service $varSourceFile is not exist!
+                         exit 1
+                      fi                       
+                    '''
+
+                    /*-------------Stop service script-----------------*/
+
                     sh '''         
                       #!/bin/sh                      
-                      echo Stop the service $varServiceName            
+                      echo Stop the service $varServiceName on dev           
                       i=0
                       while [ "$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status')" = "UP" ] 
                       do
-                        echo Try ${i} stop service ${varServiceName}
+                        echo Try $i stop service $varServiceName
                         if [ ${i} -eq ${TRY_COUNT} ]; 
                         then
-                          echo Could not stop service ${varServiceName}. Try do it later.
+                          echo Could not stop service $varServiceName or the service is not starter. Try do it later.
                           exit 1
                         fi
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
-                        #Sleep 1 second
                         sleep 1  
                         i=$(($i+1))                          
                       done
                     '''
 
-                    /*--------------------------------------------------*/
-                    /*
+                    /*-------------Replace service----------------------*/
 
-                    echo "Deploy release ${varDestFile} on dev"
-                    sh """
+                    sh '''
                       #!/bin/sh
-                      #Check if the file is exist
-                      if ! [ -f ${varSourceFile} ]; then
-                         echo Oops! The file ${varSourceFile} is not exist!
-                         exit 1
-                      fi
+                      echo "Replace service $varDestFile on dev"
                       
-                      #Make the destination directory exists
+                      #Make the destination directory $DEST_PATH exists
                       if ! [ -d ${DEST_PATH} ]; then
                           mkdir -p ${DEST_PATH}
                       fi
-
-                      echo Copy the file ${varDestFile}
+                      
+                      echo Remove the following services 
+                      ls 
+                      
+                      rm -f $DEST_PATH/*
+                      
+                      echo Put service ${varDestFile}
                       cp ${varSourceFile} ${varDestFile}
 
                       echo Launch the service ${varDestFile}
-                      java -jar ${varDestFile} &
+                    '''
 
-
-                    """
-                     */
                 }
             }
         }
