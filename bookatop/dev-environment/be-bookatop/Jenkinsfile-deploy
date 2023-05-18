@@ -52,9 +52,9 @@ pipeline {
 
                     sh '''
                       #!/bin/sh
-                      echo Check if new service $varSourceFile is exist to be replaced
-                      if ! [ -f $varSourceFile ]; then
-                         echo Oops! The service $varSourceFile is not exist!
+                      echo Check if new service ${varSourceFile} is exist to be replaced
+                      if ! [ -f ${varSourceFile} ]; then
+                         echo Oops! The service ${varSourceFile} is not exist!
                          exit 1
                       fi                       
                     '''
