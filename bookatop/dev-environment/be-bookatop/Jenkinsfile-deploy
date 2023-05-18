@@ -51,8 +51,8 @@ pipeline {
                     def varSourceFile = "${SOUR_PATH}"
                     def varDestFile = "${DEST_PATH}"
 
-                    echo ${varSourceFile}
-                    echo ${varDestFile}
+                    echo varSourceFile
+                    echo varDestFile
                 }
             }
         }
