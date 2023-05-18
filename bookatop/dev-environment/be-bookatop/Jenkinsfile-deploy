@@ -67,7 +67,7 @@ pipeline {
                       i=0
                       while [ "curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status'" = "UP" ] 
                       do
-                        echo Try $i stop service $varServiceName
+                        echo Try "$i" stop service $varServiceName
                         if [ "$i" -eq $TRY_COUNT ]; 
                         then
                           echo Could not stop service $varServiceName or the service is not starter. Try do it later.
@@ -75,7 +75,7 @@ pipeline {
                         fi
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
                         sleep 1  
-                        i="$(($i+1))"                          
+                        i="$i+1"                          
                       done
                     """
 
