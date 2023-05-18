@@ -62,7 +62,7 @@ pipeline {
                         then
                           echo Could not stop service ${varServiceName}. Try do it later.
                           exit 1
-                        fe
+                        fi
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
                         #Sleep 1 second
                         sleep 1  
