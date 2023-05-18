@@ -60,7 +60,7 @@ pipeline {
                     '''
 
                     /*-------------Stop service script-----------------*/
-
+/*
                     sh '''         
                       #!/bin/sh                      
                       echo Stop the service $varServiceName on dev           
@@ -78,9 +78,9 @@ pipeline {
                         i=$(($i+1))                          
                       done
                     '''
-
+*/
                     /*-------------Replace service----------------------*/
-
+/*
                     sh '''
                       #!/bin/sh
                       echo Replace service $varDestFile on dev
@@ -100,7 +100,7 @@ pipeline {
 
                       echo Launch the service $varDestFile
                     '''
-
+*/
                 }
             }
         }
