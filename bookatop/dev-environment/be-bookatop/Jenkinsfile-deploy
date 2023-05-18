@@ -10,11 +10,6 @@ def static branches() {
 pipeline {
     agent any
 
-    environment {
-        SOUR_PATH = '/path/dev-env/be-bookatop/releases/${params.branchName}'
-        DEST_PATH = '/path/dev-env/be-bookatop/releases/libs'
-    }
-
     parameters  {
         choice(
             name: 'branchName',
@@ -38,15 +33,17 @@ pipeline {
     }
 
     stages {
+        environment {
+            SOUR_PATH = '/path/dev-env/be-bookatop/releases/${params.branchName}'
+            DEST_PATH = '/path/dev-env/be-bookatop/releases/libs'
+        }
         stage('Deploy on Dev') {
             steps {
-                echo "Deploy ${params.branchName}:${params.serviceName}:${params.buildName} on dev environment"
+                echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
 
                 script {
-                    echo "${SOUR_PATH}/${branchName}-${branchName}.jar"
-
-                    varSourceFile = "${SOUR_PATH}/${params.serviceName}-${params.buildName}.jar"
-                    varDestFile = "${DEST_PATH}/${params.serviceName}-${params.branchName}-${params.buildName}.jar"
+                    varSourceFile = "${SOUR_PATH}/${serviceName}-${buildName}.jar"
+                    varDestFile = "${DEST_PATH}/${serviceName}-${branchName}-${buildName}.jar"
 
                     echo varSourceFile
                     echo varDestFile
