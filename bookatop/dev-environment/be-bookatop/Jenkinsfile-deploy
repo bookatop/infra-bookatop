@@ -18,7 +18,7 @@ pipeline {
     parameters  {
         choice(
             name: 'branchName',
-            choices: branches(),
+            choices: ['One', 'Two', 'Three'],
             description: 'Choose branch name*'
         )
         validatingString(
