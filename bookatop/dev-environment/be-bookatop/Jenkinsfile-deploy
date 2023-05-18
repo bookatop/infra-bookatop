@@ -65,7 +65,7 @@ pipeline {
                       echo Launch the service ${varDestFile}
                       java -jar ${varDestFile} &
 
-                      sleep 5    
+                      sleep 20    
                     """
                 }
             }
