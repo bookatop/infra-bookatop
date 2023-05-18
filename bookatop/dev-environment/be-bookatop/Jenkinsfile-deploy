@@ -75,7 +75,7 @@ pipeline {
                         fi
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
                         sleep 1  
-                        i=$i+1                          
+                        i=i+1                          
                       done
                     """
 
