@@ -43,8 +43,13 @@ pipeline {
                 echo "Deploy ${params.branchName}:${params.serviceName}:${params.buildName} on dev environment"
 
                 script {
+                    /*
                     def varSourceFile = "${SOUR_PATH}/${params.serviceName}-${params.buildName}.jar"
                     def varDestFile = "${DEST_PATH}/${params.serviceName}-${params.branchName}-${params.buildName}.jar"
+                    */
+
+                    def varSourceFile = "${SOUR_PATH}"
+                    def varDestFile = "${DEST_PATH}"
 
                     echo ${varSourceFile}
                     echo ${varDestFile}
