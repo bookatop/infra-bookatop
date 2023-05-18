@@ -91,14 +91,14 @@ pipeline {
                       fi
                       
                       echo Remove the following services 
-                      ls 
+                      ls $DEST_PATH/
                       
                       rm -f $DEST_PATH/*
                       
-                      echo Put service ${varDestFile}
-                      cp ${varSourceFile} ${varDestFile}
+                      echo Put service $varDestFile
+                      cp $varSourceFile $varDestFile
 
-                      echo Launch the service ${varDestFile}
+                      echo Launch the service $varDestFile
                     '''
 
                 }
