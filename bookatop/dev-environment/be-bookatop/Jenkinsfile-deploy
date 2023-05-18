@@ -42,8 +42,8 @@ pipeline {
                 echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
 
                 script {
-                    varSourceFile = "${SOUR_PATH}/${serviceName}-${buildName}.jar"
-                    varDestFile = "${DEST_PATH}/${serviceName}-${branchName}-${buildName}.jar"
+                    varSourceFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
+                    varDestFile = "${DEST_PATH}/${serviceName}-service-${branchName}-${buildName}.jar"
 
                     sh """
                       echo Deploy release ${varDestFile} on dev
