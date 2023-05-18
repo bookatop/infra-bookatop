@@ -51,14 +51,14 @@ pipeline {
                     sh """         
                       #!/bin/sh         
                       
-                      echo "Stop the service ${varServiceName}"             
+                      echo Stop the service ${varServiceName}            
                       i=0
                       while [ "$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status')" = "UP" ] 
                       do
-                        echo "Try ${i} stop service ${varServiceName}"
+                        echo Try ${i} stop service ${varServiceName}
                         if [ ${i} -eq ${TRY_COUNT} ]; 
                         then
-                          echo "Could not stop service ${varServiceName}. Try do it later."
+                          echo Could not stop service ${varServiceName}. Try do it later.
                           exit 1
                         fe
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
