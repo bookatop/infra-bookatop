@@ -124,8 +124,7 @@ pipeline {
                       #sudo systemctl start $serviceName
 
                       #sh /path/dev-env/be-bookatop/releases/libs/run-auth-service.sh
-                      sudo -l
-                      sudo -l -u jenkins systemctl start ${serviceName}.service
+                      sudo -l -u jvmapp systemctl start ${serviceName}.service
 
                       sleep 5
                     """
