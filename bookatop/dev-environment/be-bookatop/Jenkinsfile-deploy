@@ -110,8 +110,8 @@ pipeline {
 
                       echo Check if the service $serviceName stopped
                       
-                      varStatus=\$(sudo systemctl is-active $serviceName)
-                      echo \$varStatus  
+                      #varStatus=\$(systemctl is-active $serviceName)
+                      #echo \$varStatus  
 
                       #varStatus=\$(systemctl is-active $serviceName)
                       #if [ \$varStatus = "active" ]; then
@@ -120,7 +120,7 @@ pipeline {
                       #fi         
                       
                       echo Launch service $serviceName
-                      #systemctl start $serviceName
+                      systemctl start $serviceName
 
                       sleep 5
                     """
