@@ -66,7 +66,7 @@ pipeline {
                       set +x                      
                       echo Stop the service $varServiceName on dev
                       i=0
-                      while [ "curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status'" = "UP" ] 
+                      while [ curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status' = "UP" ] 
                       do
                         echo Try \$i stop service $varServiceName
                         if [ \$i -eq $TRY_COUNT ]; 
