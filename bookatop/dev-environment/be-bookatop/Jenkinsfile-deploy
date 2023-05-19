@@ -126,7 +126,7 @@ pipeline {
                       #sh /path/dev-env/be-bookatop/releases/libs/run-auth-service.sh
                       sudo -l -u jvmapp systemctl start ${serviceName}.service
 
-                      sleep 5
+                      sleep 30
                     """
 
                 }
