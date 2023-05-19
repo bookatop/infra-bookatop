@@ -37,22 +37,24 @@ pipeline {
             environment {
                 BACKEND_URL = "http://localhost:8081"
                 SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
-                DEST_PATH = "/path/dev-env/be-bookatop/releases/libs/${serviceName}-service"
+                DEST_PATH = "/path/dev-env/be-bookatop/releases/libs"
                 TRY_COUNT = 10
             }
             steps {
                 echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
 
                 script {
+                    varServiceName = "${serviceName}-service.jar"
                     varSourceFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
-                    varDestFile = "${DEST_PATH}/${serviceName}-service-${branchName}-${buildName}.jar"
-                    varServiceName = "${serviceName}-service"
+                    varDestFile = "${DEST_PATH}/${varServiceName}"
 
-                    /*-------------Check if new service is exist to be replaced--------------*/
+
+                    /*-------------Check if new service exists to be replaced--------------*/
 
                     sh """
                       #!/bin/sh
                       echo Check if new service $varSourceFile is exist to be replaced
+
                       if ! [ -f $varSourceFile ]; then
                          echo Oops! The service $varSourceFile is not exist!
                          exit 1
@@ -62,9 +64,9 @@ pipeline {
                     /*-------------Stop service script-----------------*/
 
                     sh """
-                      #!/bin/sh
-                      set +x                      
+                      #!/bin/sh                   
                       echo Stop the service $varServiceName on dev
+
                       i=0
                       while [ \$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status') = "UP" ] 
                       do
@@ -91,16 +93,18 @@ pipeline {
                           mkdir -p $DEST_PATH
                       fi
                       
-                      echo Remove the following services 
-                      ls $DEST_PATH/                      
-                      rm -f $DEST_PATH/*
-                      
-                      #Do not overwrite an existing file                      
+                      echo Remove the services $varServiceName                
+                      rm -f $DEST_PATH/$varServiceName                      
+                  
                       echo Put service $varDestFile
                       cp -n $varSourceFile $varDestFile
 
                       echo Launch the service $varDestFile
                     """
+
+                    /*-------------Launch service----------------------*/
+
+
 
                 }
             }
