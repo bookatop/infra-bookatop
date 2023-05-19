@@ -106,6 +106,8 @@ pipeline {
                     sh """
                       #!/bin/sh
 
+                      set +x
+
                       echo Check if the service $serviceName stopped
                       service $serviceName status
                       if [ \$? = 0 ]; then
