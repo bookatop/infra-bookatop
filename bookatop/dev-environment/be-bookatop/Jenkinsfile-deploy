@@ -114,7 +114,7 @@ pipeline {
                       fi         
                       
                       echo Launch service $serviceName
-                      service $serviceName start
+                      service $serviceName restart
                     """
 
                 }
