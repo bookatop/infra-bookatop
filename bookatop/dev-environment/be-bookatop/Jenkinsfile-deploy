@@ -120,7 +120,7 @@ pipeline {
                       #fi         
                       
                       echo Launch service $serviceName
-                      systemctl start $serviceName
+                      systemctl enable $serviceName && sudo systemctl start $serviceName
 
                       sleep 5
                     """
