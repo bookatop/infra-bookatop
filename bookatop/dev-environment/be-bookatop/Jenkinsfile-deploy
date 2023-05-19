@@ -97,14 +97,15 @@ pipeline {
                       rm -f $DEST_PATH/$varServiceName                      
                   
                       echo Put service $varDestFile
-                      cp -n $varSourceFile $varDestFile
-
-                      echo Launch the service $varDestFile
+                      cp -n $varSourceFile $varDestFile                      
                     """
 
                     /*-------------Launch service----------------------*/
 
-
+                    sh """
+                      #!/bin/sh
+                      echo Launch the service $varDestFile
+                    """
 
                 }
             }
