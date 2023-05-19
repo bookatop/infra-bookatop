@@ -50,18 +50,18 @@ pipeline {
 
                     /*-------------Check if new service is exist to be replaced--------------*/
 
-                    sh """
+                    sh /* CORRECT */ '''
                       #!/bin/sh
                       echo Check if new service $varSourceFile is exist to be replaced
                       if ! [ -f $varSourceFile ]; then
                          echo Oops! The service $varSourceFile is not exist!
                          exit 1
                       fi                       
-                    """
+                    '''
 
                     /*-------------Stop service script-----------------*/
-
-                    sh """         
+/*
+                    sh """
                       #!/bin/sh                      
                       echo Stop the service $varServiceName on dev           
                       i=0
@@ -78,7 +78,7 @@ pipeline {
                         #i="$i"+1                          
                       done
                     """
-
+*/
                     /*-------------Replace service----------------------*/
 /*
                     sh '''
