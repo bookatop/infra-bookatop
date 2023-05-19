@@ -109,14 +109,16 @@ pipeline {
                       set +x
 
                       echo Check if the service $serviceName stopped
-                      status=\$(systemctl is-active $serviceName)
-                      if [ \$status = "active" ]; then
-                         echo Service $serviceName is busy. Try do it later.
-                         exit 1 
-                      fi         
+                      systemctl is-active $serviceName
+
+                      #varStatus=\$(systemctl is-active $serviceName)
+                      #if [ \$varStatus = "active" ]; then
+                      #   echo Service $serviceName is busy. Try do it later.
+                      #   exit 1 
+                      #fi         
                       
                       echo Launch service $serviceName
-                      systemctl start $serviceName
+                      #systemctl start $serviceName
 
                       sleep 5
                     """
