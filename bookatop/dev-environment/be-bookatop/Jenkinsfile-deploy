@@ -105,7 +105,16 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo Launch the service $varDestFile
+
+                      echo Check if the service $serviceName stopped
+                      service $serviceName status
+                      if [ \$? = 0 ]; then
+                         echo Service $serviceName is busy. Try do it later.
+                         exit 1 
+                      fi         
+                      
+                      echo Launch service $serviceName
+                      systemctl start $serviceName
                     """
 
                 }
