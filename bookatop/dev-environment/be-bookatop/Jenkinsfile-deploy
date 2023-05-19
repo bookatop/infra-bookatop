@@ -65,10 +65,6 @@ pipeline {
                         echo test 1 - Stop the service ${varServiceName} on dev 
                     """
 
-                    sh '''
-                        echo test 2 - Stop the service ${varServiceName} on dev 
-                    '''
-
                     sh """
                       #!/bin/sh
                       set +x                      
@@ -84,7 +80,7 @@ pipeline {
                         fi
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
                         sleep 1  
-                        #i=$i+1                          
+                        #i=\$i+1                          
                       done
                     """
 
