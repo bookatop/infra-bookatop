@@ -92,7 +92,7 @@ pipeline {
                       if ! [ -d $DEST_PATH ]; then
                           echo Create and set jvmapps user permistions $DEST_PATH 
                           mkdir -p $DEST_PATH
-                          sudo -S chown -R jvmapps:jvmappmng $DEST_PATH  
+                          chown -R jvmapps:jvmappmng $DEST_PATH  
                       fi
                       
                       echo Remove the services $varServiceName                
