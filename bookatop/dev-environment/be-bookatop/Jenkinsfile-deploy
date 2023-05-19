@@ -61,6 +61,10 @@ pipeline {
 
                     /*-------------Stop service script-----------------*/
 
+                    sh """
+                        echo test - Stop the service ${varServiceName} on dev 
+                    """
+
                     sh '''
                       #!/bin/sh
                       set +x                      
