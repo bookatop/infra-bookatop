@@ -110,7 +110,7 @@ pipeline {
 
                       echo Check if the service $serviceName stopped
                       
-                      varStatus=\$(systemctl is-active $serviceName)
+                      varStatus=\$(sudo systemctl is-active $serviceName)
                       echo \$varStatus  
 
                       #varStatus=\$(systemctl is-active $serviceName)
