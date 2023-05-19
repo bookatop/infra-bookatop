@@ -94,10 +94,10 @@ pipeline {
                       fi
                       
                       echo Remove the services $varServiceName                
-                      rm -f $DEST_PATH/$varServiceName                      
+                      sudo -u jvmapps rm -f $DEST_PATH/$varServiceName                      
                   
                       echo Put service $varDestFile
-                      cp -n $varSourceFile $varDestFile                      
+                      sudo -u jvmapps cp -n $varSourceFile $varDestFile                      
                     """
 
                     /*-------------Launch service----------------------*/
