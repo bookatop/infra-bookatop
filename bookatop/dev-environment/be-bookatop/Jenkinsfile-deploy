@@ -91,13 +91,14 @@ pipeline {
                       #Make the destination directory $DEST_PATH exists
                       if ! [ -d $DEST_PATH ]; then
                           mkdir -p $DEST_PATH
+                          sudo chown -R jvmapps:jvmappmng $DEST_PATH  
                       fi
                       
                       echo Remove the services $varServiceName                
-                      sudo -u jvmapps rm -f $DEST_PATH/$varServiceName                      
+                      rm -f $DEST_PATH/$varServiceName                      
                   
                       echo Put service $varDestFile
-                      sudo -u jvmapps cp -n $varSourceFile $varDestFile                      
+                      cp -n $varSourceFile $varDestFile                      
                     """
 
                     /*-------------Launch service----------------------*/
