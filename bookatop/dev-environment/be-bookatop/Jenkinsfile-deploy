@@ -42,6 +42,7 @@ pipeline {
                 TRY_START_SERVICE = 3
                 TRY_STOP_DAEMON = 3
                 TRY_START_DAEMON = 3
+                TRY_CHECK_SERVICE = 3
             }
             steps {
                 echo "Deploy ${branchName}:${serviceName}-service:${buildName} on dev environment"
