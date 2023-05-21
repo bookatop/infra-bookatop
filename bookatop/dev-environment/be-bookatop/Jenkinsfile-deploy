@@ -106,17 +106,17 @@ pipeline {
                     sh """
                       #!/bin/sh
                       set +x
-                      varServiceName=${serviceName}.service
-                      echo \\$varServiceName
-                      varStatus=\$(sudo systemctl is-active \$varServiceName)
+                      varSn=${serviceName}.service
+                      echo \$varSn
+                      varStatus=\$(sudo systemctl is-active \$varSn)
                       
                       if [ \$varStatus = "active" ]; then
-                         echo Service \$varServiceName is busy. Try do it later.
+                         echo Service \$varSn is busy. Try do it later.
                          exit 1 
                       fi
                       
-                      echo Launch service \$varServiceName
-                      sudo systemctl start \$varServiceName
+                      echo Launch service \$varSn
+                      sudo systemctl start \$varSn
                     """
                 }
             }
