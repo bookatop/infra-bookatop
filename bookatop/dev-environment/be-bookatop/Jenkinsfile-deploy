@@ -105,28 +105,16 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-
-                      set +x
-
-                      echo Check if the service $serviceName stopped
                       
-                      #varStatus=\$(systemctl is-active $serviceName)
-                      #echo \$varStatus  
-
-                      #varStatus=\$(systemctl is-active $serviceName)
-                      #if [ \$varStatus = "active" ]; then
-                      #   echo Service $serviceName is busy. Try do it later.
-                      #   exit 1 
-                      #fi         
+                      varStatus=\$(systemctl is-active $serviceName)
+                      if [ \$varStatus = "active" ]; then
+                         echo Service $serviceName is busy. Try do it later.
+                         exit 1 
+                      fi         
                       
                       echo Launch service $serviceName
-                      #systemctl enable $serviceName && 
-                      #sudo systemctl start $serviceName
-
-                      #sh /path/dev-env/be-bookatop/releases/libs/run-auth-service.sh
                       sudo systemctl start ${serviceName}.service
                     """
-
                 }
             }
         }
