@@ -114,7 +114,7 @@ pipeline {
                       #fi
                       
                       echo Launch service \$varSn
-                      sudo systemctl start \$varSn
+                      #sudo systemctl start \$varSn
                     """
                 }
             }
