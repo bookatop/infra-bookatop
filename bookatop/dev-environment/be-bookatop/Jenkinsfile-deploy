@@ -41,7 +41,7 @@ pipeline {
                 TRY_COUNT = 10
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}:${buildName} on dev environment"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on dev environment"
 
                 script {
                     varServiceName = "${serviceName}-service.jar"
