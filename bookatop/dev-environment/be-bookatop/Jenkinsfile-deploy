@@ -45,7 +45,7 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on dev environment"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on dev"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
@@ -72,7 +72,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh         
-                      echo Stop service $varServiceName on dev
+                      echo Stop service $varServiceName
 
                       i=0
                       while [ \$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status') = "UP" ] 
@@ -116,7 +116,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo Replace service $varDestJarFile on dev
+                      echo Replace service $varDestJarFile
                       
                       if ! [ -d $DEST_PATH ]; then
                           mkdir -p $DEST_PATH
@@ -133,7 +133,7 @@ pipeline {
 
                       i=0
                       set +e
-                      while [ \$(sudo systemctl is-active $varDaemonName) -ne "active" ]
+                      while [ \$(sudo systemctl is-active $varDaemonName) != "active" ]
                       do
                         if [ \$i -eq $TRY_START_DAEMON ]; 
                         then 
@@ -148,13 +148,13 @@ pipeline {
                       set -e                                            
                     """
 
-                    /*-----------Check service if started----------*/
+                    /*-----------Check service status----------*/
                     sh """
                       #!/bin/sh
                       echo Check service $varServiceName status
                       
                       i=0
-                      while [ \$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status') -ne "UP" ] 
+                      while [ \$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status') != "UP" ] 
                       do                        
                         if [ \$i -eq $TRY_CHECK_SERVICE ]; 
                         then
