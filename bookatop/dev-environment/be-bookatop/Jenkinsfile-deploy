@@ -124,10 +124,7 @@ pipeline {
                       #sudo systemctl start $serviceName
 
                       #sh /path/dev-env/be-bookatop/releases/libs/run-auth-service.sh
-                      whoami
-                      #sudo -l -u jvmser systemctl start ${serviceName}.service
-
-                      sleep 30
+                      sudo systemctl start ${serviceName}.service
                     """
 
                 }
