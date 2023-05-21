@@ -92,7 +92,6 @@ pipeline {
                     sh """
                       #!/bin/sh
                       echo Stop daemon $varDaemonName
-
                       
                       i=0
                       #Continue execution when exit result is non-zero
@@ -133,12 +132,12 @@ pipeline {
 
                       i=0
                       set +e
-                      while [ \$(sudo systemctl is-active $varDaemonName) -eq "failed" ]
+                      while [ \$(sudo systemctl is-active $varDaemonName) -ne "active" ]
                       do
                         if [ \$i -eq $TRY_START_DAEMON ]; 
                         then 
                           set -e
-                          echo Oops! Could not start daemon $varDaemonName after \$TRY_START_DAEMON tries!
+                          echo Oops! Could not start daemon $varDaemonName after $TRY_START_DAEMON tries!
                           exit 1  
                         fi
                         sudo systemctl start $varDaemonName
