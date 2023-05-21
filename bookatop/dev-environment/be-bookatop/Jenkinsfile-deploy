@@ -105,12 +105,11 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      set +x
                       varSn=${serviceName}.service
-                      
-                      varStatus=\$(sudo systemctl is-active \$varSn)
-                      echo \$varSn
+                      echo \\$varSn
+                      varStatus=\$(sudo systemctl is-active \$varSn)                      
                       echo \$varStatus
+
                       if [ \$varStatus = "active" ]; then
                          echo Service \$varSn is busy. Try do it later.
                          exit 1 
