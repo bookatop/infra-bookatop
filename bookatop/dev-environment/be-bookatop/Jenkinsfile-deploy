@@ -38,25 +38,31 @@ pipeline {
                 BACKEND_URL = "http://localhost:8081"
                 SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
                 DEST_PATH = "/path/dev-env/be-bookatop/releases/libs"
-                TRY_COUNT = 10
+                TRY_STOP_SERVICE = 3
+                TRY_START_SERVICE = 3
+                TRY_STOP_DAEMON = 3
+                TRY_START_DAEMON = 3
             }
             steps {
                 echo "Deploy ${branchName}:${serviceName}-service:${buildName} on dev environment"
 
                 script {
-                    varServiceName = "${serviceName}-service.jar"
-                    varSourceFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
-                    varDestFile = "${DEST_PATH}/${varServiceName}"
+                    varSourceJarName = "${serviceName}-service.jar"
 
+                    varSourceJarFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
+                    varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
+
+                    varServiceName="${serviceName}.service"
+                    varDaemonName="${serviceName}.service"
 
                     /*-------------Check if new service exists to be replaced--------------*/
 
                     sh """
                       #!/bin/sh
-                      echo Check if new service $varSourceFile is exist to be replaced
+                      echo Check new service $varSourceJarFile is exist
 
-                      if ! [ -f $varSourceFile ]; then
-                         echo Oops! The service $varSourceFile is not exist!
+                      if ! [ -f $varSourceJarFile ]; then
+                         echo Oops! The service $varSourceJarFile is not exist!
                          exit 1
                       fi                       
                     """
@@ -64,62 +70,106 @@ pipeline {
                     /*-------------Stop service script-----------------*/
 
                     sh """
-                      #!/bin/sh                   
-                      echo Stop the service $varServiceName on dev
+                      #!/bin/sh         
+                      echo Stop service $varServiceName on dev
 
                       i=0
                       while [ \$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status') = "UP" ] 
-                      do
-                        echo Try \$i stop service $varServiceName
-                        if [ \$i -eq $TRY_COUNT ]; 
+                      do                        
+                        if [ \$i -eq $TRY_STOP_SERVICE ]; 
                         then
-                          echo Could not stop service $varServiceName or the service is not starter. Try do it later.
+                          echo Oops! Could not stop service $varServiceName after $TRY_STOP_SERVICE tries!
                           exit 1
                         fi
                         curl -X POST 'http://bookatop.com:8081/actuator/shutdown'
                         sleep 1  
-                        i=\$((i+1))                          
+                        i=\$((\$i+1))                          
                       done
+                    """
+
+                    /*-------------Stop daemon-----------------*/
+
+                    sh """
+                      #!/bin/sh
+                      echo Stop daemon $varDaemonName
+
+                      
+                      i=0
+                      #Continue execution when exit result is non-zero
+                      set +e  
+                      while [ \$(sudo systemctl is-active $varDaemonName) -eq "active" ]
+                      do
+                        if [ \$i -eq $TRY_STOP_DAEMON ]; 
+                        then 
+                          echo Oops! Could not stop daemon $varDaemonName after $TRY_STOP_DAEMON tries!
+                          set -e
+                          exit 1
+                        fi                      
+                        sudo systemctl stop $varDaemonName
+                        sleep 1
+                        i=\$((\$i+1))                      
+                      done
+                      set -e
                     """
 
                     /*-------------Replace service----------------------*/
 
                     sh """
                       #!/bin/sh
-                      echo Replace service $varDestFile on dev
+                      echo Replace service $varDestJarFile on dev
                       
-                      #Make the destination directory $DEST_PATH exists
                       if ! [ -d $DEST_PATH ]; then
-                          echo Create and set jvmapps user permistions $DEST_PATH 
                           mkdir -p $DEST_PATH
-                      fi
-                      
-                      echo Remove the services $varServiceName                
-                      rm -f $DEST_PATH/$varServiceName                      
-                  
-                      echo Put service $varDestFile
-                      cp -n $varSourceFile $varDestFile                      
+                      fi              
+                      rm -f $DEST_PATH/$varSourceJarName
+                      cp -n $varSourceJarFile $varDestJarFile                      
                     """
 
-                    /*-------------Launch service----------------------*/
+                    /*-------------Launch daemon----------------------*/
 
                     sh """
                       #!/bin/sh
+                      echo Launch daemon $varDaemonName
 
-                      varSn=${serviceName}.service
-
-                      #Continue execution when exit result is non-zero  
+                      i=0
                       set +e
-                      varStatus=\$(sudo systemctl is-active \$varSn)
-                      set-e                   
+                      while [ \$(sudo systemctl is-active $varDaemonName) -eq "failed" ]
+                      do
+                        if [ \$i -eq $TRY_START_DAEMON ]; 
+                        then 
+                          set -e
+                          echo Oops! Could not start daemon $varDaemonName after \$TRY_START_DAEMON tries!
+                          exit 1  
+                        fi
+                        sudo systemctl start $varDaemonName
+                        sleep 1
+                        \$i=\$((\$i+1))                        
+                      done 
+                      set -e                                            
+                    """
 
-                      if [ \$varStatus -eq "active" ]; then
-                         echo Service \$varSn is busy. Try do it later.
-                         exit 1 
-                      fi
+                    /*-----------Check service if started----------*/
+                    sh """
+                      #!/bin/sh
+                      echo Check service $varServiceName status
                       
-                      echo Launch service \$varSn
-                      sudo systemctl start \$varSn
+                      i=0
+                      while [ \$(curl -X GET 'http://bookatop.com:8081/actuator/health' | jq -r '.status') -ne "UP" ] 
+                      do                        
+                        if [ \$i -eq $TRY_CHECK_SERVICE ]; 
+                        then
+                          echo Oops! Could not start service $varServiceName after $TRY_CHECK_SERVICE tries!
+                          exit 1
+                        fi
+                        sleep 1  
+                        i=\$((\$i+1))                          
+                      done  
+                    """
+
+                    /*-----------Service is success launched----------*/
+                    sh """
+                      #!/bin/sh
+                      echo ${branchName}:${serviceName}-service:${buildName} is success installed and launched on dev.                      
                     """
                 }
             }
