@@ -105,9 +105,13 @@ pipeline {
 
                     sh """
                       #!/bin/sh
+
                       varSn=${serviceName}.service
+
+                      #Continue execution when exit result is non-zero  
+                      set +e
                       varStatus=\$(sudo systemctl is-active \$varSn)
-                      echo \$?                    
+                      set-e                   
 
                       if [ \$varStatus -eq "active" ]; then
                          echo Service \$varSn is busy. Try do it later.
@@ -115,7 +119,7 @@ pipeline {
                       fi
                       
                       echo Launch service \$varSn
-                      #sudo systemctl start \$varSn
+                      sudo systemctl start \$varSn
                     """
                 }
             }
