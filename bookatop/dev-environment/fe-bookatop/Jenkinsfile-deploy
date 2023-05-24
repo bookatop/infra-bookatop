@@ -60,10 +60,10 @@ pipeline {
                           mkdir -p $varDestPath  
                       fi  
 
-                      rm -dR $varDestPath/.next
-                      rm -dR $varDestPath/node_modules
-                      rm $varDestPath/package.json
-
+                      rm -dRf $varDestPath/.next
+                      rm -dRf $varDestPath/node_modules
+                      rm -f $varDestPath/package.json
+                        
                       cp -rT $varSourcePath/.next $varDestPath/.next
                       cp -rT $varSourcePath/node_modules $varDestPath/node_modules
                       cp -rT $varSourcePath/package.json $varDestPath/package.json
