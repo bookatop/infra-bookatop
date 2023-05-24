@@ -43,8 +43,7 @@ pipeline {
                   
                   echo Check new app fe-bookatop is exit
 
-                  varBuildPath = $SOUR_PATH/build-$buildNumber
-                  
+                  varBuildPath=$SOUR_PATH/build-$buildNumber                  
                   if [ ! -d $SOUR_PATH ] || [ ! -d \$varBuildPath/.next ] || [ ! -d \$varBuildPath/node_modules ] ; then 
                      echo "Oops! The source(s) of fe-bookatop is not exist!"
                      exit 1 
