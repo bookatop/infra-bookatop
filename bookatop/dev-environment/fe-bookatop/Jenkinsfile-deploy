@@ -18,7 +18,7 @@ pipeline {
                 description: 'Choose branch name*'
         )
         validatingString(
-                name: 'buildName',
+                name: 'buildNumber',
                 defaultValue: '1',
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
 
-                echo "Deploy ${branchName}:fe-bookatop:${buildName} on dev"
+                echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on dev"
 
                 /*-------------Check if new app exists to be replaced--------------*/
 
@@ -42,8 +42,10 @@ pipeline {
                   #!/bin/sh
                   
                   echo Check new app fe-bookatop is exit
+
+                  varBuildPath = $SOUR_PATH/build-$buildNumber
                   
-                  if [ ! -d $SOUR_PATH ] || [ ! -d $SOUR_PATH/.next ] || [ ! -d $SOUR_PATH/node_modules ] ; then 
+                  if [ ! -d $SOUR_PATH ] || [ ! -d \$varBuildPath/.next ] || [ ! -d \$varBuildPath/node_modules ] ; then 
                      echo "Oops! The source(s) of fe-bookatop is not exist!"
                      exit 1 
                   fi
