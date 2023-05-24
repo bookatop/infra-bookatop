@@ -9,9 +9,18 @@ pipeline {
     }
 
     stages {
-        stage('Clean/Build/Test') {
+        stage('Prepare fe application') {
             steps {
-                sh 'ls -l'
+                echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev"
+
+                sh '''
+                   #!/bin/sh
+                   #Make the destination directory exists
+                   varBuildPath=${DEST_PATH}/build-${BUILD_NUMBER}
+                   if ! [ -d $varBuildPath ]; then
+                     mkdir -p $varBuildPath
+                   fi                 
+                '''
             }
         }
         stage('Test') {

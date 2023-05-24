@@ -16,9 +16,10 @@ pipeline {
         }
         stage('Prepare release for dev environment') {
             steps {
-                echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev environment"
+                echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev"
 
                 script {
+                    /* List of services */
                     services = [
                         'auth'
                     ]
