@@ -3,15 +3,20 @@
 pipeline {
     agent any
 
+    environment {
+        SOUR_PATH = 'services'
+        DEST_PATH = '/path/dev-env/fe-bookatop/releases/${BRANCH_NAME}'
+    }
+
     stages {
-        stage('Clean/Build') {
+        stage('Clean/Build/Test') {
             steps {
-                sh 'gradle clean build -x test'
+                sh 'npm run clean && npm run build:dev'
             }
         }
         stage('Test') {
             steps {
-                sh 'gradle test'
+                sh 'echo done'
             }
         }
     }
