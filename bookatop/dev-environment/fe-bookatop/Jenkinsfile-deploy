@@ -29,7 +29,8 @@ pipeline {
     stages {
         stage('Deploy on Dev') {
             environment {
-
+                SOUR_PATH = "/path/dev-env/fe-bookatop/releases/${branchName}"
+                DEST_PATH = "/path/dev-env/fe-bookatop/releases/deploy"
             }
             steps {
                 echo "Deploy ${branchName}:fe-bookatop:${buildName} on dev"
