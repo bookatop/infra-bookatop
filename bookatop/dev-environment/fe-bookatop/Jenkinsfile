@@ -21,8 +21,7 @@ pipeline {
                      mkdir -p $varBuildPath
                    fi
                    ls -la
-                   cp --recursive * $varBuildPath
-                   npm install               
+                   cp --recursive * $varBuildPath            
                 '''
             }
         }
