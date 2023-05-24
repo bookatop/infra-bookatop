@@ -20,7 +20,7 @@ pipeline {
                    if ! [ -d $varBuildPath ]; then
                      mkdir -p $varBuildPath
                    fi
-                   ls -l
+                   ls -la
                    cp --recursive * $varBuildPath                
                 '''
             }
