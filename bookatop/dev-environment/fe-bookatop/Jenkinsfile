@@ -21,7 +21,7 @@ pipeline {
                      mkdir -p $varBuildPath
                    fi
                    cp -rT . $varBuildPath
-                   npm install
+                   npm install && npm run build:dev                   
                 '''
             }
         }
