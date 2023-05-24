@@ -36,8 +36,8 @@ pipeline {
                 echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on dev"
 
                 script {
-                    varSourcePath = ${SOUR_PATH}/build-${buildNumber}
-                    varDestPath = ${DEST_PATH}
+                    varSourcePath = "${SOUR_PATH}/build-${buildNumber}"
+                    varDestPath = "${DEST_PATH}"
 
                     /*-------------Check if new app exists to be replaced--------------*/
 
@@ -53,8 +53,7 @@ pipeline {
 
                     /*-------------Replace and Launch fe-bookatop on dev--------------*/
                     sh """
-                      #!/bin/sh
-                  
+                      #!/bin/sh                  
                       echo Replace fe-bookatop $varDestPath
 
                       rm -dR $varDestPath/.next
