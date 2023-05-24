@@ -45,10 +45,19 @@ pipeline {
                       #!/bin/sh                  
                       echo Check new app fe-bookatop is exit
                                    
-                      if [ ! -d $varSourcePath/.next ] || [ ! -d $varSourcePath/node_modules ] || [ ! -f $varSourcePath/package.json ] ; then 
-                        echo "Oops! The source(s) of fe-bookatop is not exist!"
+                      if [ ! -d $varSourcePath/.next ] || \n 
+                         [ ! -d $varSourcePath/node_modules ] || \n
+                         [ ! -f $varSourcePath/package.json ] ; then 
+                        echo "Oops! The some sourcee [.next|node_modules|package.json] of fe-bookatop are lost!"
                         exit 1 
                       fi
+                    """
+
+                    /*-------------Stop fe-bookatop daemon on dev--------------*/
+
+                    sh """
+                      #!/bin/sh
+                      sudo systemctl stop dev.fe.bookatop.service
                     """
 
                     /*-------------Replace and Launch fe-bookatop on dev--------------*/
@@ -67,10 +76,18 @@ pipeline {
                       cp -rT $varSourcePath/.next $varDestPath/.next
                       cp -rT $varSourcePath/node_modules $varDestPath/node_modules
                       cp -rT $varSourcePath/package.json $varDestPath/package.json
+                    """
 
-                      cd $varDestPath
-                    
-                      npm install && npm start                    
+                    /*-------------Start fe-bookatop daemon on dev--------------*/
+                    sh """
+                       #!/bin/sh
+                       sudo systemctl start dev.fe.bookatop.service
+                    """
+
+                    /*-------------Service is success launched--------------*/
+                    sh """
+                       #!/bin/sh
+                       echo ${branchName}:fe-bookatop:${buildNumber} is success installed and launched on dev. 
                     """
                 }
             }
