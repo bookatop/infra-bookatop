@@ -11,18 +11,18 @@ pipeline {
 
     agent any
 
-    parameters  {
+    parameters {
         choice(
-            name: 'branchName',
-            choices: branches(),
-            description: 'Choose branch name*'
+                name: 'branchName',
+                choices: branches(),
+                description: 'Choose branch name*'
         )
         validatingString(
-            name: 'buildName',
-            defaultValue: '1',
-            description: 'Put the build number*',
-            failedValidationMessage: 'Build number is invalid',
-            regex: /^[0-9]+$/
+                name: 'buildName',
+                defaultValue: '1',
+                description: 'Put the build number*',
+                failedValidationMessage: 'Build number is invalid',
+                regex: /^[0-9]+$/
         )
     }
 
@@ -33,7 +33,45 @@ pipeline {
                 DEST_PATH = "/path/dev-env/fe-bookatop/releases/deploy"
             }
             steps {
+
+                var
                 echo "Deploy ${branchName}:fe-bookatop:${buildName} on dev"
+
+                /*-------------Check if new app exists to be replaced--------------*/
+
+                sh """
+                  #!/bin/sh
+                  
+                  echo Check new app fe-bookatop is exit
+                  
+                  if ! [ -d $SOUR_PATH && -d ${SOURCE_PATH}/.next && -d ${SOUR_PATH}/node_modules ]; then 
+                     echo Oops! The source(s) of fe-bookatop is not exist!
+                     exit 1 
+                  fi
+                  
+                  if ! [ -f ${SOURCE_PATH}/package.json ]; then 
+                     echo Oops! The package file of fe-bookatop is not exist!
+                  fi 
+                """
+
+                /*-------------Replace and Launch fe-bookatop on dev--------------*/
+                sh """
+                  #!/bin/sh
+                  
+                  echo Replace fe-bookatop $DEST_PATH
+
+                  rm -dR ${DEST_PATH}/.next
+                  rm -dR ${DEST_PATH}/node_modules
+                  rm ${DEST_PATH}/package.json
+
+                  cp -rT ${SOUR_PATH}/.next ${DEST_PATH}/.next
+                  cp -rT ${SOUR_PATH}/node_modules ${DEST_PATH}/node_modules
+                  cp -rT ${SOUR_PATH}/package.json ${DEST_PATH}/package.json
+
+                  cd $DEST_PATH
+                    
+                  npm install && npm start                    
+                """
             }
         }
     }
