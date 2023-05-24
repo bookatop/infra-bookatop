@@ -33,48 +33,43 @@ pipeline {
                 DEST_PATH = "/path/dev-env/fe-bookatop/releases/deploy"
             }
             steps {
-
                 echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on dev"
 
-                /*-------------Check if new app exists to be replaced--------------*/
+                scripts {
+                    varSourcePath = ${SOUR_PATH}/build-${buildNumber}
+                    varDestPath = ${DEST_PATH}
 
-                sh """
-                  #!/bin/sh
+                    /*-------------Check if new app exists to be replaced--------------*/
+
+                    sh """
+                      #!/bin/sh                  
+                      echo Check new app fe-bookatop is exit
+                                   
+                      if [ ! -d $varSourcePath/.next ] || [ ! -d $varSourcePath/node_modules ] || [ -f $varSourcePath/package.json ] ; then 
+                        echo "Oops! The source(s) of fe-bookatop is not exist!"
+                        exit 1 
+                      fi
+                    """
+
+                    /*-------------Replace and Launch fe-bookatop on dev--------------*/
+                    sh """
+                      #!/bin/sh
                   
-                  echo Check new app fe-bookatop is exit
+                      echo Replace fe-bookatop $varDestPath
 
-                  varBuildPath=$SOUR_PATH/build-$buildNumber                  
-                  if [ ! -d $SOUR_PATH ] || [ ! -d \$varBuildPath/.next ] || [ ! -d \$varBuildPath/node_modules ] ; then 
-                     echo "Oops! The source(s) of fe-bookatop is not exist!"
-                     exit 1 
-                  fi
-                  
-                  if ! [ -f \$varBuildPath/package.json ]; then 
-                     echo Oops! The package file of fe-bookatop is not exist!
-                     exit 1
-                  fi 
-                """
+                      rm -dR $varDestPath/.next
+                      rm -dR $varDestPath/node_modules
+                      rm $varDestPath/package.json
 
-                /*-------------Replace and Launch fe-bookatop on dev--------------
-                sh """
-                  #!/bin/sh
-                  
-                  echo Replace fe-bookatop $DEST_PATH
+                      cp -rT $varSourcePath/.next $varDestPath/.next
+                      cp -rT $varSourcePath/node_modules $varDestPath/node_modules
+                      cp -rT $varSourcePath/package.json $varDestPath/package.json
 
-                  rm -dR ${DEST_PATH}/.next
-                  rm -dR ${DEST_PATH}/node_modules
-                  rm ${DEST_PATH}/package.json
-
-                  cp -rT ${SOUR_PATH}/.next ${DEST_PATH}/.next
-                  cp -rT ${SOUR_PATH}/node_modules ${DEST_PATH}/node_modules
-                  cp -rT ${SOUR_PATH}/package.json ${DEST_PATH}/package.json
-
-                  cd $DEST_PATH
+                      cd $varDestPath
                     
-                  npm install && npm start                    
-                """
-
-                 */
+                      npm install && npm start                    
+                    """
+                }
             }
         }
     }
