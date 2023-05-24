@@ -19,7 +19,9 @@ pipeline {
                    varBuildPath=${DEST_PATH}/build-${BUILD_NUMBER}
                    if ! [ -d $varBuildPath ]; then
                      mkdir -p $varBuildPath
-                   fi                 
+                   fi
+                   
+                   cp * $varBuildPath                
                 '''
             }
         }
