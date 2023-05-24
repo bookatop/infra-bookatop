@@ -56,6 +56,10 @@ pipeline {
                       #!/bin/sh                  
                       echo Replace fe-bookatop $varDestPath
 
+                      if ! [ -d $varDestPath ]; then 
+                          mkdir -p $varDestPath  
+                      fi  
+
                       rm -dR $varDestPath/.next
                       rm -dR $varDestPath/node_modules
                       rm $varDestPath/package.json
