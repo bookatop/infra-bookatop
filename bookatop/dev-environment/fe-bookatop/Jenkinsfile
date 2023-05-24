@@ -9,7 +9,7 @@ pipeline {
     }
 
     stages {
-        stage('Prepare fe application') {
+        stage('Prepare fe app') {
             steps {
                 echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev"
 
@@ -20,14 +20,16 @@ pipeline {
                    if ! [ -d $varBuildPath ]; then
                      mkdir -p $varBuildPath
                    fi
-                   cp -rT . $varBuildPath
-                   npm install && npm run build:dev                   
+                   cp -rT . $varBuildPath                                      
                 '''
             }
         }
-        stage('Test') {
+        stage('Clean/Build/Test') {
             steps {
-                sh 'echo done'
+                sh '''
+                  #!/bin/sh
+                  npm install && npm run clean && npm run build:dev && npm run lint
+                '''
             }
         }
     }
