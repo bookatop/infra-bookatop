@@ -21,7 +21,8 @@ pipeline {
                      mkdir -p $varBuildPath
                    fi
                    ls -la
-                   cp -r ./* $varBuildPath
+                   cp -r * $varBuildPath
+                   cp -r .env.development $varBuildPath
                    cd $varBuildPath
                    ls -la  
                 '''
