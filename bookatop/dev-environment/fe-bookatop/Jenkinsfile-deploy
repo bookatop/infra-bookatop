@@ -43,17 +43,17 @@ pipeline {
                   
                   echo Check new app fe-bookatop is exit
                   
-                  if ! [ -d $SOUR_PATH && -d ${SOURCE_PATH}/.next && -d ${SOUR_PATH}/node_modules ]; then 
+                  if ! [ -d $SOUR_PATH && -d $SOURCE_PATH/.next && -d $SOUR_PATH/node_modules ]; then 
                      echo Oops! The source(s) of fe-bookatop is not exist!
                      exit 1 
                   fi
                   
-                  if ! [ -f ${SOURCE_PATH}/package.json ]; then 
+                  if ! [ -f $SOURCE_PATH/package.json ]; then 
                      echo Oops! The package file of fe-bookatop is not exist!
                   fi 
                 """
 
-                /*-------------Replace and Launch fe-bookatop on dev--------------*/
+                /*-------------Replace and Launch fe-bookatop on dev--------------
                 sh """
                   #!/bin/sh
                   
@@ -71,6 +71,8 @@ pipeline {
                     
                   npm install && npm start                    
                 """
+
+                 */
             }
         }
     }
