@@ -1,0 +1,39 @@
+/* Introduces steps to build and test the fe-bookatop on dev environment */
+
+def static branches() {
+    def getTags = ("git ls-remote -t -h git@github.com:bookatop/fe-bookatop.git").execute()
+    return getTags.text.readLines().collect {
+        it.split()[1].replaceAll('refs/heads/', '').replaceAll('refs/tags/', '').replaceAll("\\^\\{\\}", '')
+    }
+}
+
+pipeline {
+
+    agent any
+
+    parameters  {
+        choice(
+            name: 'branchName',
+            choices: branches(),
+            description: 'Choose branch name*'
+        )
+        validatingString(
+            name: 'buildName',
+            defaultValue: '1',
+            description: 'Put the build number*',
+            failedValidationMessage: 'Build number is invalid',
+            regex: /^[0-9]+$/
+        )
+    }
+
+    stages {
+        stage('Deploy on Dev') {
+            environment {
+
+            }
+            steps {
+                echo "Deploy ${branchName}:fe-bookatop:${buildName} on dev"
+            }
+        }
+    }
+}
