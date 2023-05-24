@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy on Dev') {
             environment {
                 SOUR_PATH = "/path/dev-env/fe-bookatop/releases/${branchName}"
-                DEST_PATH = "/path/dev-env/fe-bookatop/releases/deploy"
+                DEST_PATH = "/path/dev-env/fe-bookatop/deploy"
             }
             steps {
                 echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on dev"
