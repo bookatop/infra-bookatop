@@ -45,7 +45,7 @@ pipeline {
                       #!/bin/sh                  
                       echo Check new app fe-bookatop is exit
                                    
-                      if [ ! -d $varSourcePath/.next ] || [ ! -d $varSourcePath/node_modules ] || [ -f $varSourcePath/package.json ] ; then 
+                      if [ ! -d $varSourcePath/.next ] || [ ! -d $varSourcePath/node_modules ] || [ ! -f $varSourcePath/package.json ] ; then 
                         echo "Oops! The source(s) of fe-bookatop is not exist!"
                         exit 1 
                       fi
