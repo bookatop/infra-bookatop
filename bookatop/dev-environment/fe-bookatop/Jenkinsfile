@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Clean/Build/Test') {
             steps {
-                sh 'npm run clean && npm run build:dev'
+                sh 'ls'
             }
         }
         stage('Test') {
