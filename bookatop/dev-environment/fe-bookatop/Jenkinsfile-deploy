@@ -87,7 +87,7 @@ pipeline {
                     /*-------------Service is success launched--------------*/
                     sh """
                        #!/bin/sh
-                       echo ${branchName}:fe-bookatop:${buildNumber} is success installed and launched on dev. 
+                       echo ${branchName}:fe-bookatop:${buildNumber} is success deployed and launched on dev. 
                     """
                 }
             }
