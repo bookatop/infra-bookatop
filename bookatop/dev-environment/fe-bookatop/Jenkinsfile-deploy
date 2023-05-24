@@ -48,8 +48,9 @@ pipeline {
                      exit 1 
                   fi
                   
-                  if ! [ -f $SOURCE_PATH/package.json ]; then 
+                  if ! [ -f $SOUR_PATH/package.json ]; then 
                      echo Oops! The package file of fe-bookatop is not exist!
+                     exit 1
                   fi 
                 """
 
