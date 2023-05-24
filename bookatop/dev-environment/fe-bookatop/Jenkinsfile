@@ -21,7 +21,9 @@ pipeline {
                      mkdir -p $varBuildPath
                    fi
                    ls -la
-                   cp -r * $varBuildPath            
+                   cp -r * $varBuildPath
+                   cd $varBuildPath
+                   ls -la  
                 '''
             }
         }
