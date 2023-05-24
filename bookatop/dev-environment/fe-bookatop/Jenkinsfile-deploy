@@ -43,7 +43,7 @@ pipeline {
                   
                   echo Check new app fe-bookatop is exit
                   
-                  if ! [ -d $SOUR_PATH && -d $SOURCE_PATH/.next && -d $SOUR_PATH/node_modules ]; then 
+                  if ! [ -d $SOUR_PATH && -d $SOUR_PATH/.next && -d $SOUR_PATH/node_modules ]; then 
                      echo Oops! The source(s) of fe-bookatop is not exist!
                      exit 1 
                   fi
