@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on dev"
 
-                scripts {
+                script {
                     varSourcePath = ${SOUR_PATH}/build-${buildNumber}
                     varDestPath = ${DEST_PATH}
 
