@@ -20,10 +20,8 @@ pipeline {
                    if ! [ -d $varBuildPath ]; then
                      mkdir -p $varBuildPath
                    fi
-                   ls -la
                    cp -rT . $varBuildPath
-                   cd $varBuildPath
-                   ls -la  
+                   npm install
                 '''
             }
         }
