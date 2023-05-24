@@ -34,7 +34,6 @@ pipeline {
             }
             steps {
 
-                var
                 echo "Deploy ${branchName}:fe-bookatop:${buildName} on dev"
 
                 /*-------------Check if new app exists to be replaced--------------*/
