@@ -43,7 +43,6 @@ pipeline {
                 TRY_STOP_DAEMON = 3
                 TRY_START_DAEMON = 3
                 TRY_CHECK_SERVICE = 3
-                SPACE_NAME = "${SPACE}"
             }
             steps {
                 echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${SPACE_NAME}"
