@@ -33,7 +33,7 @@ pipeline {
     }
 
     stages {
-        stage("Deploy on ${ENVIRONMENT}") {
+        stage('Deploy') {
             environment {
                 BACKEND_URL = "http://localhost:8081"
                 SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
