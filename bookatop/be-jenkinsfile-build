@@ -45,7 +45,7 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${env.getProperty('ENVIRONMENT')}"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${env.SPACE}"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
@@ -171,7 +171,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on ${env.getProperty('ENVIRONMENT')}"                      
+                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on ${env.SPACE}"                      
                     """
                 }
             }
