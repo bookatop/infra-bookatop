@@ -33,7 +33,7 @@ pipeline {
     }
 
     stages {
-        stage('Deploy on Dev') {
+        stage("Deploy on ${ENVIRONMENT}") {
             environment {
                 BACKEND_URL = "http://localhost:8081"
                 SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
@@ -45,7 +45,7 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on dev"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${ENVIRONMENT}"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
@@ -57,7 +57,7 @@ pipeline {
                     varDaemonName="${serviceName}.service"
 
                     /*-------------Check if new service exists to be replaced--------------*/
-
+/*
                     sh """
                       #!/bin/sh
                       echo Check new service $varSourceJarFile is exist
@@ -67,9 +67,9 @@ pipeline {
                          exit 1
                       fi                       
                     """
-
+*/
                     /*-------------Stop service script-----------------*/
-
+/*
                     sh """
                       #!/bin/sh         
                       echo Stop service $varServiceName
@@ -87,9 +87,9 @@ pipeline {
                         i=\$((\$i+1))                          
                       done
                     """
-
+*/
                     /*-------------Stop daemon-----------------*/
-
+/*
                     sh """
                       #!/bin/sh
                       echo Stop daemon $varDaemonName
@@ -111,9 +111,9 @@ pipeline {
                       done
                       set -e
                     """
-
+*/
                     /*-------------Replace service----------------------*/
-
+/*
                     sh """
                       #!/bin/sh
                       echo Replace service $varDestJarFile
@@ -124,9 +124,9 @@ pipeline {
                       rm -f $DEST_PATH/$varSourceJarName
                       cp -n $varSourceJarFile $varDestJarFile                      
                     """
-
+*/
                     /*-------------Launch daemon----------------------*/
-
+/*
                     sh """
                       #!/bin/sh
                       echo Launch daemon $varDaemonName
@@ -147,8 +147,9 @@ pipeline {
                       done 
                       set -e                                            
                     """
-
+*/
                     /*-----------Check service status----------*/
+/*
                     sh """
                       #!/bin/sh
                       echo Check service $varServiceName status
@@ -165,11 +166,12 @@ pipeline {
                         i=\$((\$i+1))                          
                       done  
                     """
-
+*/
                     /*-----------Service is success launched----------*/
+
                     sh """
                       #!/bin/sh
-                      echo ${branchName}:${serviceName}-service:${buildName} is success installed and launched on dev.                      
+                      echo ${branchName}:${serviceName}-service:${buildName} is success installed and launched on ${ENVIRONMENT}.                      
                     """
                 }
             }
