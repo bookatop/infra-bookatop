@@ -43,9 +43,10 @@ pipeline {
                 TRY_STOP_DAEMON = 3
                 TRY_START_DAEMON = 3
                 TRY_CHECK_SERVICE = 3
+                SPACE_NAME = ${SPACE}
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${env.SPACE}"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${SPACE_NAME}"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
@@ -171,7 +172,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on ${env.SPACE}"                      
+                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on ${SPACE_NAME}"                      
                     """
                 }
             }
