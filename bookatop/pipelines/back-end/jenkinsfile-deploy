@@ -144,7 +144,7 @@ pipeline {
                         fi
                         sudo systemctl start $varDaemonName
                         sleep 1
-                        \$i=\$((\$i+1))                        
+                        i=\$((\$i+1))                        
                       done 
                       set -e                                            
                     """
