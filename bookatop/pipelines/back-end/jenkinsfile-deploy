@@ -140,7 +140,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} is success installed and launched on $ENVIRONMENT"                      
+                      echo "Deploy ${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} is success installed and launched on $ENVIRONMENT"                      
                     """
                 }
             }
