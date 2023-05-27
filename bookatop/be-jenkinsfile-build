@@ -24,7 +24,7 @@ pipeline {
             regex: /^.+$/
         )
         validatingString(
-            name: 'serviceName',
+            name: 'buildName',
             defaultValue: '1',
             description: 'Put the build number*',
             failedValidationMessage: 'Build number is invalid',
