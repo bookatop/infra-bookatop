@@ -5,7 +5,7 @@ node {
 
     //checkout devops repository (other repository)
     sh 'mkdir -p devops'
-    dir("bookatop")
+    dir("devops")
             {
                 script{
                     git branch: "main",
