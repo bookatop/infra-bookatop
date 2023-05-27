@@ -1,0 +1,16 @@
+node {
+    //checkout devops repository (other repository)
+    sh 'mkdir -p devops'
+
+    dir('devops') {
+        script {
+            git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
+        }
+    }
+
+    // pass the environment variables to new pipeline
+    withEnv(['ENVIRONMENT=DEV']) {
+        // load Jenkinsfile Pipeline file from devops dir
+        load 'bookatop/pipelines/front-end/jenkinsfile-build'
+    }
+}

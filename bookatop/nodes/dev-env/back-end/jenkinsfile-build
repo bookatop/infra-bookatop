@@ -9,8 +9,8 @@ node {
     }
 
     // pass the environment variables to new pipeline
-    withEnv(['ENVIRONMENT=PROD']) {
+    withEnv(['ENVIRONMENT=DEV']) {
        // load Jenkinsfile Pipeline file from devops dir
-       load 'bookatop/be-jenkinsfile-build'
+       load 'bookatop/pipelines/back-end/jenkinsfile-build'
     }
 }
