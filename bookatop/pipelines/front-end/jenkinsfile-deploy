@@ -45,7 +45,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh                  
-                      echo Check new app fe-bookatop is exit
+                      echo Check new app fe-bookatop is exist
                                    
                       if [ ! -d $varSourcePath/.next ] || \n 
                          [ ! -d $varSourcePath/node_modules ] || \n
