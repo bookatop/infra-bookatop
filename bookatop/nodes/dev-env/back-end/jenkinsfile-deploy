@@ -10,9 +10,6 @@ node {
 
     // pass the environment variables to new pipeline
     withEnv(['ENVIRONMENT=DEV',
-             'BRANCH_PARAM="${branchName}"',
-             'SERVICE_PARAM="${serviceName}"',
-             'BUILD_NUM_PARAM="${buildNumber}"',
              'SOUR_PATH="/path/dev-env/be-bookatop/releases/${branchName}"',
              'DEST_PATH="/path/dev-env/be-bookatop/deploy"']) {
        // load Jenkinsfile Pipeline file from devops dir

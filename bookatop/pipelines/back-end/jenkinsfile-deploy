@@ -46,16 +46,16 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy - ${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} on $ENVIRONMENT"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                 script {
-                    varSourceJarName = "${SERVICE_PARAM}-service.jar"
+                    varSourceJarName = "${serviceName}-service.jar"
 
-                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_PARAM}-service-${BUILD_NUM_PARAM}.jar"
+                    varSourceJarFile = "${SOUR_PATH}/${serviceName}-service-${buildNumber}.jar"
                     varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
 
-                    varServiceName="${SERVICE_PARAM}.service"
-                    varDaemonName="${SERVICE_PARAM}.service"
+                    varServiceName="${serviceName}.service"
+                    varDaemonName="${serviceName}.service"
 
                     /*-------------Check if new service exists to be replaced--------------*/
 
@@ -172,7 +172,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "Deploy ${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} is success installed and launched on $ENVIRONMENT"                      
+                      echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"                      
                     """
                 }
             }
