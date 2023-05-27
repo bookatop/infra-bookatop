@@ -45,7 +45,7 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on "${SPACE_NAME}
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on ${env.SPACE_NAME}"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
@@ -171,7 +171,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on "${SPACE_NAME}                      
+                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on ${env.SPACE_NAME}"                      
                     """
                 }
             }
