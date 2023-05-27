@@ -4,8 +4,7 @@ node {
 
     dir('devops') {
        script {
-          /*git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'*/
-           sh "ls -al"
+          git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
        }
     }
 
