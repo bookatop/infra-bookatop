@@ -30,10 +30,10 @@ pipeline {
             failedValidationMessage: 'Build number is invalid',
             regex: /^[0-9]+$/
         )
-        hidden(
-            name: 'environment',
+        readonly(
+            name: 'envName',
             defaultValue: 'dev',
-            description: 'Environment value'
+            description: 'Environment name'
         )
     }
 
@@ -50,7 +50,7 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on $environment"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on $envName"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
@@ -176,7 +176,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on $environment"                      
+                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on $envName"                      
                     """
                 }
             }
