@@ -1,46 +1,16 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
-def static branches() {
-    /*
-    def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
-    return getTags.text.readLines().collect {
-        it.split()[1].replaceAll('refs/heads/', '').replaceAll('refs/tags/', '').replaceAll("\\^\\{\\}", '')
-    }
-    */
-    return ['main']
-}
+
 
 pipeline {
     agent any
-
-    parameters  {
-        choice(
-            name: 'branchName',
-            choices: branches(),
-            description: 'Choose branch name*'
-        )
-        validatingString(
-            name: 'serviceName',
-            defaultValue: 'auth',
-            description: 'Put the service name*',
-            failedValidationMessage: 'Service name is empty',
-            regex: /^.+$/
-        )
-        validatingString(
-            name: 'buildNumber',
-            defaultValue: '1',
-            description: 'Put the build number*',
-            failedValidationMessage: 'Build number is invalid',
-            regex: /^[0-9]+$/
-        )
-    }
 
     stages {
         stage('Deploy') {
             environment {
                 BACKEND_URL = "http://localhost:8081"
-                SOUR_PATH = "/path/dev-env/be-bookatop/releases/${branchName}"
-                DEST_PATH = "/path/dev-env/be-bookatop/releases/libs"
+                SOUR_PATH = "${SOUR_PATH}"
+                DEST_PATH = "${DEST_PATH}"
                 TRY_STOP_SERVICE = 3
                 TRY_START_SERVICE = 3
                 TRY_STOP_DAEMON = 3
