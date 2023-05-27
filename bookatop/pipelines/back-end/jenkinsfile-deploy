@@ -9,8 +9,6 @@ pipeline {
         stage('Deploy') {
             environment {
                 BACKEND_URL = "http://localhost:8081"
-                SOUR_PATH = "${SOUR_PATH}"
-                DEST_PATH = "${DEST_PATH}"
                 TRY_STOP_SERVICE = 3
                 TRY_START_SERVICE = 3
                 TRY_STOP_DAEMON = 3
@@ -18,16 +16,16 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
+                echo "Deploy ${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} on $ENVIRONMENT"
 
                 script {
-                    varSourceJarName = "${serviceName}-service.jar"
+                    varSourceJarName = "${SERVICE_PARAM}-service.jar"
 
-                    varSourceJarFile = "${SOUR_PATH}/${serviceName}-service-${buildNumber}.jar"
+                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_PARAM}-service-${BUILD_NUM_PARAM}.jar"
                     varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
 
-                    varServiceName="${serviceName}.service"
-                    varDaemonName="${serviceName}.service"
+                    varServiceName="${SERVICE_PARAM}.service"
+                    varDaemonName="${SERVICE_PARAM}.service"
 
                     /*-------------Check if new service exists to be replaced--------------*/
 
@@ -144,7 +142,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"                      
+                      echo "${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} is success installed and launched on $ENVIRONMENT"                      
                     """
                 }
             }
