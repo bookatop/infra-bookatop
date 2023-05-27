@@ -5,7 +5,7 @@ pipeline {
 
     environment {
         SOUR_PATH = 'services'
-        DEST_PATH = '/path/dev-env/be-bookatop/releases/${BRANCH_NAME}'
+        DEST_PATH = "/path/dev-env/be-bookatop/releases/${BRANCH_NAME}"
     }
 
     stages {
