@@ -30,7 +30,7 @@ pipeline {
                     varDaemonName="${serviceName}.service"
 
                     /*-------------Check if new service exists to be replaced--------------*/
-/*
+
                     sh """
                       #!/bin/sh
                       echo Check new service $varSourceJarFile is exist
@@ -40,9 +40,9 @@ pipeline {
                          exit 1
                       fi                       
                     """
-*/
+
                     /*-------------Stop service script-----------------*/
-/*
+
                     sh """
                       #!/bin/sh         
                       echo Stop service $varServiceName
@@ -60,9 +60,9 @@ pipeline {
                         i=\$((\$i+1))                          
                       done
                     """
-*/
+
                     /*-------------Stop daemon-----------------*/
-/*
+
                     sh """
                       #!/bin/sh
                       echo Stop daemon $varDaemonName
@@ -84,9 +84,9 @@ pipeline {
                       done
                       set -e
                     """
-*/
+
                     /*-------------Replace service----------------------*/
-/*
+
                     sh """
                       #!/bin/sh
                       echo Replace service $varDestJarFile
@@ -97,9 +97,9 @@ pipeline {
                       rm -f $DEST_PATH/$varSourceJarName
                       cp -n $varSourceJarFile $varDestJarFile                      
                     """
-*/
+
                     /*-------------Launch daemon----------------------*/
-/*
+
                     sh """
                       #!/bin/sh
                       echo Launch daemon $varDaemonName
@@ -120,9 +120,9 @@ pipeline {
                       done 
                       set -e                                            
                     """
-*/
+
                     /*-----------Check service status----------*/
-/*
+
                     sh """
                       #!/bin/sh
                       echo Check service $varServiceName status
@@ -139,7 +139,7 @@ pipeline {
                         i=\$((\$i+1))                          
                       done  
                     """
-*/
+
                     /*-----------Service is success launched----------*/
 
                     sh """
