@@ -14,26 +14,26 @@ pipeline {
 
     agent any
 
-    parameters {
-        choice(
-                name: 'branchName',
-                choices: branches(),
-                description: 'Choose branch name*'
-        )
-        validatingString(
-                name: 'buildNumber',
-                defaultValue: '1',
-                description: 'Put the build number*',
-                failedValidationMessage: 'Build number is invalid',
-                regex: /^[0-9]+$/
-        )
-    }
+//    parameters {
+//        choice(
+//                name: 'branchName',
+//                choices: branches(),
+//                description: 'Choose branch name*'
+//        )
+//        validatingString(
+//                name: 'buildNumber',
+//                defaultValue: '1',
+//                description: 'Put the build number*',
+//                failedValidationMessage: 'Build number is invalid',
+//                regex: /^[0-9]+$/
+//        )
+//    }
 
     stages {
         stage('Deploy on Dev') {
             environment {
-                SOUR_PATH = "/path/dev-env/fe-bookatop/releases/${branchName}"
-                DEST_PATH = "/path/dev-env/fe-bookatop/deploy"
+                SOUR_PATH = "${SOUR_PATH}"
+                DEST_PATH = "${DEST_PATH}"
             }
             steps {
                 echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on dev"

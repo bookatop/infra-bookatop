@@ -1,4 +1,20 @@
 node {
+
+    parameters {
+        choice(
+                name: 'branchName',
+                choices: branches(),
+                description: 'Choose branch name*'
+        )
+        validatingString(
+                name: 'buildNumber',
+                defaultValue: '1',
+                description: 'Put the build number*',
+                failedValidationMessage: 'Build number is invalid',
+                regex: /^[0-9]+$/
+        )
+    }
+
     //checkout devops repository (other repository)
     sh 'mkdir -p devops'
 
@@ -9,7 +25,9 @@ node {
     }
 
     // pass the environment variables to new pipeline
-    withEnv(['ENVIRONMENT=DEV']) {
+    withEnv(['ENVIRONMENT=DEV',
+             'SOUR_PATH="/path/dev-env/fe-bookatop/releases/${branchName}"',
+             'DEST_PATH="/path/dev-env/fe-bookatop/deploy"']) {
        // load Jenkinsfile Pipeline file from devops dir
        load 'devops/bookatop/pipelines/back-end/jenkinsfile-deploy'
     }
