@@ -10,6 +10,8 @@ def static branches() {
 
 node {
 
+    agent any
+
     parameters  {
         choice(
                 name: 'branchName',
