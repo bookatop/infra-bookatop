@@ -30,7 +30,11 @@ pipeline {
             failedValidationMessage: 'Build number is invalid',
             regex: /^[0-9]+$/
         )
-        hidden(name: 'environment', 'dev', descrion: 'environment value')
+        hidden(
+            name: 'environment',
+            defaultValue: 'dev',
+            descrion: 'environment value'
+        )
     }
 
     stages {
