@@ -46,7 +46,7 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} on $ENVIRONMENT"
+                echo "Deploy - ${BRANCH_PARAM}:${SERVICE_PARAM}-service:${BUILD_NUM_PARAM} on $ENVIRONMENT"
 
                 script {
                     varSourceJarName = "${SERVICE_PARAM}-service.jar"
