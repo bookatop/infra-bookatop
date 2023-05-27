@@ -24,7 +24,7 @@ pipeline {
             regex: /^.+$/
         )
         validatingString(
-            name: 'buildName',
+            name: 'buildNumber',
             defaultValue: '1',
             description: 'Put the build number*',
             failedValidationMessage: 'Build number is invalid',
@@ -50,12 +50,12 @@ pipeline {
                 TRY_CHECK_SERVICE = 3
             }
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildName} on $ENVIRONMENT"
+                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                 script {
                     varSourceJarName = "${serviceName}-service.jar"
 
-                    varSourceJarFile = "${SOUR_PATH}/${serviceName}-service-${buildName}.jar"
+                    varSourceJarFile = "${SOUR_PATH}/${serviceName}-service-${buildNumber}.jar"
                     varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
 
                     varServiceName="${serviceName}.service"
@@ -176,7 +176,7 @@ pipeline {
 
                     sh """
                       #!/bin/sh
-                      echo "${branchName}:${serviceName}-service:${buildName} is success installed and launched on $ENVIRONMENT"                      
+                      echo "${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"                      
                     """
                 }
             }
