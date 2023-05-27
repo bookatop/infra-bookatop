@@ -9,28 +9,6 @@ def static branches() {
 }
 
 node {
-    parameters  {
-        choice(
-                name: 'branchName',
-                choices: branches(),
-                description: 'Choose branch name*'
-        )
-        validatingString(
-                name: 'serviceName',
-                defaultValue: 'auth',
-                description: 'Put the service name*',
-                failedValidationMessage: 'Service name is empty',
-                regex: /^.+$/
-        )
-        validatingString(
-                name: 'buildNumber',
-                defaultValue: '1',
-                description: 'Put the build number*',
-                failedValidationMessage: 'Build number is invalid',
-                regex: /^[0-9]+$/
-        )
-    }
-
     //checkout devops repository (other repository)
     sh 'mkdir -p devops'
 
