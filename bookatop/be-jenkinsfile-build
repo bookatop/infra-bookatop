@@ -30,7 +30,7 @@ pipeline {
             failedValidationMessage: 'Build number is invalid',
             regex: /^[0-9]+$/
         )
-        readonly(
+        readonlyString(
             name: 'envName',
             defaultValue: 'dev',
             description: 'Environment name'
