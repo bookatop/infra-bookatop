@@ -33,7 +33,7 @@ pipeline {
         hidden(
             name: 'environment',
             defaultValue: 'dev',
-            description: 'environment value'
+            description: 'Environment value'
         )
     }
 
