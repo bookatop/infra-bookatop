@@ -1,5 +1,3 @@
-import deployUtils.ServiceDeployUtils
-
 class DeployBeOnDevBuilder {
 
     void deploy(
@@ -11,7 +9,7 @@ class DeployBeOnDevBuilder {
             String destPath
     ) {
 
-        def utils = new ServiceDeployUtils()
+        def utils = new deployUtils.ServiceDeployUtils()
 
         println "${branchName}"
         println "${serviceName}"
