@@ -15,6 +15,8 @@ TRY_CHECK_SERVICE = 3
 
 def deploy(String str) {
 
+    println str
+
 /*-------------Check if new service exists to be replaced--------------*/
 
 /*

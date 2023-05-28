@@ -43,18 +43,18 @@ pipeline {
 
                 script {
 
-                    load "deploy-be-on-dev"
+                    load 'deploy-be-on-dev.groovy'
 
-                    varSourceJarName = "${SERVICE_NAME}-service.jar"
-
-                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_NAME}-service-${buildNumber}.jar"
-                    varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
-
-                    varServiceName = "${SERVICE_NAME}.service"
-                    varDaemonName = "${SERVICE_NAME}.service"
+//                    varSourceJarName = "${SERVICE_NAME}-service.jar"
+//
+//                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_NAME}-service-${buildNumber}.jar"
+//                    varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
+//
+//                    varServiceName = "${SERVICE_NAME}.service"
+//                    varDaemonName = "${SERVICE_NAME}.service"
 
                     deploy(
-                            varSourceJarName
+                            'Hello Deploy'
                     )
 
                 }
