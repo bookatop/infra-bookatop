@@ -36,13 +36,6 @@ pipeline {
     }
 
     stages {
-//        stage('Init') {
-//            steps {
-//                script {
-//                    library "bookatop-shared-libraries@main"
-//                }
-//            }
-//        }
 
         stage('Deploy') {
 
@@ -52,8 +45,6 @@ pipeline {
                     echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     daemonName = "${serviceName}.service"
-
-//                    def builderModule = load 'DeployBuilder.groovy'
 
                     load("bookatop/pipelines/libs/DeployBuilder.groovy").deployBackEndOnDev(
                             "${branchName}",
