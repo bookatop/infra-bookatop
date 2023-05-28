@@ -45,9 +45,7 @@ pipeline {
 
                     def builderModule = load 'bookatop/pipelines/deploy-be-on-dev/DeployBeOnDevBuilder.groovy'
 
-                    builder = new builderModule.DeployBeOnDevBuilder()
-
-                    builder.deploy(
+                    builderModule.deploy(
                       "${branchName}",
                       "${serviceName}",
                       "${daemonName}",

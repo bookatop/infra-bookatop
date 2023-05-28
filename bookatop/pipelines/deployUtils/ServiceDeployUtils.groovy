@@ -1,6 +1,4 @@
-class ServiceDeployUtils {
-
-  private void checkServiceExists(String serviceName) {
+private void checkServiceExists(String serviceName) {
     sh """
      #!/bin/sh
 
@@ -12,9 +10,9 @@ class ServiceDeployUtils {
         exit 1
      fi
   """
-  }
+}
 
-  private void checkServiceStatus(String serviceName) {
+private void checkServiceStatus(String serviceName) {
     sh """
      #!/bin/sh
 
@@ -33,9 +31,9 @@ class ServiceDeployUtils {
        i=\$((\$i+1))
      done
   """
-  }
+}
 
-  private void stopService(String serviceName) {
+private void stopService(String serviceName) {
     sh """
      #!/bin/sh
 
@@ -57,9 +55,9 @@ class ServiceDeployUtils {
        i=\$((\$i+1))
      done
   """
-  }
+}
 
-  private void stopDaemon(String daemonName) {
+private void stopDaemon(String daemonName) {
     sh """
      #!/bin/sh
 
@@ -84,9 +82,9 @@ class ServiceDeployUtils {
      done
      set -e
   """
-  }
+}
 
-  private void replaceService(String serviceName, Integer buildNumber) {
+private void replaceService(String serviceName, Integer buildNumber) {
     sh """
      #!/bin/sh
 
@@ -102,9 +100,9 @@ class ServiceDeployUtils {
      rm -f $DEST_PATH/\$serviceJarName
      cp -n \$sourceJarFile \$destJarFile
   """
-  }
+}
 
-  private void launchDaemon(String daemonName) {
+private void launchDaemon(String daemonName) {
     sh """
      #!/bin/sh
 
@@ -128,12 +126,9 @@ class ServiceDeployUtils {
      done
      set -e
     """
-  }
 }
 
 return this
-
-
 
 
 ////varSourceJarName = "${SERVICE_NAME}-service.jar"
