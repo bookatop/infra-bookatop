@@ -39,9 +39,9 @@ pipeline {
         stage('Deploy') {
 
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                 script {
+                    echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     def deployModule = load 'bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev.groovy'
 
@@ -55,8 +55,8 @@ pipeline {
 
                     deployModule.deploy()
 
+                    echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"
                 }
-                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"
             }
         }
     }
