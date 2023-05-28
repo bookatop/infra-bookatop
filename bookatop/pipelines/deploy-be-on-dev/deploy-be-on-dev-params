@@ -58,6 +58,8 @@ pipeline {
                             "${DEST_PATH}"
                     )
 
+                    echo library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.whereissh()
+
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
             }
