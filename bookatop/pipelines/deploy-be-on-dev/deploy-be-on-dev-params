@@ -53,9 +53,7 @@ pipeline {
 //                    varServiceName = "${SERVICE_NAME}.service"
 //                    varDaemonName = "${SERVICE_NAME}.service"
 
-                    deployClass.deploy(
-                            "Hello Deploy"
-                    )
+                    deployClass.deploy "Hello Deploy"
 
                 }
                 echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"
