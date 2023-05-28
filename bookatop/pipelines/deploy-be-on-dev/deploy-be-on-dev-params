@@ -49,18 +49,14 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    echo library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.f1()
-
-//                    load('bookatop/pipelines/src/com/bookatop/DeployBuilder.groovy').f1()
-
-//                    DeployBuilder.deployBackEndOnDev(
-//                            "${branchName}",
-//                            "${serviceName}",
-//                            "${daemonName}",
-//                            "${buildNumber}".toInteger(),
-//                            "${SOUR_PATH}",
-//                            "${DEST_PATH}"
-//                    )
+                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
+                            "${branchName}",
+                            "${serviceName}",
+                            "${daemonName}",
+                            "${buildNumber}".toInteger(),
+                            "${SOUR_PATH}",
+                            "${DEST_PATH}"
+                    )
 
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
