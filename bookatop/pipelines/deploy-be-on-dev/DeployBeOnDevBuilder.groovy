@@ -1,3 +1,5 @@
+import deployUtils.ServiceDeployUtils
+
 def deploy(
         String branchName,
         String serviceName,
@@ -7,7 +9,7 @@ def deploy(
         String destPath
 ) {
 
-//        def utils = new deployUtils.ServiceDeployUtils()
+    utils = new ServiceDeployUtils()
 
     println branchName
     println serviceName

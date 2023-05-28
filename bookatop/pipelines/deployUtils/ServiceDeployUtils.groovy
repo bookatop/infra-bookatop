@@ -1,5 +1,7 @@
-private void checkServiceExists(String serviceName) {
-    sh """
+class ServiceDeployUtils {
+
+    private void checkServiceExists(String serviceName) {
+        sh """
      #!/bin/sh
 
      serviceJarName = "${serviceName}-service.jar"
@@ -10,10 +12,10 @@ private void checkServiceExists(String serviceName) {
         exit 1
      fi
   """
-}
+    }
 
-private void checkServiceStatus(String serviceName) {
-    sh """
+    private void checkServiceStatus(String serviceName) {
+        sh """
      #!/bin/sh
 
      TRY_CHECK_SERVICE = 3
@@ -31,10 +33,10 @@ private void checkServiceStatus(String serviceName) {
        i=\$((\$i+1))
      done
   """
-}
+    }
 
-private void stopService(String serviceName) {
-    sh """
+    private void stopService(String serviceName) {
+        sh """
      #!/bin/sh
 
      serviceName = "${serviceName}.service"
@@ -55,10 +57,10 @@ private void stopService(String serviceName) {
        i=\$((\$i+1))
      done
   """
-}
+    }
 
-private void stopDaemon(String daemonName) {
-    sh """
+    private void stopDaemon(String daemonName) {
+        sh """
      #!/bin/sh
 
      daemonName = "${daemonName}"
@@ -82,10 +84,10 @@ private void stopDaemon(String daemonName) {
      done
      set -e
   """
-}
+    }
 
-private void replaceService(String serviceName, Integer buildNumber) {
-    sh """
+    private void replaceService(String serviceName, Integer buildNumber) {
+        sh """
      #!/bin/sh
 
      serviceJarName = "${serviceName}-service.jar"
@@ -100,10 +102,10 @@ private void replaceService(String serviceName, Integer buildNumber) {
      rm -f $DEST_PATH/\$serviceJarName
      cp -n \$sourceJarFile \$destJarFile
   """
-}
+    }
 
-private void launchDaemon(String daemonName) {
-    sh """
+    private void launchDaemon(String daemonName) {
+        sh """
      #!/bin/sh
 
      TRY_START_DAEMON = 3
@@ -126,9 +128,8 @@ private void launchDaemon(String daemonName) {
      done
      set -e
     """
+    }
 }
-
-return this
 
 
 ////varSourceJarName = "${SERVICE_NAME}-service.jar"
