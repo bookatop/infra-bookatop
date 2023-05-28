@@ -15,7 +15,7 @@ TRY_CHECK_SERVICE = 3
 
 def deployFunc(str) {
 
-    println str
+    println "$str"
 
 /*-------------Check if new service exists to be replaced--------------*/
 
