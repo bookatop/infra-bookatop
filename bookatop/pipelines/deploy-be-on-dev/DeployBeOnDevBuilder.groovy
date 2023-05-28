@@ -9,12 +9,12 @@ def deploy(
 
 //        def utils = new deployUtils.ServiceDeployUtils()
 
-    println "${branchName}"
-    println "${serviceName}"
-    println "${daemonName}"
-    println "${buildNumber}"
-    println "${sourcePath}"
-    println "${destPath}"
+    println branchName
+    println serviceName
+    println daemonName
+    println buildNumber
+    println sourcePath
+    println destPath
 
 
 //        utils.checkServiceExists(serviceName)
@@ -25,7 +25,4 @@ def deploy(
 //        utils.checkServiceStatus(serviceName)
 }
 
-def example(Integer i) {
-    println "Hello" + i
-}
 return this
