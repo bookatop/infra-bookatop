@@ -1,7 +1,9 @@
 package com.bookatop.deployment
 
+import ServiceDeployUtils
+
 def f1() {
-    println "f1"
+    ServiceDeployUtils.f2()
 }
 
 return this
