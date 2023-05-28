@@ -24,4 +24,8 @@ def deploy(
 //        utils.launchDaemon(daemonName)
 //        utils.checkServiceStatus(serviceName)
 }
+
+def example() {
+    println "Hello"
+}
 return this
