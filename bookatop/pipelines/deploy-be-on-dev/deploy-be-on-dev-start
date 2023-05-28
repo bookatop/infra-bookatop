@@ -1,6 +1,4 @@
 node {
-    checkout scm
-
     //checkout devops repository (other repository)
     sh 'mkdir -p devops'
 
