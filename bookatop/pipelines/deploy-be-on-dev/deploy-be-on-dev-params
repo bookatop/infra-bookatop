@@ -46,7 +46,8 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    load("bookatop/pipelines/libs/DeployBuilder.groovy").deployBackEndOnDev(
+//                    load("bookatop/pipelines/libs/DeployBuilder.groovy")
+                    DeployBuilder.deployBackEndOnDev(
                             "${branchName}",
                             "${serviceName}",
                             "${daemonName}",
