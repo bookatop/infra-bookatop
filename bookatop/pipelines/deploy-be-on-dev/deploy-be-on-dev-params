@@ -50,7 +50,7 @@ pipeline {
                       "${branchName}",
                       "${serviceName}",
                       "${daemonName}",
-                      "${buildNumber}",
+                      "${buildNumber}".toInteger(),
                       "${SOUR_PATH}",
                       "${DEST_PATH}"
                     )
