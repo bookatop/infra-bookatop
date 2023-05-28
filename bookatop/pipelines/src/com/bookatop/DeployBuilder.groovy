@@ -1,6 +1,6 @@
 package com.bookatop.deployment
 
-import ServiceDeployUtils
+import com.bookatop.deployment.ServiceDeployUtils
 
 def f1() {
     ServiceDeployUtils.f2()
