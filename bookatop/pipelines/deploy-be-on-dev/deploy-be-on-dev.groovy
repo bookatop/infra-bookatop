@@ -13,8 +13,8 @@ TRY_STOP_DAEMON = 3
 TRY_START_DAEMON = 3
 TRY_CHECK_SERVICE = 3
 
-def deploy(str) {
-
+def deploy() {
+    println("deploy")
 
 
 /*-------------Check if new service exists to be replaced--------------*/
