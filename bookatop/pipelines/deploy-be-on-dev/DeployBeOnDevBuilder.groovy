@@ -24,6 +24,4 @@ def deploy(
 //        utils.launchDaemon(daemonName)
 //        utils.checkServiceStatus(serviceName)
 }
-
-
 return this
