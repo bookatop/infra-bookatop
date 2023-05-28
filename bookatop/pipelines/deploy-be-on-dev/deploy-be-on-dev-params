@@ -43,7 +43,7 @@ pipeline {
 
                 script {
 
-                    load "jenkinsfile-deploy.groovy"
+                    load "deploy-be-on-dev"
 
                     varSourceJarName = "${SERVICE_NAME}-service.jar"
 

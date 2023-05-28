@@ -1,0 +1,43 @@
+/* Introduces steps to build and test the be-bookatop on dev environment */
+
+pipeline {
+    agent any
+
+        parameters  {
+            validatingString(
+                    name: 'serviceName',
+                    defaultValue: 'auth',
+                    description: 'Put the service name*',
+                    failedValidationMessage: 'Service name is empty',
+                    regex: /^.+$/
+            )
+        }
+
+    stages {
+        stage('Deploy') {
+
+            steps {
+                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
+
+                script {
+
+                    load "jenkinsfile.groovy"
+
+                    varSourceJarName = "${SERVICE_NAME}-service.jar"
+
+                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_NAME}-service-${buildNumber}.jar"
+                    varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
+
+                    varServiceName = "${SERVICE_NAME}.service"
+                    varDaemonName = "${SERVICE_NAME}.service"
+
+                    deploy(
+                            varSourceJarName
+                    )
+
+                }
+                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"
+            }
+        }
+    }
+}

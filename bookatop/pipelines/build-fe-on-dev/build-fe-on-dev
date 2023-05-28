@@ -1,0 +1,36 @@
+/* Introduces steps to build and test the fe-bookatop on dev environment */
+
+pipeline {
+    agent any
+
+    environment {
+        SOUR_PATH = 'services'
+        DEST_PATH = "/path/dev-env/fe-bookatop/releases/${BRANCH_NAME}"
+    }
+
+    stages {
+        stage('Prepare fe app') {
+            steps {
+                echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev"
+
+                sh '''
+                   #!/bin/sh
+                   #Make the destination directory exists
+                   varBuildPath=${DEST_PATH}/build-${BUILD_NUMBER}
+                   if ! [ -d $varBuildPath ]; then
+                     mkdir -p $varBuildPath
+                   fi
+                   cp -rT . $varBuildPath
+                '''
+            }
+        }
+        stage('Clean/Build/Test') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  npm install && npm run clean && npm run build:dev && npm run lint
+                '''
+            }
+        }
+    }
+}

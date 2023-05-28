@@ -1,0 +1,57 @@
+/* Introduces steps to build and test the be-bookatop on dev environment */
+
+pipeline {
+    agent any
+
+    environment {
+        SOUR_PATH = 'services'
+        DEST_PATH = "/path/dev-env/be-bookatop/releases/${BRANCH_NAME}"
+    }
+
+    stages {
+        stage('Clean/Build/Test') {
+            steps {
+                sh 'gradle clean build test'
+            }
+        }
+        stage('Prepare release for dev environment') {
+            steps {
+                echo "Copy release:${BRANCH_NAME}:${BUILD_NUMBER} on branch on dev"
+
+                script {
+                    /* List of services */
+                    services = [
+                        'auth'
+                    ]
+
+                    sh """
+                      #!/bin/sh
+                      #Make the destination directory exists
+                      if ! [ -d ${DEST_PATH} ]; then
+                          mkdir -p ${DEST_PATH}
+                      fi
+                    """
+
+                    /* Fetch defined services to be released */
+                    services.each { item ->
+                          varSourceFile = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
+                          varDestFile = "${DEST_PATH}/${item}-service-${BUILD_NUMBER}.jar"
+                          sh """
+                            #!/bin/sh
+                            echo Fetch service ${item}
+
+                            #Check if the file is exist
+                            if ! [ -f ${varSourceFile} ]; then
+                                echo Oops! The file ${varSourceFile} is not exist!
+                                exit 1
+                            fi
+
+                            echo Copy the file ${varDestFile}
+                            cp ${varSourceFile} ${varDestFile}
+                          """
+                    }
+                }
+            }
+        }
+    }
+}

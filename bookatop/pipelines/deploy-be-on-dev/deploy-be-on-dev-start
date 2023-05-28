@@ -1,0 +1,18 @@
+node {
+    //checkout devops repository (other repository)
+    sh 'mkdir -p devops'
+
+    dir('devops') {
+       script {
+          git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
+       }
+    }
+
+    // pass the environment variables to new pipeline
+    withEnv(['ENVIRONMENT=DEV',
+             'SOUR_PATH="/path/dev-env/be-bookatop/releases/${branchName}"',
+             'DEST_PATH="/path/dev-env/be-bookatop/deploy"']) {
+       // load Jenkinsfile Pipeline file from devops dir
+       load 'deploy-be-on-dev-params'
+    }
+}

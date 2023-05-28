@@ -1,0 +1,29 @@
+/* Introduces steps to build and test the fe-bookatop on dev environment */
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy on Dev') {
+            environment {
+                SOUR_PATH = "${SOUR_PATH}"
+                DEST_PATH = "${DEST_PATH}"
+            }
+            steps {
+                echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on ${ENVIRONMENT}"
+
+                script {
+                    varSourcePath = "${SOUR_PATH}/build-${buildNumber}"
+                    varDestPath = "${DEST_PATH}"
+
+                    load "deploy-fe-on-prod"
+
+                    deploy (
+
+                    )
+
+
+            }
+        }
+    }
+}
