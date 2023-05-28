@@ -46,7 +46,7 @@ pipeline {
                     echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     daemonName = "${serviceName}.service"
-                    def builderModule = load 'bookatop/pipelines/src/DeployBuilder.groovy'
+                    def builderModule = load 'src/DeployBuilder.groovy'
 
 //                    builderModule.deployBackEndOnDev(
 
