@@ -57,14 +57,14 @@ pipeline {
 
 //                    def builderModule = load 'DeployBuilder.groovy'
 
-                    DeployBuilder.deployBackEndOnDev(
-                      "${branchName}",
-                      "${serviceName}",
-                      "${daemonName}",
-                      "${buildNumber}".toInteger(),
-                      "${SOUR_PATH}",
-                      "${DEST_PATH}"
-                    )
+//                    DeployBuilder.deployBackEndOnDev(
+//                      "${branchName}",
+//                      "${serviceName}",
+//                      "${daemonName}",
+//                      "${buildNumber}".toInteger(),
+//                      "${SOUR_PATH}",
+//                      "${DEST_PATH}"
+//                    )
 
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
