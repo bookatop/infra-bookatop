@@ -1,4 +1,4 @@
-void deploy(
+def deploy(
         String branchName,
         String serviceName,
         String daemonName,
