@@ -49,7 +49,7 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    DeployBuilder.f1()
+                    com.bookatop.DeployBuilder.f1()
 
 //                    DeployBuilder.deployBackEndOnDev(
 //                            "${branchName}",
