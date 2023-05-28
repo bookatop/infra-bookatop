@@ -43,6 +43,10 @@ pipeline {
 
                 script {
 
+                    sh ```
+                      ls -la
+                    ```
+
                     load 'devops/bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev.groovy'
 
 //                    varSourceJarName = "${SERVICE_NAME}-service.jar"
