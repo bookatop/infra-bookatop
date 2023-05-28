@@ -1,5 +1,3 @@
-import ServiceDeployUtils
-
 def deployBackEndOnDev(
         String branchName,
         String serviceName,
