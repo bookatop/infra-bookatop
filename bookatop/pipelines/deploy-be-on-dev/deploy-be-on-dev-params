@@ -40,6 +40,14 @@ pipeline {
 
     stages {
 
+        stage('Init') {
+            steps {
+                script {
+
+                }
+            }
+        }
+
         stage('Deploy') {
 
             steps {
@@ -49,7 +57,9 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    load('bookatop/pipelines/src/com/bookatop/DeployBuilder.groovy').f1()
+                    library('bookatop-shared-libs').com.bookatop.DeployBuilder.f1()
+
+//                    load('bookatop/pipelines/src/com/bookatop/DeployBuilder.groovy').f1()
 
 //                    DeployBuilder.deployBackEndOnDev(
 //                            "${branchName}",
