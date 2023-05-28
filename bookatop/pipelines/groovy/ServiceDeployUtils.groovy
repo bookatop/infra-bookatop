@@ -1,6 +1,6 @@
 class ServiceDeployUtils {
 
-    private void checkServiceExists(String serviceName) {
+    void checkServiceExists(String serviceName) {
         sh """
      #!/bin/sh
 
@@ -14,7 +14,7 @@ class ServiceDeployUtils {
   """
     }
 
-    private void checkServiceStatus(String serviceName) {
+    void checkServiceStatus(String serviceName) {
         sh """
      #!/bin/sh
 
@@ -35,7 +35,7 @@ class ServiceDeployUtils {
   """
     }
 
-    private void stopService(String serviceName) {
+    void stopService(String serviceName) {
         sh """
      #!/bin/sh
 
@@ -59,7 +59,7 @@ class ServiceDeployUtils {
   """
     }
 
-    private void stopDaemon(String daemonName) {
+    void stopDaemon(String daemonName) {
         sh """
      #!/bin/sh
 
@@ -86,7 +86,7 @@ class ServiceDeployUtils {
   """
     }
 
-    private void replaceService(String serviceName, Integer buildNumber) {
+    void replaceService(String serviceName, Integer buildNumber) {
         sh """
      #!/bin/sh
 
@@ -104,7 +104,7 @@ class ServiceDeployUtils {
   """
     }
 
-    private void launchDaemon(String daemonName) {
+    void launchDaemon(String daemonName) {
         sh """
      #!/bin/sh
 

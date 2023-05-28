@@ -1,3 +1,6 @@
+@Library('ServiceDeployUtils') _
+import ServiceDeployUtils
+
 def deployBackEndOnDev(
         String branchName,
         String serviceName,
@@ -7,17 +10,14 @@ def deployBackEndOnDev(
         String destPath
 ) {
 
-    node {
-        deployUtilsModule = load 'bookatop/pipelines/groovy/ServiceDeployUtils.groovy'
+    ServiceDeployUtils utils = new ServiceDeployUtils();
 
-        println branchName
-        println serviceName
-        println daemonName
-        println buildNumber
-        println sourcePath
-        println destPath
-
-    }
+    println branchName
+    println serviceName
+    println daemonName
+    println buildNumber
+    println sourcePath
+    println destPath
 
 //        utils.checkServiceExists(serviceName)
 //        utils.stopService(serviceName)
