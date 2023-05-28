@@ -1,6 +1,6 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
-@Library('bookatop-shared-libs')
+//@Library('bookatop-shared-libs')
 import com.bookatop.DeployBuilder
 
 def static branches() {
