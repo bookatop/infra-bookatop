@@ -57,7 +57,7 @@ pipeline {
 
 //                    def builderModule = load 'DeployBuilder.groovy'
 
-                    deployBackEndOnDev(
+                    DeployBuilder.deployBackEndOnDev(
                       "${branchName}",
                       "${serviceName}",
                       "${daemonName}",
