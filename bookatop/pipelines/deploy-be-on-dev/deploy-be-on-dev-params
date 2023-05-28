@@ -43,11 +43,7 @@ pipeline {
 
                 script {
 
-                    sh '''
-                        ls -la
-                    '''
-
-                    load 'bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev.groovy'
+                    def deployClass = load 'bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev.groovy'
 
 //                    varSourceJarName = "${SERVICE_NAME}-service.jar"
 //
@@ -57,7 +53,7 @@ pipeline {
 //                    varServiceName = "${SERVICE_NAME}.service"
 //                    varDaemonName = "${SERVICE_NAME}.service"
 
-                    deploy(
+                    deployClass.deploy(
                             'Hello Deploy'
                     )
 
