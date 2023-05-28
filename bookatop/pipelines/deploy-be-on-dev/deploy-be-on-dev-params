@@ -46,22 +46,13 @@ pipeline {
                     daemonName = "${serviceName}.service"
                     def builderModule = load 'bookatop/pipelines/deploy-be-on-dev/DeployBeOnDevBuilder.groovy'
 
-//                    builderModule.deploy(
-//                      "${branchName}",
-//                      "${serviceName}",
-//                      "${daemonName}",
-//                      "${buildNumber}",
-//                      "${SOUR_PATH}",
-//                      "${DEST_PATH}"
-//                    )
-
                     builderModule.deploy(
-                      "branchName",
-                      "serviceName",
-                      "daemonName",
+                      "${branchName}",
+                      "${serviceName}",
+                      "${daemonName}",
                       1,
-                      "SOUR_PATH",
-                      "DEST_PATH"
+                      "${SOUR_PATH}",
+                      "${DEST_PATH}"
                     )
 
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
