@@ -1,5 +1,3 @@
-import ServiceDeployUtils
-
 def deploy(
         String branchName,
         String serviceName,
