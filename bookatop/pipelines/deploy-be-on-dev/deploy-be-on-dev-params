@@ -40,14 +40,6 @@ pipeline {
 
     stages {
 
-        stage('Init') {
-            steps {
-                script {
-
-                }
-            }
-        }
-
         stage('Deploy') {
 
             steps {
