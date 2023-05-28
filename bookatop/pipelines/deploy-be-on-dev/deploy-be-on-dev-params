@@ -51,7 +51,7 @@ pipeline {
 
                     sharedModule = library('bookatop-shared-libs')
 
-                    echo sharedModule.com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
+                    sh sharedModule.com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
                             "${branchName}",
                             "${serviceName}",
                             "${daemonName}",
