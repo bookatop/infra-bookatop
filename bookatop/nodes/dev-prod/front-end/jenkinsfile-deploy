@@ -9,8 +9,10 @@ node {
     }
 
     // pass the environment variables to new pipeline
-    withEnv(['ENVIRONMENT=PROD']) {
+    withEnv(['ENVIRONMENT=PROD',
+             'SOUR_PATH="/path/dev-env/fe-bookatop/deploy"',
+             'DEST_PATH="/path/prod-env/fe-bookatop/deploy"']) {
        // load Jenkinsfile Pipeline file from devops dir
-       load 'devops/bookatop/pipelines/front-end/jenkinsfile-deploy'
+       load 'devops/bookatop/pipelines/front-end/jenkinsfile-param-deploy'
     }
 }

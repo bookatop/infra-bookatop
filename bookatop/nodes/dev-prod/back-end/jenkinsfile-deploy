@@ -1,43 +1,57 @@
-def static branches() {
-    /*
-    def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
-    return getTags.text.readLines().collect {
-        it.split()[1].replaceAll('refs/heads/', '').replaceAll('refs/tags/', '').replaceAll("\\^\\{\\}", '')
-    }
-    */
-    return ['main']
-}
-
 node {
-    parameters {
-        choice(
-                name: 'branchName',
-                choices: branches(),
-                description: 'Choose branch name*'
-        )
-        validatingString(
-                name: 'buildNumber',
-                defaultValue: '1',
-                description: 'Put the build number*',
-                failedValidationMessage: 'Build number is invalid',
-                regex: /^[0-9]+$/
-        )
-    }
-
     //checkout devops repository (other repository)
     sh 'mkdir -p devops'
 
     dir('devops') {
-       script {
-          git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
-       }
+        script {
+            git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
+        }
     }
 
     // pass the environment variables to new pipeline
     withEnv(['ENVIRONMENT=PROD',
              'SOUR_PATH="/path/dev-env/be-bookatop/deploy"',
              'DEST_PATH="/path/prod-env/be-bookatop/deploy"']) {
-       // load Jenkinsfile Pipeline file from devops dir
-       load 'devops/bookatop/pipelines/back-end/jenkinsfile-deploy'
+        // load Jenkinsfile Pipeline file from devops dir
+        pipeline {
+            agent any
+
+            validatingString(
+                    name: 'serviceName',
+                    defaultValue: 'auth',
+                    description: 'Put the service name*',
+                    failedValidationMessage: 'Service name is empty',
+                    regex: /^.+$/
+            )
+
+            stages {
+                stage('Deploy') {
+
+                    steps {
+                        echo "Deploy ${serviceName}-service on $ENVIRONMENT"
+
+                        script {
+
+                            load "jenkinsfile-deploy.groovy"
+
+                            varSourceJarName = "${serviceName}-service.jar"
+
+                            varSourceJarFile = "${SOUR_PATH}/${varSourceJarName}"
+                            varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
+
+                            varServiceName = "${serviceName}.service"
+                            varDaemonName = "${serviceName}.service"
+
+                            deploy(
+                                    varSourceJarName
+                            )
+
+                        }
+
+                        echo "Deploy ${branchName}:${serviceName}-service is success installed and launched on $ENVIRONMENT"
+                    }
+                }
+            }
+        }
     }
 }
