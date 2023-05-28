@@ -53,7 +53,7 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    def builderModule = load 'src/DeployBuilder.groovy'
+                    def builderModule = load 'DeployBuilder.groovy'
 
                     builderModule.deployBackEndOnDev(
                       "${branchName}",
