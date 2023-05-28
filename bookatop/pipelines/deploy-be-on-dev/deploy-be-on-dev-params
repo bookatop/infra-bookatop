@@ -50,7 +50,7 @@ pipeline {
                       "${branchName}",
                       "${serviceName}",
                       "${daemonName}",
-                      1,
+                      "${buildNumber}",
                       "${SOUR_PATH}",
                       "${DEST_PATH}"
                     )
