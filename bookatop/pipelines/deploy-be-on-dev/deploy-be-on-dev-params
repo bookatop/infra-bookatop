@@ -49,7 +49,7 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.f1()
+                    echo library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.f1()
 
 //                    load('bookatop/pipelines/src/com/bookatop/DeployBuilder.groovy').f1()
 
