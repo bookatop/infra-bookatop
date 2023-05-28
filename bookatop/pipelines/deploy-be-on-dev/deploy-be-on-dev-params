@@ -43,19 +43,20 @@ pipeline {
                 script {
                     echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
-                    def deployModule = load 'bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev.groovy'
+                    def builderModule = load 'bookatop/pipelines/ServiceDeployUtils/DeployBeOnDevBuilder.groovy'
 
-//                    varSourceJarName = "${SERVICE_NAME}-service.jar"
-//
-//                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_NAME}-service-${buildNumber}.jar"
-//                    varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
-//
-//                    varServiceName = "${SERVICE_NAME}.service"
-//                    varDaemonName = "${SERVICE_NAME}.service"
+                    builder = new builderModule.DeployBeOnDevBuilder()
 
-                    deployModule.deploy()
+                    builder.deploy(
+                      "${branchName}",
+                      "${serviceName}",
+                      "${daemonName}",
+                      "${buildNumber}",
+                      "${SOUR_PATH}",
+                      "${DEST_PATH}"
+                    )
 
-                    echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"
+                    echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
             }
         }
