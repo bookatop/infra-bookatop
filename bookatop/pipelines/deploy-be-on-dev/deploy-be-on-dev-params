@@ -48,14 +48,16 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    DeployBuilder.deployBackEndOnDev(
-                            "${branchName}",
-                            "${serviceName}",
-                            "${daemonName}",
-                            "${buildNumber}".toInteger(),
-                            "${SOUR_PATH}",
-                            "${DEST_PATH}"
-                    )
+                    DeployBuilder.f1()
+
+//                    DeployBuilder.deployBackEndOnDev(
+//                            "${branchName}",
+//                            "${serviceName}",
+//                            "${daemonName}",
+//                            "${buildNumber}".toInteger(),
+//                            "${SOUR_PATH}",
+//                            "${DEST_PATH}"
+//                    )
 
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
