@@ -9,7 +9,7 @@ class DeployBeOnDevBuilder {
             String destPath
     ) {
 
-        def utils = new deployUtils.ServiceDeployUtils()
+//        def utils = new deployUtils.ServiceDeployUtils()
 
         println "${branchName}"
         println "${serviceName}"
