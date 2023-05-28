@@ -49,7 +49,7 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    echo library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
+                    sh library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
                             "${branchName}",
                             "${serviceName}",
                             "${daemonName}",
