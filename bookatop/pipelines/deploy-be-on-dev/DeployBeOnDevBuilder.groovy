@@ -28,3 +28,5 @@ class DeployBeOnDevBuilder {
     }
 
 }
+
+return this
