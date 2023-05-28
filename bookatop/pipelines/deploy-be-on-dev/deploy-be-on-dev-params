@@ -1,5 +1,7 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
+@Library('bookatop/pipelines/groovy/ServiceDeployUtils') _
+
 def static branches() {
     /*
     def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
@@ -44,9 +46,11 @@ pipeline {
                     echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     daemonName = "${serviceName}.service"
-                    def builderModule = load 'bookatop/pipelines/groovy/DeployBuilder.groovy'
+//                    def builderModule = load 'bookatop/pipelines/groovy/DeployBuilder.groovy'
 
-                    builderModule.deployBackEndOnDev(
+//                    builderModule.deployBackEndOnDev(
+
+                    deployBackEndOnDev(
                       "${branchName}",
                       "${serviceName}",
                       "${daemonName}",

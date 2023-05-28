@@ -1,4 +1,4 @@
-@Library('ServiceDeployUtils') _
+@Library('bookatop/pipelines/groovy/ServiceDeployUtils')
 import ServiceDeployUtils
 
 def deployBackEndOnDev(
