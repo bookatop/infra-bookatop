@@ -1,3 +1,5 @@
+import deployUtils.ServiceDeployUtils
+
 class DeployBeOnDevBuilder {
 
     void deploy(
