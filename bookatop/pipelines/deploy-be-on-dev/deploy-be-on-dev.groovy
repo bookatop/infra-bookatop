@@ -13,7 +13,7 @@ TRY_STOP_DAEMON = 3
 TRY_START_DAEMON = 3
 TRY_CHECK_SERVICE = 3
 
-def deployFunc(String str) {
+def deployFunc(str) {
 
     println str
 
