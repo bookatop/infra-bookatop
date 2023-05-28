@@ -1,4 +1,4 @@
-import deployUtils.ServiceDeployUtils
+import ServiceDeployUtils
 
 def deploy(
         String branchName,
