@@ -43,7 +43,7 @@ pipeline {
                 script {
                     echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
-                    def builderModule = load 'bookatop/pipelines/ServiceDeployUtils/DeployBeOnDevBuilder.groovy'
+                    def builderModule = load 'bookatop/pipelines/deploy-be-on-dev/DeployBeOnDevBuilder.groovy'
 
                     builder = new builderModule.DeployBeOnDevBuilder()
 
