@@ -14,6 +14,6 @@ node {
              'SOUR_PATH="/path/dev-env/be-bookatop/releases/${branchName}"',
              'DEST_PATH="/path/dev-env/be-bookatop/deploy"']) {
        // load Jenkinsfile Pipeline file from devops dir
-       load 'devops/bookatop/pipelines/ServiceDeployUtils/ServiceDeployUtils-params'
+       load 'devops/bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev-params'
     }
 }
