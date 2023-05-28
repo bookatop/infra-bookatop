@@ -25,7 +25,7 @@ def deploy(
 //        utils.checkServiceStatus(serviceName)
 }
 
-def example() {
-    println "Hello"
+def example(Integer i) {
+    println "Hello" + ${i}
 }
 return this

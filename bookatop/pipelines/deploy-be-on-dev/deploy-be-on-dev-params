@@ -55,7 +55,7 @@ pipeline {
 //                      "${DEST_PATH}"
 //                    )
 
-                    builderModule.example()
+                    builderModule.example(1)
 
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
