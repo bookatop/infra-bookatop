@@ -1,7 +1,9 @@
 package com.bookatop.deployment
 
-def f2() {
-    println "f2"
+class ServiceDeployUtils {
+    static def f2() {
+        println "f2"
+    }
 }
 
 return this
