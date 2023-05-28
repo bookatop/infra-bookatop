@@ -54,7 +54,7 @@ pipeline {
 //                    varDaemonName = "${SERVICE_NAME}.service"
 
                     deployClass.deploy(
-                            'Hello Deploy'
+                            "Hello Deploy"
                     )
 
                 }
