@@ -1,5 +1,3 @@
-//@Library('bookatop/pipelines/groovy/ServiceDeployUtils')
-
 @Library('bookatop-shared-libraries')
 import ServiceDeployUtils
 
