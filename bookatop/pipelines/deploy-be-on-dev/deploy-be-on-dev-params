@@ -1,5 +1,7 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
+@Library('bookatop-shared-libraries')_
+
 def static branches() {
     /*
     def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
@@ -36,13 +38,13 @@ pipeline {
     }
 
     stages {
-        stage('Init') {
-            steps {
-                script {
-                    library "bookatop-shared-libraries@main"
-                }
-            }
-        }
+//        stage('Init') {
+//            steps {
+//                script {
+//                    library "bookatop-shared-libraries@main"
+//                }
+//            }
+//        }
 
         stage('Deploy') {
 
@@ -53,9 +55,9 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    def builderModule = load 'DeployBuilder.groovy'
+//                    def builderModule = load 'DeployBuilder.groovy'
 
-                    builderModule.deployBackEndOnDev(
+                    deployBackEndOnDev(
                       "${branchName}",
                       "${serviceName}",
                       "${daemonName}",
