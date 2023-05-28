@@ -11,8 +11,7 @@ def static branches() {
 }
 
 pipeline {
-//    agent any
-    checkout scm
+    agent any
 
     parameters  {
         choice(
