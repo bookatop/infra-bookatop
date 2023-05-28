@@ -26,6 +26,6 @@ def deploy(
 }
 
 def example(Integer i) {
-    println "Hello" + ${i}
+    println "Hello" + i
 }
 return this
