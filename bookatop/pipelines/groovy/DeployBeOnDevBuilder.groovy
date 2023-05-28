@@ -1,4 +1,4 @@
-package com.bookatop
+import ServiceDeployUtils
 
 def deploy(
         String branchName,

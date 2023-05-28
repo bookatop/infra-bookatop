@@ -1,5 +1,3 @@
-package com.bookatop
-
 class ServiceDeployUtils {
 
     private void checkServiceExists(String serviceName) {
