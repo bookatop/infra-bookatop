@@ -49,15 +49,13 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    sh """
-                        ${library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
+                    sh library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder.deployBackEndOnDev(
                             "${branchName}",
                             "${serviceName}",
                             "${daemonName}",
                             "${buildNumber}".toInteger(),
                             "${SOUR_PATH}",
-                            "${DEST_PATH}")}
-                        """
+                            "${DEST_PATH}")
 
                     echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
                 }
