@@ -1,5 +1,7 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
+@Library('bookatop-shared-libs')
+
 def static branches() {
     /*
     def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
@@ -54,7 +56,17 @@ pipeline {
                         echo "Exucuted NOT under Script" + this.className()
                     }
 
-                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
+//                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
+//                            .deployBackEndOnDev(
+//                                    "${branchName}",
+//                                    "${serviceName}",
+//                                    "${daemonName}",
+//                                    "${buildNumber}".toInteger(),
+//                                    "${SOUR_PATH}",
+//                                    "${DEST_PATH}")
+
+
+                    com.bookatop.deployment.DeployBuilder
                             .deployBackEndOnDev(
                                     "${branchName}",
                                     "${serviceName}",
