@@ -75,7 +75,7 @@ pipeline {
 //                                    "${SOUR_PATH}",
 //                                    "${DEST_PATH}")
 
-                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
+                    library('bookatop-shared-libs@main').com.bookatop.deployment.DeployBuilder
                             .deployBackEndOnDev(
                                     "${branchName}",
                                     "${serviceName}",
