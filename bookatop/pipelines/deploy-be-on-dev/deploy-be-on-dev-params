@@ -1,7 +1,5 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
-@Library('bookatop-shared-libs') _
-
 def static branches() {
     /*
     def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
@@ -44,6 +42,8 @@ pipeline {
             steps {
 
                 script {
+                    @Library('bookatop-shared-libs') _
+
                     servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     echo "Deploy $servicePlace"
