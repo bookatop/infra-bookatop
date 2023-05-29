@@ -1,7 +1,7 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
-//@Library("bookatop-shared-libs@main")
-import com.bookatop.deployment.DeployBuilder
+//@Library("bookatop-shared-libs")
+//import com.bookatop.deployment.DeployBuilder
 
 def static branches() {
     /*
@@ -75,7 +75,7 @@ pipeline {
 //                                    "${SOUR_PATH}",
 //                                    "${DEST_PATH}")
 
-                    DeployBuilder.deployBackEndOnDev(
+                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder(
                                     "${branchName}",
                                     "${serviceName}",
                                     "${daemonName}",
