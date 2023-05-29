@@ -51,6 +51,8 @@ pipeline {
 
                 script {
 
+//                    import com.bookatop.deployment.DeployBuilder
+
 //                    @Library('bookatop-shared-libs') _
 //                    import com.bookatop.deployment.DeployBuilder
 
@@ -75,8 +77,7 @@ pipeline {
 //                                    "${SOUR_PATH}",
 //                                    "${DEST_PATH}")
 
-
-                    com.bookatop.deployment.DeployBuilder
+                    DeployBuilder
                             .deployBackEndOnDev(
                                     "${branchName}",
                                     "${serviceName}",
