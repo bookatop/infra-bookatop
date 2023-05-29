@@ -38,8 +38,10 @@ pipeline {
     stages {
 
         stage('Init') {
-            script {
-                library "bookatop-shared-libs@main"
+            steps {
+                script {
+                    library "bookatop-shared-libs@main"
+                }
             }
         }
 
