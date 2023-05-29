@@ -48,6 +48,12 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
+                    if (this instanceof Script){
+                        echo "Executed under Script"
+                    } else {
+                        echo "Exucuted NOT under Script" + this.className()
+                    }
+
                     library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
                             .deployBackEndOnDev(
                                     "${branchName}",
