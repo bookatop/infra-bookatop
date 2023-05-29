@@ -37,12 +37,20 @@ pipeline {
 
     stages {
 
+        stage('Init') {
+            script {
+                library "bookatop-shared-libs@main"
+            }
+        }
+
         stage('Deploy') {
 
             steps {
 
                 script {
-                    @Library('bookatop-shared-libs') _
+
+//                    @Library('bookatop-shared-libs') _
+//                    import com.bookatop.deployment.DeployBuilder
 
                     servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
