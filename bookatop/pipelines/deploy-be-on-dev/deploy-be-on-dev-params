@@ -40,13 +40,13 @@ pipeline {
 
     stages {
 
-        stage('Init') {
-            steps {
-                script {
-                    library "bookatop-shared-libs@main"
-                }
-            }
-        }
+//        stage('Init') {
+//            steps {
+//                script {
+//                    library "bookatop-shared-libs@main"
+//                }
+//            }
+//        }
 
         stage('Deploy') {
 
