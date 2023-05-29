@@ -76,14 +76,14 @@ pipeline {
 //                                    "${DEST_PATH}")
 
 
-                    com.bookatop.deployment.DeployBuilder
-                            .deployBackEndOnDev(
-                                    "${branchName}",
-                                    "${serviceName}",
-                                    "${daemonName}",
-                                    "${buildNumber}".toInteger(),
-                                    "${SOUR_PATH}",
-                                    "${DEST_PATH}")
+//                    com.bookatop.deployment.DeployBuilder
+//                            .deployBackEndOnDev(
+//                                    "${branchName}",
+//                                    "${serviceName}",
+//                                    "${daemonName}",
+//                                    "${buildNumber}".toInteger(),
+//                                    "${SOUR_PATH}",
+//                                    "${DEST_PATH}")
 
                     echo "The $servicePlace is success deployed"
                 }
