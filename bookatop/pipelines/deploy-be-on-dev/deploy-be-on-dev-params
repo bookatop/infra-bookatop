@@ -42,7 +42,9 @@ pipeline {
             steps {
 
                 script {
-                    echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
+                    servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
+
+                    echo "Deploy $servicePlace"
 
                     daemonName = "${serviceName}.service"
 
@@ -55,7 +57,7 @@ pipeline {
                                     "${SOUR_PATH}",
                                     "${DEST_PATH}")
 
-                    echo "The ${branchName}:${serviceName}-service:${buildNumber} is success deployed on $ENVIRONMENT"
+                    echo "The $servicePlace is success deployed"
                 }
             }
         }
