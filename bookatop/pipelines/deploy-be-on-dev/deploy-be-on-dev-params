@@ -66,6 +66,8 @@ pipeline {
                         echo "Exucuted NOT under Script" + this.className()
                     }
 
+                    // def out = getBinding().out
+
 //                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
 //                            .deployBackEndOnDev(
 //                                    "${branchName}",
@@ -77,7 +79,10 @@ pipeline {
 
 //                    library('bookatop-shared-libs@main').com.bookatop.deployment.DeployBuilder
 
+                    PrintStream printStream = System.out
+
                     DeployBuilder.deployBackEndOnDev(
+                                    printStream,
                                     "${branchName}",
                                     "${serviceName}",
                                     "${daemonName}",
