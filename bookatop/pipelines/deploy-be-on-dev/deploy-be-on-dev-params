@@ -91,7 +91,7 @@ pipeline {
                                     "${SOUR_PATH}",
                                     "${DEST_PATH}")
 
-                    echo buf.toStream()
+                    echo buf.toString()
 
                     echo "The $servicePlace is success deployed"
                 }
