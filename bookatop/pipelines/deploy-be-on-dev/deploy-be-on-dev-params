@@ -87,7 +87,9 @@ pipeline {
                     def context = getContext()
 
                     if (context != null) {
-                        echo "okokokokokok"
+                        echo "+getContext"
+                    } else {
+                        echo "-getContext"
                     }
 
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
