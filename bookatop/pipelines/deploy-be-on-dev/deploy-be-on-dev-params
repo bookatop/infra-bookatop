@@ -84,13 +84,7 @@ pipeline {
 
 //                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
 
-                    def context = getContext()
-
-                    if (context != null) {
-                        echo "+getContext"
-                    } else {
-                        echo "-getContext"
-                    }
+                    getContext hudson.FilePath
 
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
