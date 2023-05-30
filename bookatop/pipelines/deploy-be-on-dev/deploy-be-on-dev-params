@@ -79,7 +79,8 @@ pipeline {
 
 //                    library('bookatop-shared-libs@main').com.bookatop.deployment.DeployBuilder
 
-                    PrintStream printStream = System.out
+                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
+                    PrintStream printStream = new PrintStream(buf)
 
                     DeployBuilder.deployBackEndOnDev(
                                     printStream,
@@ -89,6 +90,8 @@ pipeline {
                                     "${buildNumber}".toInteger(),
                                     "${SOUR_PATH}",
                                     "${DEST_PATH}")
+
+                    echo buf.toStream()
 
                     echo "The $servicePlace is success deployed"
                 }
