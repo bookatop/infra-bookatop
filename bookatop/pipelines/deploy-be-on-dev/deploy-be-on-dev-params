@@ -84,6 +84,8 @@ pipeline {
 
                     getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
 
+                    Logger.getLogger().println("wwwwwwwwwwwwww");
+
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
 //                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
