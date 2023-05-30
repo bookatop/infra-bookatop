@@ -69,7 +69,8 @@ pipeline {
                     echo "###################"
                     echo this.getBinding().getVariables().toString()
                     echo this.getBinding().getVariables().toString()
-                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
+                    echo this.getBinding().getVariables().get("steps").getClass().getTypeName()
+//                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
 //                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
 //                            .deployBackEndOnDev(
