@@ -84,7 +84,11 @@ pipeline {
 
 //                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
 
-                    println("wwwwwwwwwwwwww")
+                    StepContext context = getContex()
+
+                    if (context != null) {
+                        echo "okokokokokok"
+                    }
 
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
