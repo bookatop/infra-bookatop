@@ -73,14 +73,16 @@ pipeline {
 
                     if (this.getBinding().getVariables().get("steps") instanceof GroovyObjectSupport) {
                         echo "+GroovyObjectSupport"
-                        if (this.getBinding().getVariables().get("steps").getProperty("out") != null) {
-                            echo "getProperty != null"
-                        } else {
-                            echo "getProperty == null"
-                        }
+//                        if (this.getBinding().getVariables().get("steps").getProperty("out") != null) {
+//                            echo "getProperty != null"
+//                        } else {
+//                            echo "getProperty == null"
+//                        }
                     } else {
                         echo "-GroovyObjectSupport"
                     }
+
+                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
 
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
@@ -103,7 +105,9 @@ pipeline {
                     echo DeployBuilder.getClass().toString()
                     echo DeployBuilder.getClass().getDeclaredFields().toString()
                     echo DeployBuilder.getClass().getDeclaredMethods().toString()
+
                     echo "--------------"
+
                     echo this.getClass().getTypeName()
                     echo this.getClass().toString()
                     echo this.getClass().getDeclaredFields().toString()
