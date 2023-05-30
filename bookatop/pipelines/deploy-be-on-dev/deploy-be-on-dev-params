@@ -70,6 +70,13 @@ pipeline {
                     echo this.getBinding().getVariables().toString()
                     echo this.getBinding().getVariables().toString()
                     echo this.getBinding().getVariables().get("steps").getClass().getTypeName()
+
+                    if (this.getBinding().getVariables().get("steps") instanceof GroovyObjectSupport) {
+                        echo "+GroovyObjectSupport"
+                    } else {
+                        echo "-GroovyObjectSupport"
+                    }
+
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
 //                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
