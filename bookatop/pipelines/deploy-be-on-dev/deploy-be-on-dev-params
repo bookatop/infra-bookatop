@@ -81,7 +81,7 @@ pipeline {
 
                     //println("Print line")
 
-                    getBinding().getVariable('out').print("Binding Line")
+                    getProperty("out").print("Binding Line")
 
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
