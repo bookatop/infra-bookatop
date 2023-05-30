@@ -73,6 +73,11 @@ pipeline {
 
                     if (this.getBinding().getVariables().get("steps") instanceof GroovyObjectSupport) {
                         echo "+GroovyObjectSupport"
+                        if (this.getBinding().getVariables().get("steps").getProperty("out") != null) {
+                            echo "getProperty != null"
+                        } else {
+                            echo "getProperty == null"
+                        }
                     } else {
                         echo "-GroovyObjectSupport"
                     }
