@@ -86,10 +86,12 @@ pipeline {
                     echo DeployBuilder.getClass().getTypeName()
                     echo DeployBuilder.getClass().toString()
                     echo DeployBuilder.getClass().getDeclaredFields().toString()
+                    echo DeployBuilder.getClass().getDeclaredMethods().toString()
                     echo "--------------"
                     echo this.getClass().getTypeName()
                     echo this.getClass().toString()
                     echo this.getClass().getDeclaredFields().toString()
+                    echo this.getClass().getDeclaredMethods().toString()
 
 
                     // System.out.print("Binding Line");
