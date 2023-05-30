@@ -82,9 +82,9 @@ pipeline {
                         echo "-GroovyObjectSupport"
                     }
 
-                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
+//                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
 
-                    getLogger().println("wwwwwwwwwwwwww");
+                    Logger.getLogger().println("wwwwwwwwwwwwww");
 
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
 
