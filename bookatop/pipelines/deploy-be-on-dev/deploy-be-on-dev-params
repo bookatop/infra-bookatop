@@ -81,8 +81,8 @@ pipeline {
 
                     //println("Print line")
 
-                    //getProperty("out").print("Binding Line")
-                    System.out.print("Binding Line");
+                    this.getProperty("out").print("Binding Line")
+                    // System.out.print("Binding Line");
 
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
