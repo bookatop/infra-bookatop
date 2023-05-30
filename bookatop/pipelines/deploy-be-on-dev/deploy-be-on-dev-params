@@ -83,8 +83,11 @@ pipeline {
 
                     //getProperty("out").print("Binding Line")
 
-                    echo DeployBuilder.getClass().getName()
-                    echo this.getClass().getName()
+                    echo DeployBuilder.getClass().getTypeName()
+                    echo DeployBuilder.getClass().toString()
+                    echo "--------------"
+                    echo this.getClass().getTypeName()
+                    echo this.getClass().toString()
 
 
                     // System.out.print("Binding Line");
