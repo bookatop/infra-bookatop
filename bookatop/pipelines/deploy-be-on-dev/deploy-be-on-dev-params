@@ -79,7 +79,9 @@ pipeline {
 
 //                    library('bookatop-shared-libs@main').com.bookatop.deployment.DeployBuilder
 
-                    println("Print line")
+                    //println("Print line")
+
+                    getBinding().out.print("Binding Line")
 
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
