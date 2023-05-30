@@ -66,6 +66,8 @@ pipeline {
                         echo "Exucuted NOT under Script" + this.className()
                     }
 
+                    setProperty("out", System.out)
+
                     // def out = getBinding().out
 
 //                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
@@ -81,7 +83,7 @@ pipeline {
 
                     //println("Print line")
 
-                    this.getProperty("out").print("Binding Line")
+                    getProperty("out").print("Binding Line")
                     // System.out.print("Binding Line");
 
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
