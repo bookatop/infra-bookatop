@@ -84,7 +84,7 @@ pipeline {
 
 //                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
 
-                    def context = getContex()
+                    def context = getContext()
 
                     if (context != null) {
                         echo "okokokokokok"
