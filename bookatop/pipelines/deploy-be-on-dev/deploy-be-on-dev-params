@@ -61,7 +61,7 @@ pipeline {
 //                                    "${SOUR_PATH}",
 //                                    "${DEST_PATH}")
 
-                    sh 'com/bookatop/deployment/deploy-util.sh'
+                    sh 'src/com/bookatop/deployment/deploy-util.sh'
 
                     echo "The $servicePlace is success deployed"
                 }
