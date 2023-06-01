@@ -63,7 +63,7 @@ pipeline {
 
                     def utils = libraryResource 'com/bookatop/scripts/deploy-utils.sh'
 
-                    echo "${utils}"
+                    sh "${utils}"
 
                     echo "The $servicePlace is success deployed"
                 }
