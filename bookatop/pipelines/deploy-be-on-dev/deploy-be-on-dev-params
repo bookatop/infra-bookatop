@@ -61,7 +61,7 @@ pipeline {
 //                                    "${SOUR_PATH}",
 //                                    "${DEST_PATH}")
 
-                    sh library('bookatop-shared-libs').com.bookatop.deployment.'deploy-utils.sh'
+                    sh libraryResource 'com/bookatop/scripts/deploy-utils.sh'
 
                     echo "The $servicePlace is success deployed"
                 }
