@@ -40,14 +40,6 @@ pipeline {
 
     stages {
 
-//        stage('Init') {
-//            steps {
-//                script {
-//                    library "bookatop-shared-libs@main"
-//                }
-//            }
-//        }
-
         stage('Deploy') {
 
             steps {
@@ -60,34 +52,55 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-                    if (this instanceof Script){
-                        echo "Executed under Script"
-                    } else {
-                        echo "Exucuted NOT under Script" + this.className()
-                    }
+//                    DeployBuilder.deployBackEndOnDev(
+//                                    printStream,
+//                                    "${branchName}",
+//                                    "${serviceName}",
+//                                    "${daemonName}",
+//                                    "${buildNumber}".toInteger(),
+//                                    "${SOUR_PATH}",
+//                                    "${DEST_PATH}")
 
-                    echo "###################"
-                    echo this.getBinding().getVariables().toString()
-                    echo this.getBinding().getVariables().toString()
-                    echo this.getBinding().getVariables().get("steps").getClass().getTypeName()
+                    sh 'ls'
 
-                    if (this.getBinding().getVariables().get("steps") instanceof GroovyObjectSupport) {
-                        echo "+GroovyObjectSupport"
-//                        if (this.getBinding().getVariables().get("steps").getProperty("out") != null) {
-//                            echo "getProperty != null"
-//                        } else {
-//                            echo "getProperty == null"
-//                        }
-                    } else {
-                        echo "-GroovyObjectSupport"
-                    }
+                    echo "The $servicePlace is success deployed"
+                }
+            }
+        }
+    }
+}
 
+//        stage('Init') {
+//            steps {
+//                script {
+//                    library "bookatop-shared-libs@main"
+//                }
+//            }
+//        }
+
+//                    if (this instanceof Script){
+//                        echo "Executed under Script"
+//                    } else {
+//                        echo "Exucuted NOT under Script" + this.className()
+//                    }
+//                    echo "###################"
+//                    echo this.getBinding().getVariables().toString()
+//                    echo this.getBinding().getVariables().toString()
+//                    echo this.getBinding().getVariables().get("steps").getClass().getTypeName()
+//
+//                    if (this.getBinding().getVariables().get("steps") instanceof GroovyObjectSupport) {
+//                        echo "+GroovyObjectSupport"
+////                        if (this.getBinding().getVariables().get("steps").getProperty("out") != null) {
+////                            echo "getProperty != null"
+////                        } else {
+////                            echo "getProperty == null"
+////                        }
+//                    } else {
+//                        echo "-GroovyObjectSupport"
+//                    }
 //                    getContext().get(TaskListener.class).getLogger().println("ddddddddddddd");
-
-                    getContext hudson.FilePath
-
+//                    getContext hudson.FilePath
 //                    echo this.getBinding().getVariables().get("steps").getDeclaredMethods().toString()
-
 //                    library('bookatop-shared-libs').com.bookatop.deployment.DeployBuilder
 //                            .deployBackEndOnDev(
 //                                    "${branchName}",
@@ -96,45 +109,34 @@ pipeline {
 //                                    "${buildNumber}".toInteger(),
 //                                    "${SOUR_PATH}",
 //                                    "${DEST_PATH}")
-
 //                    library('bookatop-shared-libs@main').com.bookatop.deployment.DeployBuilder
 
-                    //println("Print line")
+//getProperty("out").print("Binding Line")
+//
+//                    echo DeployBuilder.getClass().getTypeName()
+//                    echo DeployBuilder.getClass().toString()
+//                    echo DeployBuilder.getClass().getDeclaredFields().toString()
+//                    echo DeployBuilder.getClass().getDeclaredMethods().toString()
+//
+//                    echo "--------------"
+//
+//                    echo this.getClass().getTypeName()
+//                    echo this.getClass().toString()
+//                    echo this.getClass().getDeclaredFields().toString()
+//                    echo this.getClass().getDeclaredMethods().toString()
 
-                    //getProperty("out").print("Binding Line")
+// System.out.print("Binding Line");
 
-                    echo DeployBuilder.getClass().getTypeName()
-                    echo DeployBuilder.getClass().toString()
-                    echo DeployBuilder.getClass().getDeclaredFields().toString()
-                    echo DeployBuilder.getClass().getDeclaredMethods().toString()
-
-                    echo "--------------"
-
-                    echo this.getClass().getTypeName()
-                    echo this.getClass().toString()
-                    echo this.getClass().getDeclaredFields().toString()
-                    echo this.getClass().getDeclaredMethods().toString()
-
-
-                    // System.out.print("Binding Line");
-
-                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
-                    PrintStream printStream = new PrintStream(buf)
-
-                    DeployBuilder.deployBackEndOnDev(
-                                    printStream,
-                                    "${branchName}",
-                                    "${serviceName}",
-                                    "${daemonName}",
-                                    "${buildNumber}".toInteger(),
-                                    "${SOUR_PATH}",
-                                    "${DEST_PATH}")
-
-                    echo buf.toString()
-
-                    echo "The $servicePlace is success deployed"
-                }
-            }
-        }
-    }
-}
+//                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
+//                    PrintStream printStream = new PrintStream(buf)
+//
+//                    DeployBuilder.deployBackEndOnDev(
+//                                    printStream,
+//                                    "${branchName}",
+//                                    "${serviceName}",
+//                                    "${daemonName}",
+//                                    "${buildNumber}".toInteger(),
+//                                    "${SOUR_PATH}",
+//                                    "${DEST_PATH}")
+//
+//                    echo buf.toString()
