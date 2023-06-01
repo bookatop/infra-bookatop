@@ -46,6 +46,13 @@ pipeline {
 
                 script {
 
+                    def out
+                    def config = new HashMap()
+                    def bindings = getBinding()
+                    config.putAll(bindings.getVariables())
+                    out = config['out']
+                    out.println "Printed do Jenkins console."
+
                     servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     echo "Deploy $servicePlace"
