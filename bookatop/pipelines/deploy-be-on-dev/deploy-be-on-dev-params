@@ -62,6 +62,8 @@ pipeline {
 //                                    "${DEST_PATH}")
 
                     sh 'ls'
+                    sh 'cd bookatop'
+                    sh 'ls'
 
                     echo "The $servicePlace is success deployed"
                 }
