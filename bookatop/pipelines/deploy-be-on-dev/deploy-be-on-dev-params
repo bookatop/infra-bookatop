@@ -52,18 +52,18 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
-//                    DeployBuilder.deployBackEndOnDev(
-//                                    printStream,
-//                                    "${branchName}",
-//                                    "${serviceName}",
-//                                    "${daemonName}",
-//                                    "${buildNumber}".toInteger(),
-//                                    "${SOUR_PATH}",
-//                                    "${DEST_PATH}")
+                    DeployBuilder.deployBackEndOnDev(
+                                    printStream,
+                                    "${branchName}",
+                                    "${serviceName}",
+                                    "${daemonName}",
+                                    "${buildNumber}".toInteger(),
+                                    "${SOUR_PATH}",
+                                    "${DEST_PATH}")
 
-                    def utils = libraryResource 'com/bookatop/scripts/deploy-utils.sh'
-
-                    sh "${utils} && check_service_exists"
+//                    def utils = libraryResource 'com/bookatop/scripts/deploy-utils.sh'
+//
+//                    sh "${utils} && check_service_exists"
 
                     echo "The $servicePlace is success deployed"
                 }
