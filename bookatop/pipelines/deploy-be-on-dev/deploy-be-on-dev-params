@@ -46,12 +46,12 @@ pipeline {
 
                 script {
 
-                    def out
-                    def config = new HashMap()
-                    def bindings = getBinding()
-                    config.putAll(bindings.getVariables())
-                    out = config['out']
-                    out.println "Printed do Jenkins console."
+//                    def out
+//                    def config = new HashMap()
+//                    def bindings = getBinding()
+//                    config.putAll(bindings.getVariables())
+//                    out = config['out']
+//                    out.println "Printed do Jenkins console."
 
                     servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
@@ -59,13 +59,19 @@ pipeline {
 
                     daemonName = "${serviceName}.service"
 
+                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
+                    PrintStream printStream = new PrintStream(buf)
+
                     DeployBuilder.deployBackEndOnDev(
+                                    printStream,
                                     "${branchName}",
                                     "${serviceName}",
                                     "${daemonName}",
                                     "${buildNumber}".toInteger(),
                                     "${SOUR_PATH}",
                                     "${DEST_PATH}")
+
+                    echo buf.toString()
 
 //                    def utils = libraryResource 'com/bookatop/scripts/deploy-utils.sh'
 //
