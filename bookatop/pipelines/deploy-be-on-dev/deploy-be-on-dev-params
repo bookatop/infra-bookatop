@@ -49,15 +49,15 @@ pipeline {
 
                     echo "Deploy $servicePlace"
 
-                    String daemonName = "${serviceName}.service"
-                    String sourceFile = "${env.SOUR_PATH}/${branchName}"
+                    String sourceJarFile = "${serviceName}-service-${buildNumber}.jar"
+                    String sourceBranch = "${env.SOUR_PATH}/${branchName}"
 
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream out = new PrintStream(buf)
 
                     DeployUtils utils = new DeployUtils(out)
 
-                    utils.checkServiceExists("${serviceName}", sourceFile)
+                    utils.checkServiceExists(sourceJarFile, sourceBranch)
                     utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
 
                     echo buf.toString()
