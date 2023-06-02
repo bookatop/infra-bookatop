@@ -71,9 +71,9 @@ pipeline {
                         utils.replaceService sourceFile, destFile, errorClosure
                         utils.fileExists destFile, errorClosure
 
-//                        utils.launchDaemon daemonName, errorClosure
-//                        utils.statusService serviceName, "${env.BACKEND_URL}", "200", errorClosure
-//                        utils.statusDaemon daemonName, "active", errorClosure
+                        utils.launchDaemon daemonName, errorClosure
+                        utils.statusDaemon daemonName, "active", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", "200", errorClosure
 
                     } finally {
                         echo logger.toString()
