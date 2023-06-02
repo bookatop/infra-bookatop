@@ -58,8 +58,8 @@ pipeline {
                         GString sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
                         Closure exitClosure = { exit it }
 
-                        utils.checkFileExists sourceFile, exitClosure
-                        utils.checkServiceStatus "${serviceName}", "${env.BACKEND_URL}", exitClosure
+                        utils.fileExists sourceFile, exitClosure
+                        utils.serviceStatus "${serviceName}", "${env.BACKEND_URL}", exitClosure
 
                     } finally {
                         echo logger.toString()
