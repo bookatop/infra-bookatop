@@ -11,7 +11,7 @@ node {
     // pass the environment variables to new pipeline
     withEnv(['ENVIRONMENT=DEV',
              'BACKEND_URL="http://93.84.112.114:8081"',
-             'SOUR_PATH="/path/dev-env/be-bookatop/releases/${branchName}"',
+             'SOUR_PATH="/path/dev-env/be-bookatop/releases"',
              'DEST_PATH="/path/dev-env/be-bookatop/deploy"']) {
        // load Jenkinsfile Pipeline file from devops dir
        load 'devops/bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev-params'
