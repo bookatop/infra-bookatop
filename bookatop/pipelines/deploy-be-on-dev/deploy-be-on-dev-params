@@ -73,7 +73,7 @@ pipeline {
 //                         "${DEST_PATH}")
 
                     EnvReader reader = new EnvReader()
-                    reader.print(env)
+                    reader.print(printStream, env)
 
                     echo buf.toString()
 
