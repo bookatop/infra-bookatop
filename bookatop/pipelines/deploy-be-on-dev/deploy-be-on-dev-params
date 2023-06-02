@@ -48,23 +48,17 @@ pipeline {
 
                     echo "Deploy $servicePlace"
 
-//                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
-//                    PrintStream out = new PrintStream(buf)
-//
-//                    DeployUtils utils = new DeployUtils(out)
-//
-//                    String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
+                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
+                    PrintStream out = new PrintStream(buf)
 
-                    sh "exit 0"
-                    sh "exit 0"
-                    sh "exit 1"
-                    sh "exit 0"
-                    sh "exit 0"
+                    DeployUtils utils = new DeployUtils(out)
 
-//                    utils.checkFileExists(sourceFile)
-//                    utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
+                    String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
 
-//                    echo buf.toString()
+                    sh "exit ${utils.checkFileExists(sourceFile)}"
+                    sh "exit ${utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")}"
+
+                    echo buf.toString()
                     echo "The $servicePlace is success deployed"
                 }
             }
