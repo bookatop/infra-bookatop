@@ -45,8 +45,8 @@ pipeline {
             steps {
                 script {
 
-                    def checkStatus = {status ->
-                        sh "exit $status"
+                    def checkStatus = { status ->
+                        sh "Hello"
                     }
 
                     String servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
@@ -60,8 +60,8 @@ pipeline {
 
                     String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
 
-                    checkStatus ${utils.checkFileExists(sourceFile)}
-                    checkStatus ${utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")}
+                    checkStatus $ { utils.checkFileExists(sourceFile) }
+                    checkStatus $ { utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}") }
 
                     echo buf.toString()
                     echo "The $servicePlace is success deployed"
