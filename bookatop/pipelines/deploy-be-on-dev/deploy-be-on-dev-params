@@ -62,14 +62,16 @@ pipeline {
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
 
+                    echo "BACKEND_URL = \${BACKEND_URL}"
+
                     DeployBuilder.deployBackEndOnDev(
-                                    printStream,
-                                    "${branchName}",
-                                    "${serviceName}",
-                                    "${daemonName}",
-                                    "${buildNumber}".toInteger(),
-                                    "${SOUR_PATH}",
-                                    "${DEST_PATH}")
+                         printStream,
+                         "${branchName}",
+                         "${serviceName}",
+                         "${daemonName}",
+                         "${buildNumber}".toInteger(),
+                         "${SOUR_PATH}",
+                         "${DEST_PATH}")
 
                     echo buf.toString()
 
