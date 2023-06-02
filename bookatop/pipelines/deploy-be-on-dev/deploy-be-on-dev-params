@@ -62,12 +62,12 @@ pipeline {
 
                         utils.fileExists sourceFile, errorClosure
                         utils.stopService serviceName, errorClosure
-                        utils.statusService serviceName, 000, "${env.BACKEND_URL}", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", "000", errorClosure
                         utils.stopDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "failed", errorClosure
 //                        utils.replaceService serviceName, buildNumber, errorClosure
 //                        utils.launchDaemon daemonName, errorClosure
-//                        utils.statusService serviceName, 200, "${env.BACKEND_URL}", errorClosure
+//                        utils.statusService serviceName, "${env.BACKEND_URL}", "200", errorClosure
 //                        utils.statusDaemon daemonName, "active", errorClosure
 
                     } finally {
