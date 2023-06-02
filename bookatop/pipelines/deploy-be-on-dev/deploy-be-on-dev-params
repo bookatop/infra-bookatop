@@ -58,10 +58,11 @@ pipeline {
                     sh "exit 0"
                     sh "exit 0"
                     sh "exit 1"
+
 //                    utils.checkFileExists(sourceFile)
 //                    utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
 
-                    echo buf.toString()
+//                    echo buf.toString()
                     echo "The $servicePlace is success deployed"
                 }
             }
