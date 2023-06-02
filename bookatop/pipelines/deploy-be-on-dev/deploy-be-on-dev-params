@@ -71,7 +71,7 @@ pipeline {
 //                         "${SOUR_PATH}",
 //                         "${DEST_PATH}")
 
-                    def reader = new EnvReader()
+                    EnvReader reader = new EnvReader()
                     reader.print()
 
                     echo buf.toString()
