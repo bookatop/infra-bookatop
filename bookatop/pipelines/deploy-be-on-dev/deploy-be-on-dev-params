@@ -62,14 +62,17 @@ pipeline {
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
 
-                    DeployBuilder.deployBackEndOnDev(
-                         printStream,
-                         "${branchName}",
-                         "${serviceName}",
-                         "${daemonName}",
-                         "${buildNumber}".toInteger(),
-                         "${SOUR_PATH}",
-                         "${DEST_PATH}")
+//                    DeployBuilder.deployBackEndOnDev(
+//                         printStream,
+//                         "${branchName}",
+//                         "${serviceName}",
+//                         "${daemonName}",
+//                         "${buildNumber}".toInteger(),
+//                         "${SOUR_PATH}",
+//                         "${DEST_PATH}")
+
+                    def reader = new EnvReader()
+                    reader.print()
 
                     echo buf.toString()
 
