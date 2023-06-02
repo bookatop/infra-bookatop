@@ -55,9 +55,11 @@ pipeline {
 
                     String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
 
-                    utils.checkFileExists(sourceFile)
-                    exit 1
-                    utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
+                    sh "exit 0"
+                    sh "exit 0"
+                    sh "exit 1"
+//                    utils.checkFileExists(sourceFile)
+//                    utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
 
                     echo buf.toString()
                     echo "The $servicePlace is success deployed"
