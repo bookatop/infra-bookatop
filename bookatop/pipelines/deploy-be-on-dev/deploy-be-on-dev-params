@@ -54,7 +54,7 @@ pipeline {
 
                         DeployUtils utils = new DeployUtils(logger)
 
-                        GString sourceFile = "${env.SOUR_PATH}/${branchNameParam}/${serviceNameParam}-service-${buildNumber}.jar"
+                        GString sourceFile = "${env.SOUR_PATH}/${branchNameParam}/${serviceNameParam}-service-${buildNumberParam}.jar"
                         Closure errorClosure = { error it.toString() }
 
                         GString serviceName = "${serviceNameParam}.service"
