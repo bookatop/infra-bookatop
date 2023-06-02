@@ -54,8 +54,8 @@ pipeline {
 
                     DeployUtils utils = new DeployUtils(out)
 
-                    utils.checkServiceExists("${branchName}")
-                    utils.checkServiceStatus("${env.BACKEND_URL}", "${branchName}")
+                    utils.checkServiceExists("${serviceName}")
+                    utils.checkServiceStatus("${env.BACKEND_URL}", "${serviceName}")
 
                     echo buf.toString()
                     echo "The $servicePlace is success deployed"
