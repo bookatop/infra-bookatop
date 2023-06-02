@@ -56,10 +56,10 @@ pipeline {
                         DeployUtils utils = new DeployUtils(logger)
 
                         GString sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
-                        Closure exitClosure = { exit it }
+                        Closure errorClosure = { error it }
 
-                        utils.fileExists sourceFile, exitClosure
-                        utils.serviceStatus "${serviceName}", "${env.BACKEND_URL}", exitClosure
+                        utils.fileExists sourceFile, errorClosure
+                        utils.serviceStatus "${serviceName}", "${env.BACKEND_URL}", errorClosure
 
                     } finally {
                         echo logger.toString()
