@@ -46,7 +46,7 @@ pipeline {
                 script {
 
                     def checkStatus = { Integer status ->
-                        echo status.toString()
+                        sh "exit $status.toString()"
                     }
 
                     String servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
