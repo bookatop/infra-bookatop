@@ -1,7 +1,6 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
 //@Library('bookatop-shared-libs')
-import com.bookatop.deployment.DeployBuilder
 import com.bookatop.deployment.EnvReader
 
 def static branches() {
@@ -46,14 +45,6 @@ pipeline {
             steps {
 
                 script {
-
-//                    def out
-//                    def config = new HashMap()
-//                    def bindings = getBinding()
-//                    config.putAll(bindings.getVariables())
-//                    out = config['out']
-//                    out.println "Printed do Jenkins console."
-
                     servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     echo "Deploy $servicePlace"
@@ -63,23 +54,12 @@ pipeline {
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
 
-//                    DeployBuilder.deployBackEndOnDev(
-//                         printStream,
-//                         "${branchName}",
-//                         "${serviceName}",
-//                         "${daemonName}",
-//                         "${buildNumber}".toInteger(),
-//                         "${SOUR_PATH}",
-//                         "${DEST_PATH}")
+                    ServiceDeployUtils utils = new ServiceDeployUtils(out)
 
-                    EnvReader reader = new EnvReader()
-                    reader.print(printStream, env)
+                    utils.checkServiceExists("${branchName}")
+                    utils.checkServiceStatus("${env.BACKEND_URL}", "${branchName}")
 
                     echo buf.toString()
-
-//                    def utils = libraryResource 'com/bookatop/scripts/deploy-utils.sh'
-//
-//                    sh "${utils} && check_service_exists"
 
                     echo "The $servicePlace is success deployed"
                 }
