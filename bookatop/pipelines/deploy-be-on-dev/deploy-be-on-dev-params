@@ -1,6 +1,5 @@
-/* Introduces steps to build and test the be-bookatop on dev environment */
+/* Introduces steps to build and test the be-bookatop on dev */
 
-//@Library('bookatop-shared-libs')
 import com.bookatop.deployment.DeployUtils
 import com.bookatop.deployment.Logger
 
@@ -57,9 +56,17 @@ pipeline {
 
                         GString sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
                         Closure errorClosure = { error it.toString() }
+                        GString daemonName = "${serviceName}.service"
 
                         utils.fileExists sourceFile, errorClosure
-                        utils.serviceStatus "${serviceName}", "${env.BACKEND_URL}", errorClosure
+                        utils.stopService sourceFile, errorClosure
+                        utils.statusService "${serviceName}", 000, "${env.BACKEND_URL}", errorClosure
+                        utils.stopDaemon daemonName, errorClosure
+                        utils.statusDaemon daemonName, "failed", errorClosure
+//                        utils.replaceService serviceName, buildNumber, errorClosure
+//                        utils.launchDaemon daemonName, errorClosure
+//                        utils.statusService "${serviceName}", 200, "${env.BACKEND_URL}", errorClosure
+//                        utils.statusDaemon daemonName, "active", errorClosure
 
                     } finally {
                         echo logger.toString()
