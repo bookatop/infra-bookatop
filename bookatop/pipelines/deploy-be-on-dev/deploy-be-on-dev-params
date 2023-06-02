@@ -1,7 +1,7 @@
 /* Introduces steps to build and test the be-bookatop on dev environment */
 
 //@Library('bookatop-shared-libs')
-import com.bookatop.deployment.EnvReader
+import com.bookatop.deployment.DeployUtils
 
 def static branches() {
     /*
@@ -45,22 +45,19 @@ pipeline {
             steps {
 
                 script {
-                    servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
-
+                    String servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
                     echo "Deploy $servicePlace"
-
-                    daemonName = "${serviceName}.service"
+                    String daemonName = "${serviceName}.service"
 
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
-                    PrintStream printStream = new PrintStream(buf)
+                    PrintStream out = new PrintStream(buf)
 
-                    ServiceDeployUtils utils = new ServiceDeployUtils(out)
+                    DeployUtils utils = new DeployUtils(out)
 
                     utils.checkServiceExists("${branchName}")
                     utils.checkServiceStatus("${env.BACKEND_URL}", "${branchName}")
 
                     echo buf.toString()
-
                     echo "The $servicePlace is success deployed"
                 }
             }
