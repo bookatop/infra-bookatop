@@ -18,19 +18,19 @@ pipeline {
 
     parameters {
         choice(
-                name: 'branchName',
+                name: 'branchNameParam',
                 choices: branches(),
                 description: 'Choose branch name*'
         )
         validatingString(
-                name: 'serviceName',
+                name: 'serviceNameParam',
                 defaultValue: 'auth',
                 description: 'Put the service name*',
                 failedValidationMessage: 'Service name is empty',
                 regex: /^.+$/
         )
         validatingString(
-                name: 'buildNumber',
+                name: 'buildNumberParam',
                 defaultValue: '1',
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
 
-                    GString servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
+                    GString servicePlace = "${branchNameParam}:${serviceNameParam}-service:${buildNumberParam} on $ENVIRONMENT"
 
                     echo "Deploy $servicePlace"
 
@@ -54,18 +54,20 @@ pipeline {
 
                         DeployUtils utils = new DeployUtils(logger)
 
-                        GString sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
+                        GString sourceFile = "${env.SOUR_PATH}/${branchNameParam}/${serviceNameParam}-service-${buildNumber}.jar"
                         Closure errorClosure = { error it.toString() }
-                        GString daemonName = "${serviceName}.service"
+
+                        GString serviceName = "${serviceNameParam}.service"
+                        GString daemonName = "${serviceNameParam}.service"
 
                         utils.fileExists sourceFile, errorClosure
-                        utils.stopService sourceFile, errorClosure
-                        utils.statusService "${serviceName}", 000, "${env.BACKEND_URL}", errorClosure
+                        utils.stopService serviceName, errorClosure
+                        utils.statusService serviceName, 000, "${env.BACKEND_URL}", errorClosure
                         utils.stopDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "failed", errorClosure
 //                        utils.replaceService serviceName, buildNumber, errorClosure
 //                        utils.launchDaemon daemonName, errorClosure
-//                        utils.statusService "${serviceName}", 200, "${env.BACKEND_URL}", errorClosure
+//                        utils.statusService serviceName, 200, "${env.BACKEND_URL}", errorClosure
 //                        utils.statusDaemon daemonName, "active", errorClosure
 
                     } finally {
