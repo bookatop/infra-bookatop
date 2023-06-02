@@ -45,29 +45,23 @@ pipeline {
             steps {
                 script {
 
-                    def checkStatus = { Integer status, errorMessage ->
-                        if (status > 0) {
-                            error errorMessage
-                        }
-                    }
-
-                    String servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
+                    GString servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
                     echo "Deploy $servicePlace"
 
-                    ByteArrayOutputStream buf = new ByteArrayOutputStream()
-
+                    Logger logger = new Logger()
                     try {
-                        PrintStream out = new PrintStream(buf)
 
-                        DeployUtils utils = new DeployUtils(out)
+                        DeployUtils utils = new DeployUtils(logger)
 
-                        String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
+                        GString sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
+                        Closure exitClosure = { exit it }
 
-                        checkStatus utils.checkFileExists(sourceFile), "File is not exists"
-                        checkStatus utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}"), "Service is not valid"
+                        utils.checkFileExists sourceFile, exitClosure
+                        utils.checkServiceStatus "${serviceName}", "${env.BACKEND_URL}", exitClosure
+
                     } finally {
-                        echo buf.toString()
+                        echo logger.toString()
                     }
 
                     echo "The $servicePlace is success deployed"
