@@ -62,8 +62,6 @@ pipeline {
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
 
-                    echo "$BACKEND_URL"
-
                     DeployBuilder.deployBackEndOnDev(
                          printStream,
                          "${branchName}",
