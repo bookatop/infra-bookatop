@@ -2,6 +2,7 @@
 
 //@Library('bookatop-shared-libs')
 import com.bookatop.deployment.DeployUtils
+import com.bookatop.deployment.Logger
 
 def static branches() {
     /*
