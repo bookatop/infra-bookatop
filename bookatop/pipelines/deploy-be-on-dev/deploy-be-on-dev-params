@@ -57,7 +57,6 @@ pipeline {
                     String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
                     utils.checkFileExists(sourceFile)
 
-
                     utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
 
                     echo buf.toString()
