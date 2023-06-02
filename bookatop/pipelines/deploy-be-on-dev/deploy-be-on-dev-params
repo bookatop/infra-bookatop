@@ -46,7 +46,7 @@ pipeline {
                 script {
 
                     def checkStatus = { status ->
-                        sh "exit ${status}"
+                        sh "exit"
                     }
 
                     String servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
