@@ -43,7 +43,6 @@ pipeline {
         stage('Deploy') {
 
             steps {
-
                 script {
                     String servicePlace = "${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
 
@@ -55,8 +54,9 @@ pipeline {
                     DeployUtils utils = new DeployUtils(out)
 
                     String sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
-                    utils.checkFileExists(sourceFile)
 
+                    utils.checkFileExists(sourceFile)
+                    exit 1
                     utils.checkServiceStatus("${serviceName}", "${env.BACKEND_URL}")
 
                     echo buf.toString()
