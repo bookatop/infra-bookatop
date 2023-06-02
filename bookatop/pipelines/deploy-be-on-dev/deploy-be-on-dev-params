@@ -56,7 +56,7 @@ pipeline {
                         DeployUtils utils = new DeployUtils(logger)
 
                         GString sourceFile = "${env.SOUR_PATH}/${branchName}/${serviceName}-service-${buildNumber}.jar"
-                        Closure errorClosure = { error it }
+                        Closure errorClosure = { error it.toString() }
 
                         utils.fileExists sourceFile, errorClosure
                         utils.serviceStatus "${serviceName}", "${env.BACKEND_URL}", errorClosure
