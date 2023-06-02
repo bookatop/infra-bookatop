@@ -62,7 +62,7 @@ pipeline {
                     ByteArrayOutputStream buf = new ByteArrayOutputStream()
                     PrintStream printStream = new PrintStream(buf)
 
-                    echo "BACKEND_URL = $BACKEND_URL"
+                    echo "$BACKEND_URL"
 
                     DeployBuilder.deployBackEndOnDev(
                          printStream,
