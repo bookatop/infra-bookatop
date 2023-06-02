@@ -64,28 +64,28 @@ pipeline {
 
                         utils.fileExists sourceFile, errorClosure
                         utils.stopService serviceName, {
-                            utils.sleep 5, errorClosure
+                            sleep 5
                             utils.stopService serviceName, errorClosure
                         }
-                        utils.statusService serviceName, "${env.BACKEND_URL}", "000", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", "DOWN", errorClosure
                         utils.stopDaemon daemonName, {
-                            utils.sleep 5, errorClosure
+                            sleep 5
                             utils.stopDaemon daemonName, errorClosure
                         }
                         utils.statusDaemon daemonName, "failed", errorClosure
                         utils.replaceService sourceFile, destFile, errorClosure
                         utils.fileExists destFile, errorClosure
                         utils.launchDaemon daemonName, {
-                            utils.sleep 5, errorClosure
+                            sleep 5
                             utils.launchDaemon daemonName, errorClosure
                         }
                         utils.statusDaemon daemonName, "active", {
-                            utils.sleep 5, errorClosure
+                            sleep 5
                             utils.statusDaemon daemonName, "active", errorClosure
                         }
-                        utils.statusService serviceName, "${env.BACKEND_URL}", "200", {
-                            utils.sleep 5, errorClosure
-                            utils.statusService serviceName, "${env.BACKEND_URL}", "200", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", "UP", {
+                            sleep 5
+                            utils.statusService serviceName, "${env.BACKEND_URL}", "UP", errorClosure
                         }
 
                     } finally {
