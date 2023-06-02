@@ -63,30 +63,15 @@ pipeline {
                         GString daemonName = "${serviceNameParam}.service"
 
                         utils.fileExists sourceFile, errorClosure
-                        utils.stopService serviceName, {
-                            sleep 5
-                            utils.stopService serviceName, errorClosure
-                        }
+                        utils.stopService serviceName, errorClosure
                         utils.statusService serviceName, "${env.BACKEND_URL}", "DOWN", errorClosure
-                        utils.stopDaemon daemonName, {
-                            sleep 5
-                            utils.stopDaemon daemonName, errorClosure
-                        }
+                        utils.stopDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "failed", errorClosure
                         utils.replaceService sourceFile, destFile, errorClosure
                         utils.fileExists destFile, errorClosure
-                        utils.launchDaemon daemonName, {
-                            sleep 5
-                            utils.launchDaemon daemonName, errorClosure
-                        }
-                        utils.statusDaemon daemonName, "active", {
-                            sleep 5
-                            utils.statusDaemon daemonName, "active", errorClosure
-                        }
-                        utils.statusService serviceName, "${env.BACKEND_URL}", "UP", {
-                            sleep 5
-                            utils.statusService serviceName, "${env.BACKEND_URL}", "UP", errorClosure
-                        }
+                        utils.launchDaemon daemonName, errorClosure
+                        utils.statusDaemon daemonName, "active", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", "UP", errorClosure
 
                     } finally {
                         echo logger.toString()
