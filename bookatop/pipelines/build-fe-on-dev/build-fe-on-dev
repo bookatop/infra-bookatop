@@ -7,18 +7,24 @@ pipeline {
     agent any
 
     stages {
-        stage('Prepare on DEV') {
+        stage('Copy on DEV') {
             steps {
                 echo "release:${BRANCH_NAME}:all:${BUILD_NUMBER} on $ENVIRONMENT"
 
                 logger = { echo it }
-                error = { error it }
+                errorLog = { error it }
 
-                source = "${SOUR_PATH}"
-                dest = "${DEST_PATH}/${BRANCH_NAME}/build-${BUILD_NUMBER}"
+                source = "${WORKSPACE}/${SOUR_PATH}"
+                destDir = "${DEST_PATH}/${BRANCH_NAME}"
+                dest = "${destDir}/build-${BUILD_NUMBER}"
 
-                new FileUtils(logger, error)
-                        .copyDir(source, dest, error)
+                FileUtils utils = ew FileUtils(logger, errorLog)
+                echo "==========="
+                echo source
+                echo destDir
+                //utils.makeDir(destDir)
+                //utils.clearDir(destDir)
+                //utils.copyDir(source, dest, errorLog)
             }
         }
         stage('Build on DEV') {
@@ -27,9 +33,9 @@ pipeline {
                     npm install && npm run clean && npm run build:dev && npm run lint
                 """
                 logger = { echo it }
-                error = { error it }
+                errorLog = { error it }
 
-                checkError executeShellCommand(script, logger) error
+                checkError executeShellCommand(script, logger) errorLog
             }
         }
     }

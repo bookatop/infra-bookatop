@@ -10,8 +10,8 @@ node {
 
     // pass the environment variables to new pipeline
     withEnv(['ENVIRONMENT=DEV',
-             'SOUR_PATH="."',
-             'DEST_PATH="/path/dev-env/fe-bookatop/releases"']) {
+             'SOUR_PATH=.',
+             'DEST_PATH=/path/dev-env/fe-bookatop/releases']) {
         // load Jenkinsfile Pipeline file from devops dir
         load 'devops/bookatop/pipelines/build-fe-on-dev/build-fe-on-dev'
     }
