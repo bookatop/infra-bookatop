@@ -21,7 +21,7 @@ pipeline {
                     logger = { echo it }
                     error = { error it }
 
-                    FileUtils utils = new FileUtils(logger)
+                    FileUtils utils = new FileUtils(logger, error)
 
                     services.each { item ->
                         echo "release:${BRANCH_NAME}:$item on $ENVIRONMENT"

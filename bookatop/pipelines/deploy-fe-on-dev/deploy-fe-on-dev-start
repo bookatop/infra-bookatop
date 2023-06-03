@@ -13,6 +13,6 @@ node {
              'SOUR_PATH="/path/dev-env/fe-bookatop/releases"',
              'DEST_PATH="/path/dev-env/fe-bookatop/deploy"']) {
        // load Jenkinsfile Pipeline file from devops dir
-       load 'bookatop/pipelines/deploy-fe-on-dev/deploy-fe-on-dev-params'
+       load 'devops/bookatop/pipelines/deploy-fe-on-dev/deploy-fe-on-dev-params'
     }
 }

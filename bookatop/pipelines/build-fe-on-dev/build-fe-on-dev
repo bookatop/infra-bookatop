@@ -17,7 +17,7 @@ pipeline {
                 source = "${SOUR_PATH}"
                 dest = "${DEST_PATH}/${BRANCH_NAME}/build-${BUILD_NUMBER}"
 
-                new FileUtils(logger)
+                new FileUtils(logger, error)
                         .copyDir(source, dest, error)
             }
         }
