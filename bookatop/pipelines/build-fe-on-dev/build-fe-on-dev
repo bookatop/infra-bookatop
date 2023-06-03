@@ -10,33 +10,37 @@ pipeline {
     stages {
         stage('Copy on DEV') {
             steps {
-                echo "release:${BRANCH_NAME}:all:${BUILD_NUMBER} on $ENVIRONMENT"
+                script {
+                    echo "release:${BRANCH_NAME}:all:${BUILD_NUMBER} on $ENVIRONMENT"
 
-                logger = { echo it }
-                errorLog = { error it }
+                    logger = { echo it }
+                    errorLog = { error it }
 
-                source = "${WORKSPACE}/${SOUR_PATH}"
-                destDir = "${DEST_PATH}/${BRANCH_NAME}"
-                dest = "${destDir}/build-${BUILD_NUMBER}"
+                    source = "${WORKSPACE}/${SOUR_PATH}"
+                    destDir = "${DEST_PATH}/${BRANCH_NAME}"
+                    dest = "${destDir}/build-${BUILD_NUMBER}"
 
-                FileUtils utils = new FileUtils(logger, errorLog)
-                echo "==========="
-                echo source
-                echo destDir
-                //utils.makeDir(destDir)
-                //utils.clearDir(destDir)
-                //utils.copyDir(source, dest, errorLog)
+                    FileUtils utils = new FileUtils(logger, errorLog)
+                    echo "==========="
+                    echo source
+                    echo destDir
+                    //utils.makeDir(destDir)
+                    //utils.clearDir(destDir)
+                    //utils.copyDir(source, dest, errorLog)
+                }
             }
         }
         stage('Build on DEV') {
             steps {
-                script = """
+                script {
+                    script = """
                     npm install && npm run clean && npm run build:dev && npm run lint
                 """
-                logger = { echo it }
-                errorLog = { error it }
+                    logger = { echo it }
+                    errorLog = { error it }
 
-                checkError executeShellCommand(script, logger) errorLog
+                    checkError executeShellCommand(script, logger) errorLog
+                }
             }
         }
     }
