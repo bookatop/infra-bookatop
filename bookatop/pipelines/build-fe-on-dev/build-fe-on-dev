@@ -1,7 +1,6 @@
 /* Introduces steps to build and test the fe-bookatop on dev environment */
 
-import static com.bookatop.utils.ShellExecUtils.checkError
-import static com.bookatop.utils.ShellExecUtils.executeShellCommand
+import com.bookatop.utils.ShellExecUtils
 import com.bookatop.utils.FileUtils
 
 pipeline {
@@ -35,7 +34,7 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
-                    checkError executeShellCommand(command, logger), errorLog
+                    ShellExecUtils.checkError ShellExecUtils.executeShellCommand(command, logger), errorLog
                 }
             }
         }
