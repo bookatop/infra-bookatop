@@ -3,9 +3,9 @@ node {
     sh 'mkdir -p devops'
 
     dir('devops') {
-       script {
-          git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
-       }
+        script {
+            git branch: 'main', url: 'git@github.com:bookatop/infra-bookatop.git'
+        }
     }
 
     // pass the environment variables to new pipeline
@@ -13,7 +13,7 @@ node {
              'BACKEND_URL="http://93.84.112.114:8082"',
              'SOUR_PATH="/path/dev-env/be-bookatop/deploy"',
              'DEST_PATH="/path/prod-env/be-bookatop/deploy"']) {
-       // load Jenkinsfile Pipeline file from devops dir
+        // load Jenkinsfile Pipeline file from devops dir
         load 'devops/bookatop/pipelines/deploy-be-on-dev/deploy-be-on-dev-params'
     }
 }
