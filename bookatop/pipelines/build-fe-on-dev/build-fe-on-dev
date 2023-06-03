@@ -1,6 +1,6 @@
 /* Introduces steps to build and test the fe-bookatop on dev environment */
 
-import static com.bookatop.utils.ShellExecUtils
+import static com.bookatop.utils.ShellExecUtils.checkError
 import static com.bookatop.utils.ShellExecUtils.executeShellCommand
 import com.bookatop.utils.FileUtils
 
@@ -32,12 +32,13 @@ pipeline {
                     command = """
                        npm install && npm run clean && npm run build:dev && npm run lint
                     """
+
                     logger = { echo it }
                     errorLog = { error it }
 
                     checkError(
-                            ShellExecUtils.executeShellCommand(command, logger),
-                            errorLog
+                       executeShellCommand(command, logger),
+                       errorLog
                     )
                 }
             }
