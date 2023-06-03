@@ -29,13 +29,13 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
-                    script = """
-                    npm install && npm run clean && npm run build:dev && npm run lint
-                """
+                    command = """
+                       npm install && npm run clean && npm run build:dev && npm run lint
+                    """
                     logger = { echo it }
                     errorLog = { error it }
 
-                    checkError executeShellCommand(script, logger), errorLog
+                    checkError executeShellCommand(command, logger), errorLog
                 }
             }
         }
