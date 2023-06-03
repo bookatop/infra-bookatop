@@ -64,14 +64,18 @@ pipeline {
 
                         utils.fileExists sourceFile, errorClosure
                         utils.stopService serviceName, "${env.BACKEND_URL}", errorClosure
-                        utils.statusService serviceName, "${env.BACKEND_URL}", "down", errorClosure
+
+                        utils.statusService serviceName, "${env.BACKEND_URL}", 000, errorClosure
+
                         utils.stopDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "failed", errorClosure
                         utils.replaceService sourceFile, destFile, errorClosure
                         utils.fileExists destFile, errorClosure
                         utils.launchDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "active", errorClosure
-                        utils.statusService serviceName, "${env.BACKEND_URL}", "up", errorClosure
+
+
+                        utils.statusService serviceName, "${env.BACKEND_URL}", 200, errorClosure
 
                     } finally {
                         echo logger.toString()
