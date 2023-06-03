@@ -13,6 +13,6 @@ node {
              'SOUR_PATH="service"',
              'DEST_PATH="/path/dev-env/be-bookatop/releases"']) {
        // load Jenkinsfile Pipeline file from devops dir
-       load 'bookatop/pipelines/build-be-on-dev/build-be-on-dev'
+       load 'devops/bookatop/pipelines/build-be-on-dev/build-be-on-dev'
     }
 }
