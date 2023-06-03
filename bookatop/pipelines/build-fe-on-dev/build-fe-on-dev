@@ -35,7 +35,7 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
-                    checkError executeShellCommand(script, logger) errorLog
+                    checkError executeShellCommand(script, logger), errorLog
                 }
             }
         }
