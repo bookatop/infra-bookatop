@@ -63,15 +63,12 @@ pipeline {
                         GString daemonName = "${serviceNameParam}.service"
 
                         utils.fileExists sourceFile, errorClosure
-                        utils.stopService serviceName, errorClosure
+                        utils.stopService serviceName, "${env.BACKEND_URL}", errorClosure
                         utils.statusService serviceName, "${env.BACKEND_URL}", "DOWN", errorClosure
                         utils.stopDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "failed", errorClosure
                         utils.replaceService sourceFile, destFile, errorClosure
                         utils.fileExists destFile, errorClosure
-
-                        echo "Launch daemon"
-
                         utils.launchDaemon daemonName, errorClosure
                         utils.statusDaemon daemonName, "active", errorClosure
                         utils.statusService serviceName, "${env.BACKEND_URL}", "UP", errorClosure
