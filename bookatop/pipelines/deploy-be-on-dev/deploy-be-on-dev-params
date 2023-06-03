@@ -53,8 +53,8 @@ pipeline {
                     GString destFile = "${env.DEST_PATH}/${serviceNameParam}-service.jar"
                     GString serviceName = "${serviceNameParam}.service"
                     GString daemonName = "${serviceNameParam}.service"
-                    Closure errorClosure = { error it }
-                    Closure loggerClosure = { echo it }
+                    Closure logger = { echo it }
+                    Closure error = { error it }
 
                     DeployBuild deployBuild = new DeployBuild(
                             backendUrl,
@@ -64,7 +64,7 @@ pipeline {
                             daemonName
                     )
 
-                    deployBuild.deploy(loggerClosure, errorClosure)
+                    deployBuild.deploy(logger, error)
 
 //                    Logger logger = new Logger()
 //                    try {
