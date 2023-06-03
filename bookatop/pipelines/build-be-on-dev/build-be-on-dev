@@ -14,9 +14,6 @@ pipeline {
         stage('Copy on DEV') {
             steps {
                 script {
-                    echo "Current dir"
-                    sh "pwd"
-
                     /* List of services */
                     services = [
                         'auth'
