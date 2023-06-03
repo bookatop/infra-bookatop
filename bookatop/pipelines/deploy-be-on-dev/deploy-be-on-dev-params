@@ -68,9 +68,7 @@ pipeline {
                             utils.statusDaemon daemonName, "inactive", errorClosure
                         }
                         utils.replaceService sourceFile, destFile, errorClosure
-                        utils.fileExists destFile, {
-                            echo File ${destFile} is not replaced
-                        }
+                        utils.fileExists destFile, errorClosure
 
                         utils.launchDaemon daemonName, errorClosure
 
