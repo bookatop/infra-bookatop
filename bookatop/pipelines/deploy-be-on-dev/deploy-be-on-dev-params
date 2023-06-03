@@ -72,7 +72,7 @@ pipeline {
 
                         utils.launchDaemon daemonName, errorClosure
 
-                        utils.statusDaemon daemonName, "active1", errorClosure
+                        utils.statusDaemon daemonName, "active", errorClosure
                         utils.statusService serviceName, "${env.BACKEND_URL}", 200, errorClosure
 
                     } finally {
