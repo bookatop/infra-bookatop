@@ -5,7 +5,7 @@ pipeline {
 
     parameters  {
         validatingString(
-                name: 'serviceName',
+                name: 'serviceNameParam',
                 defaultValue: 'auth',
                 description: 'Put the service name*',
                 failedValidationMessage: 'Service name is empty',
@@ -14,29 +14,46 @@ pipeline {
     }
 
     stages {
-        stage('Deploy') {
-
+        stage('Deploy on PROD') {
             steps {
-                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} on $ENVIRONMENT"
-
                 script {
 
-                    load "deploy-be-on-prod"
+                    GString servicePlace = "main:${serviceNameParam}-service on $ENVIRONMENT"
 
-                    varSourceJarName = "${SERVICE_NAME}-service.jar"
+                    echo "Deploy $servicePlace"
 
-                    varSourceJarFile = "${SOUR_PATH}/${SERVICE_NAME}-service-${buildNumber}.jar"
-                    varDestJarFile = "${DEST_PATH}/${varSourceJarName}"
+                    Logger logger = new Logger()
+                    try {
 
-                    varServiceName = "${SERVICE_NAME}.service"
-                    varDaemonName = "${SERVICE_NAME}.service"
+                        DeployUtils utils = new DeployUtils(logger)
 
-                    deploy(
-                            varSourceJarName
-                    )
+                        GString sourceFile = "${env.SOUR_PATH}/${serviceNameParam}-service.jar"
+                        GString destFile = "${env.DEST_PATH}/${serviceNameParam}-service.jar"
+                        Closure errorClosure = { error it.toString() }
+                        GString serviceName = "${serviceNameParam}.prod.service"
+                        GString daemonName = "${serviceNameParam}.prod.service"
+
+                        utils.fileExists sourceFile, errorClosure
+                        utils.stopService serviceName, "${env.BACKEND_URL}", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", 000, errorClosure
+                        utils.stopDaemon daemonName, errorClosure
+                        utils.statusDaemon daemonName, "failed", {
+                            utils.statusDaemon daemonName, "inactive", errorClosure
+                        }
+                        utils.replaceService sourceFile, destFile, errorClosure
+                        utils.fileExists destFile, errorClosure
+                        utils.launchDaemon daemonName, errorClosure
+                        utils.statusDaemon daemonName, "active", errorClosure
+                        utils.statusService serviceName, "${env.BACKEND_URL}", 200, errorClosure
+
+                    } finally {
+                        echo logger.toString()
+                    }
+
+                    echo "The $servicePlace is success deployed"
 
                 }
-                echo "Deploy ${branchName}:${serviceName}-service:${buildNumber} is success installed and launched on $ENVIRONMENT"
+
             }
         }
     }
