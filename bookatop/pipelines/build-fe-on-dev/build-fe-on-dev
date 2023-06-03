@@ -18,7 +18,7 @@ pipeline {
                 destDir = "${DEST_PATH}/${BRANCH_NAME}"
                 dest = "${destDir}/build-${BUILD_NUMBER}"
 
-                FileUtils utils = ew FileUtils(logger, errorLog)
+                FileUtils utils = new FileUtils(logger, errorLog)
                 echo "==========="
                 echo source
                 echo destDir
