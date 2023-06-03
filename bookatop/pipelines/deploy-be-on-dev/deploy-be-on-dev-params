@@ -61,12 +61,10 @@ pipeline {
                             sourceFile,
                             destFile,
                             serviceName,
-                            daemonName,
-                            loggerClosure,
-                            errorClosure
+                            daemonName
                     )
 
-                    deployBuild.deploy()
+                    deployBuild.deploy(loggerClosure, errorClosure)
 
 //                    Logger logger = new Logger()
 //                    try {
