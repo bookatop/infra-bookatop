@@ -55,7 +55,7 @@ pipeline {
                     Closure errorClosure = { error it.toString() }
 
                     DeployBuild deployBuild = new DeployBuild(
-                            ${env.DEST_PATH},
+                            backendUrl,
                             sourceFile,
                             destFile,
                             serviceName,
