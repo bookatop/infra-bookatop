@@ -3,7 +3,7 @@
 pipeline {
     agent any
 
-    parameters  {
+    parameters {
         validatingString(
                 name: 'serviceNameParam',
                 defaultValue: 'auth',
@@ -22,38 +22,28 @@ pipeline {
 
                     echo "Deploy $servicePlace"
 
-                    Logger logger = new Logger()
-                    try {
+                    GString backendUrl = "${env.BACKEND_URL}"
+                    GString sourceFile = "${env.SOUR_PATH}/${serviceNameParam}-service.jar"
+                    GString destFile = "${env.DEST_PATH}/${serviceNameParam}-service.jar"
+                    GString serviceName = "${serviceNameParam}.prod.service"
+                    GString daemonName = "${serviceNameParam}.prod.service"
 
-                        DeployUtils utils = new DeployUtils(logger)
+                    DeployBuild deployBuild = new DeployBuild(
+                            backendUrl,
+                            sourceFile,
+                            destFile,
+                            serviceName,
+                            daemonName
+                    )
 
-                        GString sourceFile = "${env.SOUR_PATH}/${serviceNameParam}-service.jar"
-                        GString destFile = "${env.DEST_PATH}/${serviceNameParam}-service.jar"
-                        Closure errorClosure = { error it.toString() }
-                        GString serviceName = "${serviceNameParam}.prod.service"
-                        GString daemonName = "${serviceNameParam}.prod.service"
-
-                        utils.fileExists sourceFile, errorClosure
-                        utils.stopService serviceName, "${env.BACKEND_URL}", errorClosure
-                        utils.statusService serviceName, "${env.BACKEND_URL}", 000, errorClosure
-                        utils.stopDaemon daemonName, errorClosure
-                        utils.statusDaemon daemonName, "failed", {
-                            utils.statusDaemon daemonName, "inactive", errorClosure
-                        }
-                        utils.replaceService sourceFile, destFile, errorClosure
-                        utils.fileExists destFile, errorClosure
-                        utils.launchDaemon daemonName, errorClosure
-                        utils.statusDaemon daemonName, "active", errorClosure
-                        utils.statusService serviceName, "${env.BACKEND_URL}", 200, errorClosure
-
-                    } finally {
-                        echo logger.toString()
-                    }
+                    deployBuild.deploy({
+                        echo it
+                    }, {
+                        error it
+                    })
 
                     echo "The $servicePlace is success deployed"
-
                 }
-
             }
         }
     }

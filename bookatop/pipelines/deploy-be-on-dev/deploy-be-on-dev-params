@@ -53,8 +53,6 @@ pipeline {
                     GString destFile = "${env.DEST_PATH}/${serviceNameParam}-service.jar"
                     GString serviceName = "${serviceNameParam}.service"
                     GString daemonName = "${serviceNameParam}.service"
-                    Closure logger = { echo it }
-                    Closure error = { error it }
 
                     DeployBuild deployBuild = new DeployBuild(
                             backendUrl,
@@ -64,35 +62,11 @@ pipeline {
                             daemonName
                     )
 
-                    deployBuild.deploy(logger, error)
-
-//                    Logger logger = new Logger()
-//                    try {
-//
-//                        DeployUtils utils = new DeployUtils(logger)
-//
-//                        GString sourceFile = "${env.SOUR_PATH}/${branchNameParam}/${serviceNameParam}-service-${buildNumberParam}.jar"
-//                        GString destFile = "${env.DEST_PATH}/${serviceNameParam}-service.jar"
-//                        Closure errorClosure = { error it.toString() }
-//                        GString serviceName = "${serviceNameParam}.service"
-//                        GString daemonName = "${serviceNameParam}.service"
-//
-//                        utils.fileExists sourceFile, errorClosure
-//                        utils.stopService serviceName, "${env.BACKEND_URL}", errorClosure
-//                        utils.statusService serviceName, "${env.BACKEND_URL}", 000, errorClosure
-//                        utils.stopDaemon daemonName, errorClosure
-//                        utils.statusDaemon daemonName, "failed", {
-//                            utils.statusDaemon daemonName, "inactive", errorClosure
-//                        }
-//                        utils.replaceService sourceFile, destFile, errorClosure
-//                        utils.fileExists destFile, errorClosure
-//                        utils.launchDaemon daemonName, errorClosure
-//                        utils.statusDaemon daemonName, "active", errorClosure
-//                        utils.statusService serviceName, "${env.BACKEND_URL}", 200, errorClosure
-//
-//                    } finally {
-//                        echo logger.toString()
-//                    }
+                    deployBuild.deploy({
+                        echo it
+                    }, {
+                        error it
+                    })
 
                     echo "The $servicePlace is success deployed"
                 }
