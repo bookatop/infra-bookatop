@@ -66,6 +66,8 @@ pipeline {
                             errorClosure
                     )
 
+                    deployBuild.deploy()
+
 //                    Logger logger = new Logger()
 //                    try {
 //
