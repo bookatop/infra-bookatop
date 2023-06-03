@@ -1,5 +1,7 @@
 /* Introduces steps to build and test the fe-bookatop on dev environment */
 
+import com.bookatop.provider.FrontEndProvider
+
 def static branches() {
     /*
     def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
@@ -13,14 +15,14 @@ def static branches() {
 pipeline {
     agent any
 
-    parameters  {
+    parameters {
         choice(
-                name: 'branchName',
+                name: 'branchNameParam',
                 choices: branches(),
                 description: 'Choose branch name*'
         )
         validatingString(
-                name: 'buildNumber',
+                name: 'buildNumberParam',
                 defaultValue: '1',
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
@@ -29,25 +31,22 @@ pipeline {
     }
 
     stages {
-        stage('Deploy on Dev') {
-            environment {
-                SOUR_PATH = "${SOUR_PATH}"
-                DEST_PATH = "${DEST_PATH}"
-            }
+        stage('Deploy on DEV') {
             steps {
-                echo "Deploy ${branchName}:fe-bookatop:${buildNumber} on ${ENVIRONMENT}"
-
                 script {
-                    varSourcePath = "${SOUR_PATH}/build-${buildNumber}"
-                    varDestPath = "${DEST_PATH}"
+                    echo "deploy:${branchNameParam}:fe-bookatop:${buildNumberParam} on ${ENVIRONMENT}"
 
-                    load "deploy-fe-on-dev"
+                    source = "${SOUR_PATH}/${branchNameParam}/build-${buildNumberParam}"
+                    dest = "${DEST_PATH}"
 
-                    deploy (
+                    logger = { echo it }
+                    error = { error it }
 
-                    )
-
-
+                    new FrontEndProvider(
+                            source,
+                            dest
+                    ).deploy(logger, error)
+                }
             }
         }
     }
