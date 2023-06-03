@@ -26,6 +26,9 @@ pipeline {
                     services.each { item ->
                         echo "build:${BRANCH_NAME}:$item:${BUILD_NUMBER} on $ENVIRONMENT"
 
+                        echo Current dir
+                        sh pwd
+
                         source = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                         dest = "${DEST_PATH}/${BRANCH_NAME}/${item}-service-${BUILD_NUMBER}.jar"
 
