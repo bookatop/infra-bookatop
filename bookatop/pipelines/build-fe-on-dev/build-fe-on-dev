@@ -2,6 +2,7 @@
 
 import static com.bookatop.utils.ShellExecUtils.checkError
 import static com.bookatop.utils.ShellExecUtils.executeShellCommand
+import com.bookatop.utils.FileUtils
 
 pipeline {
     agent any
