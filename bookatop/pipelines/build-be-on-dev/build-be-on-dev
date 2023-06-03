@@ -29,7 +29,7 @@ pipeline {
                         source = "${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                         dest = "${DEST_PATH}/${BRANCH_NAME}/${item}-service-${BUILD_NUMBER}.jar"
 
-                        utils.copyFile(source, dest, error)
+                        utils.copyFile(source, dest)
                         utils.fileExists(dest)
                     }
                 }
