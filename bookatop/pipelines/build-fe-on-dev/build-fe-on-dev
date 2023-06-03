@@ -21,7 +21,7 @@ pipeline {
 
                     FileUtils utils = new FileUtils(logger, errorLog)
 
-                    utils.makeDir(destDir)
+                    utils.makeDir(dest)
                     utils.copyDir(source, dest)
                 }
             }
