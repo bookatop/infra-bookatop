@@ -5,10 +5,6 @@ import com.bookatop.deploy.provider.BackEndProvider
 pipeline {
     agent any
 
-    options {
-        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
-    }
-
     parameters {
         validatingString(
                 name: 'serviceNameParam',
