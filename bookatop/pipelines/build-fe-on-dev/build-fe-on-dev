@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Copy on DEV') {
+        stage('Build on DEV') {
             steps {
                 script {
                     echo "build:${BRANCH_NAME}:all:${BUILD_NUMBER}:$ENVIRONMENT"
@@ -20,39 +20,25 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
+                    command = """
+                       npm install && npm run clean && npm run build:dev && npm run lint
+                    """
+
+                    checkError(
+                            executeShellCommand(command, logger),
+                            errorLog
+                    )
+
                     source = "${WORKSPACE}/."
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
                     FileUtils utils = new FileUtils(logger, errorLog)
 
-                    utils.makeDir(dest)
-                    utils.copyDir(source, dest)
-                }
-            }
-        }
-        stage('Build on DEV') {
-            steps {
-                script {
-                    command = """
-                       npm install && npm run clean && npm run build:dev && npm run lint
-                    """
+                    echo "source=" + {source}
+                    echo "dest=" + {dest}
 
-                    logger = { echo it }
-                    errorLog = { error it }
-
-                    checkError(
-                       executeShellCommand(command, logger),
-                       errorLog
-                    )
-                }
-            }
-        }
-        stage('Archive on DEV') {
-            steps {
-                script {
-                    FileUtils utils = new FileUtils(logger, errorLog)
-
-                    sh "echo pwd"
+//                    utils.makeDir(dest)
+//                    utils.copyDir(source, dest)
 
                 }
             }
