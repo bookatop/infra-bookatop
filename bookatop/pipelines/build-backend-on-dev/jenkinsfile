@@ -15,7 +15,7 @@ pipeline {
                     def res = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
 
                     sh """
-                        $res 1 2 3
+                        $res 1, 2, 3
                     """
                 }
             }
