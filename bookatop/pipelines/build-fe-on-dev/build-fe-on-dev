@@ -20,8 +20,10 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
-                    sh pwd
-                    sh ll
+                    echo "${WORKSPACE}/devops"
+
+//                    sh pwd
+//                    sh ll
 
                     command = """
                        npm install && npm run clean && npm run build:dev && npm run lint
