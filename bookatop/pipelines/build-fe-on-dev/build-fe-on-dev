@@ -20,21 +20,22 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
-                    echo "${WORKSPACE}/devops"
-
+//                    echo "${WORKSPACE}/devops"
 //                    sh pwd
 //                    sh ll
 
-                    command = """
-                       npm install && npm run clean && npm run build:dev && npm run lint
-                    """
+                    sh 'npm install && npm run clean && npm run build:dev && npm run lint'
 
-                    echo "DDDDDDDDDDDDDDDDD"
-
-                    checkError(
-                            executeShellCommand(command, logger),
-                            errorLog
-                    )
+//                    command = """
+//                       npm install && npm run clean && npm run build:dev && npm run lint
+//                    """
+//
+//                    echo "DDDDDDDDDDDDDDDDD"
+//
+//                    checkError(
+//                            executeShellCommand(command, logger),
+//                            errorLog
+//                    )
 
                     source = "${WORKSPACE}/."
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
