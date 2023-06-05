@@ -48,7 +48,7 @@ pipeline {
                 script {
                     FileUtils utils = new FileUtils(logger, errorLog)
 
-                    sh echo pwd
+                    sh "echo pwd"
 
                 }
             }
