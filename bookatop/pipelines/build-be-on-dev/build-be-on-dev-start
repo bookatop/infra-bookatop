@@ -10,6 +10,7 @@ node {
 
     // pass the environment variables to new pipeline
     withEnv(['ENVIRONMENT=DEV',
+             'PROJECT_NAME=build-be-on-dev',
              'JENKINS_HOME=/var/lib/jenkins']) {
        // load Jenkinsfile Pipeline file from devops dir
        load 'devops/bookatop/pipelines/build-be-on-dev/build-be-on-dev'
