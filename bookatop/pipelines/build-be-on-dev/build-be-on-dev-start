@@ -1,4 +1,4 @@
-node('build-be-on-dev') {
+node {
     //checkout devops repository (other repository)
     sh 'mkdir -p devops'
 
