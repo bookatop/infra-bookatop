@@ -24,7 +24,7 @@ pipeline {
                     FrontEndProvider provider = new FrontEndProvider(source, dest)
 
                     provider.build(logger, errorLog)
-//                    provider.install(logger, errorLog)
+                    provider.install(logger, errorLog)
                 }
             }
         }
