@@ -12,7 +12,7 @@ pipeline {
                     echo "Hello Jenkins pipeline"
                     sh "ls"
                     sh "pwd"
-                    def buildFile = libraryResource '/resources/com/bookatop/scripts/build-backend-on-dev.sh'
+                    def buildFile = libraryResource '/com/bookatop/scripts/build-backend-on-dev.sh'
                     sh buildFile
                 }
             }
