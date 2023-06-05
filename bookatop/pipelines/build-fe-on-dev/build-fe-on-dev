@@ -1,8 +1,6 @@
 /* Pipeline introduces steps to build on dev */
 
-import static com.bookatop.utils.ShellExecUtils.checkError
-import static com.bookatop.utils.ShellExecUtils.executeShellCommand
-import com.bookatop.utils.FileUtils
+import com.bookatop.provider.FrontEndProvider
 
 pipeline {
     agent any
@@ -20,21 +18,6 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
-//                    echo "${WORKSPACE}/devops"
-//                    sh pwd
-//                    sh ll
-
-//                    sh 'npm install && npm run clean && npm run build:dev && npm run lint'
-
-//                    command = """
-//                       cd ${WORKSPACE}
-//                       npm install && npm run clean && npm run build:dev && npm run lint
-//                    """
-//                    checkError(
-//                            executeShellCommand(command, logger),
-//                            errorLog
-//                    )
-
                     source = "${WORKSPACE}/."
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
@@ -42,18 +25,6 @@ pipeline {
 
                     provider.build(logger, error)
                     provider.install(logger, error)
-
-
-
-//                    dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
-//                    FileUtils utils = new FileUtils(logger, errorLog)
-
-                    echo "source=" + {source}
-                    echo "dest=" + {dest}
-
-//                    utils.makeDir(dest)
-//                    utils.copyDir(source, dest)
-
                 }
             }
         }
