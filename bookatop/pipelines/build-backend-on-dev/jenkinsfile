@@ -12,8 +12,8 @@ pipeline {
                     echo "Hello Jenkins pipeline"
                     sh "ls"
                     sh "pwd"
-                    def buildFile = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
-                    sh buildFile $WORKSPACE $BRANCH_NAME $BUILD_NUMBER
+                    def res = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
+                    sh res $WORKSPACE $BRANCH_NAME $BUILD_NUMBER
                 }
             }
         }
