@@ -34,6 +34,8 @@ pipeline {
                         destDir = "${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
                         destFile = "${destDir}/${item}-service.jar"
 
+                        echo "JOB_NAME=${JOB_NAME}"
+                        echo "BRANCH_NAME=${BRANCH_NAME}"
                         echo "source=${source}"
                         echo "destDir=${destDir}"
                         echo "destFile=${destFile}"
