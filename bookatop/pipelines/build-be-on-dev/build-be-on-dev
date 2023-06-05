@@ -1,9 +1,13 @@
-/* Introduces steps to build and test the be-bookatop on dev environment */
+/* Pipeline introduces steps to build on dev */
 
 import com.bookatop.utils.FileUtils
 
 pipeline {
     agent any
+
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
+    }
 
     stages {
         stage('Build on DEV') {
@@ -24,7 +28,7 @@ pipeline {
                     FileUtils utils = new FileUtils(logger, errorLog)
 
                     services.each { item ->
-                        echo "build:${BRANCH_NAME}:$item:${BUILD_NUMBER} on $ENVIRONMENT"
+                        echo "build:${BRANCH_NAME}:$item:${BUILD_NUMBER}:$ENVIRONMENT"
 
                         source = "${WORKSPACE}/${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
                         destDir = "${DEST_PATH}/${BRANCH_NAME}"
@@ -32,6 +36,7 @@ pipeline {
 
                         utils.makeDir(destDir)
                         utils.copyFile(source, dest)
+
                         utils.fileExists(dest)
                     }
                 }
