@@ -31,7 +31,12 @@ pipeline {
                         echo "build:${BRANCH_NAME}:$item:${BUILD_NUMBER}:$ENVIRONMENT"
 
                         source = "${WORKSPACE}/${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
-                        utils.fileExists(source)
+                        destDir = "${DEST_PATH}/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
+                        destFile = "${destDir}/${item}-service.jar"
+
+                        utils.makeDir(destDir)
+                        utils.copyFile(source, destFile)
+                        utils.fileExists(destFile)
                     }
                 }
             }
