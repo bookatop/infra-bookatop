@@ -9,9 +9,7 @@ node {
     }
 
     // pass the environment variables to new pipeline
-    withEnv(['ENVIRONMENT=DEV',
-             'SOUR_PATH=services',
-             'DEST_PATH=/var/lib/jenkins/jobs']) {
+    withEnv(['ENVIRONMENT=DEV']) {
        // load Jenkinsfile Pipeline file from devops dir
        load 'devops/bookatop/pipelines/build-be-on-dev/build-be-on-dev'
     }

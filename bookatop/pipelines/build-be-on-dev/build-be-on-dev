@@ -30,8 +30,8 @@ pipeline {
                     services.each { item ->
                         echo "build:${BRANCH_NAME}:$item:${BUILD_NUMBER}:$ENVIRONMENT"
 
-                        source = "${WORKSPACE}/${SOUR_PATH}/${item}/build/libs/${item}-service.jar"
-                        destDir = "${DEST_PATH}/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
+                        source = "${WORKSPACE}/services/${item}/build/libs/${item}-service.jar"
+                        destDir = "${WORKSPACE}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
                         destFile = "${destDir}/${item}-service.jar"
 
                         utils.makeDir(destDir)
