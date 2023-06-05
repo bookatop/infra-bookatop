@@ -21,9 +21,9 @@ pipeline {
                     source = "${WORKSPACE}/."
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
-//                    FrontEndProvider provider = new FrontEndProvider(source, dest)
+                    FrontEndProvider provider = new FrontEndProvider(source, dest)
 //
-//                    provider.build(logger, error)
+                    provider.build(logger, error)
 //                    provider.install(logger, error)
                 }
             }
