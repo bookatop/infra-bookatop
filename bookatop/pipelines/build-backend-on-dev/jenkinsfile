@@ -12,10 +12,11 @@ pipeline {
                     echo "Hello Jenkins pipeline"
                     sh "ls"
                     sh "pwd"
-                    def res = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
+                    def script = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
+                    writeFile 'script.sh' script
 
                     sh """
-                        $res 1, 2, 3
+                        ./script.sh 1, 2, 3
                     """
                 }
             }
