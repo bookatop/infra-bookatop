@@ -20,6 +20,9 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
+                    sh "echo pwd"
+                    sh "echo ls -la"
+
                     command = """
                        npm install && npm run clean && npm run build:dev && npm run lint
                     """
