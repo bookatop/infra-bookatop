@@ -35,8 +35,6 @@ pipeline {
                         destDir = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
                         destFile = "${destDir}/${item}-service.jar"
 
-                        // /var/lib/jenkins/ {jobs} / {build-be-on-dev} /branches/ {main} /builds/ {95} /release
-
                         utils.makeDir(destDir)
                         utils.copyFile(source, destFile)
                         utils.fileExists(destFile)
