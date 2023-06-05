@@ -21,7 +21,7 @@ pipeline {
                     errorLog = { error it }
 
                     sh pwd
-                    sh ls -la
+                    sh ll
 
                     command = """
                        npm install && npm run clean && npm run build:dev && npm run lint
