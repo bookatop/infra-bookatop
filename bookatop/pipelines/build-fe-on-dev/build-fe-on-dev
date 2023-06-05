@@ -26,18 +26,26 @@ pipeline {
 
 //                    sh 'npm install && npm run clean && npm run build:dev && npm run lint'
 
-                    command = """
-                       cd ${WORKSPACE} 
-                       npm install && npm run clean && npm run build:dev && npm run lint
-                    """
-                    checkError(
-                            executeShellCommand(command, logger),
-                            errorLog
-                    )
+//                    command = """
+//                       cd ${WORKSPACE}
+//                       npm install && npm run clean && npm run build:dev && npm run lint
+//                    """
+//                    checkError(
+//                            executeShellCommand(command, logger),
+//                            errorLog
+//                    )
 
                     source = "${WORKSPACE}/."
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
+                    FrontEndProvider provider = new FrontEndProvider(source, dest)
+
+                    provider.build(logger, error)
+                    provider.install(logger, error)
+
+
+
+//                    dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 //                    FileUtils utils = new FileUtils(logger, errorLog)
 
                     echo "source=" + {source}
