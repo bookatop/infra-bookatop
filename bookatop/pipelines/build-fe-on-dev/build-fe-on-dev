@@ -1,4 +1,4 @@
-/* Introduces steps to build and test the fe-bookatop on dev environment */
+/* Pipeline introduces steps to build on dev */
 
 import static com.bookatop.utils.ShellExecUtils.checkError
 import static com.bookatop.utils.ShellExecUtils.executeShellCommand
@@ -11,13 +11,13 @@ pipeline {
         stage('Copy on DEV') {
             steps {
                 script {
-                    echo "release:${BRANCH_NAME}:all:${BUILD_NUMBER} on $ENVIRONMENT"
+                    echo "build:${BRANCH_NAME}:all:${BUILD_NUMBER}:$ENVIRONMENT"
 
                     logger = { echo it }
                     errorLog = { error it }
 
-                    source = "${WORKSPACE}/${SOUR_PATH}"
-                    dest = "${DEST_PATH}/${BRANCH_NAME}/build-${BUILD_NUMBER}"
+                    source = "${WORKSPACE}/."
+                    dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
                     FileUtils utils = new FileUtils(logger, errorLog)
 
@@ -40,6 +40,16 @@ pipeline {
                        executeShellCommand(command, logger),
                        errorLog
                     )
+                }
+            }
+        }
+        stage('Archive on DEV') {
+            steps {
+                script {
+                    FileUtils utils = new FileUtils(logger, errorLog)
+
+                    sh echo pwd
+
                 }
             }
         }
