@@ -14,10 +14,8 @@ pipeline {
                     sh "pwd"
                     def script = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
                     writeFile(file: 'script.sh', text: script)
-                    chmod +x script.sh
-                    sh """
-                        ./script.sh 1, 2, 3
-                    """
+                    sh 'chmod +x ./script.sh'
+                    sh './script.sh 1 2 3'
                 }
             }
         }
