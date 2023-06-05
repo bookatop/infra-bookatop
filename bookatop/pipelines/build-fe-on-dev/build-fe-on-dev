@@ -24,12 +24,12 @@ pipeline {
                        npm install && npm run clean && npm run build:dev && npm run lint
                     """
 
+                    echo "DDDDDDDDDDDDDDDDD"
+
                     checkError(
                             executeShellCommand(command, logger),
                             errorLog
                     )
-
-                    echo "DDDDDDDDDDDDDDDDD"
 
                     source = "${WORKSPACE}/."
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
