@@ -31,7 +31,7 @@ pipeline {
                         echo "build:${BRANCH_NAME}:$item:${BUILD_NUMBER}:$ENVIRONMENT"
 
                         source = "${WORKSPACE}/services/${item}/build/libs/${item}-service.jar"
-                        destDir = "${JENKINS_HOME}/jobs/${JOB_NAME}/branches/{$BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
+                        destDir = "${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
                         destFile = "${destDir}/${item}-service.jar"
 
                         utils.makeDir(destDir)
