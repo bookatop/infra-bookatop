@@ -32,7 +32,9 @@ pipeline {
 
                         source = "${WORKSPACE}/services/${item}/build/libs/${item}-service.jar"
 
-                        echo "NODE_NAME = ${NODE_NAME}"
+                        projectName = ${JOB_NAME}.tokenize('/')[0]
+
+                        echo "projectName = ${projectName}"
 
                         destDir = "${JENKINS_HOME}/jobs/${JOB_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
                         destFile = "${destDir}/${item}-service.jar"
