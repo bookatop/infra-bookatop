@@ -15,7 +15,7 @@ pipeline {
                     def script = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
                     writeFile(file: 'script.sh', text: script)
                     sh 'chmod +x ./script.sh'
-                    sh './script.sh 1 2 3'
+                    sh "./script.sh $WORKSPACE $BRANCH_NAME $BUILD_NUMBER"
                 }
             }
         }
