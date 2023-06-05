@@ -10,8 +10,8 @@ pipeline {
             steps {
                 script {
                     echo "Hello Jenkins pipeline"
-                    sh ls
-                    sh pwd
+                    sh "ls"
+                    sh "pwd"
                 }
             }
         }
