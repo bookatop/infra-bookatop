@@ -13,7 +13,7 @@ pipeline {
                     sh "ls"
                     sh "pwd"
                     def res = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
-                    sh res $WORKSPACE BRANCH_NAME $BUILD_NUMBER
+                    sh res $WORKSPACE $BUILD_NUMBER $BUILD_NUMBER
                 }
             }
         }
