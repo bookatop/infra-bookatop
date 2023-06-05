@@ -34,15 +34,9 @@ pipeline {
                         destDir = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/release"
                         destFile = "${destDir}/${item}-service.jar"
 
-                        echo "JOB_NAME=${JOB_NAME}"
-                        echo "BRANCH_NAME=${BRANCH_NAME}"
-                        echo "source=${source}"
-                        echo "destDir=${destDir}"
-                        echo "destFile=${destFile}"
-
-//                        utils.makeDir(destDir)
-//                        utils.copyFile(source, destFile)
-//                        utils.fileExists(destFile)
+                        utils.makeDir(destDir)
+                        utils.copyFile(source, destFile)
+                        utils.fileExists(destFile)
                     }
                 }
             }
