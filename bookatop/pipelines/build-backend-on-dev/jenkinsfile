@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('Build on DEV') {
             steps {
-                echo Hello Jenkins pipeline
+                script {
+                    echo Hello Jenkins pipeline
+                }
             }
         }
     }
