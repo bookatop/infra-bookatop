@@ -14,7 +14,7 @@ pipeline {
                     sh "pwd"
                     def res = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
                     echo res
-                    sh script:res, args:WORKSPACE_VAL BUILD_NUMBER_VAL BUILD_NUMBER_VAL
+                    sh script:res, args:'WORKSPACE_VAL BUILD_NUMBER_VAL BUILD_NUMBER_VAL'
                 }
             }
         }
