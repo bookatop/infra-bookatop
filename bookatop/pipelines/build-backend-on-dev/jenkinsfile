@@ -9,13 +9,11 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
-                    echo "Hello Jenkins pipeline"
-                    sh "ls"
-                    sh "pwd"
-                    def script = libraryResource 'com/bookatop/scripts/build-backend-on-dev.sh'
-                    writeFile(file: 'script.sh', text: script)
-                    sh 'chmod +x ./script.sh'
-                    sh "./script.sh $WORKSPACE $BRANCH_NAME $BUILD_NUMBER"
+                    def file = 'build-backend-on-dev.sh'
+                    def script = libraryResource "com/bookatop/scripts/$file"
+                    writeFile(file: file, text: script)
+                    sh "chmod +x ./$file"
+                    sh "./$file $WORKSPACE $BRANCH_NAME $BUILD_NUMBER"
                 }
             }
         }
