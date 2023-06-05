@@ -18,7 +18,7 @@ pipeline {
                     logger = { echo it }
                     errorLog = { error it }
 
-                    source = "${WORKSPACE}/."
+                    source = "${WORKSPACE}"
                     dest = "${JENKINS_HOME}/jobs/${PROJECT_NAME}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
                     FrontEndProvider provider = new FrontEndProvider(source, dest)
