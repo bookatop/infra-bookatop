@@ -37,7 +37,8 @@ pipeline {
                 script {
                     String jenkinsHome = '/var/lib/jenkins'
 
-                    GString sourceRelease = "${jenkinsHome}/jobs/build-frontend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/releases/com.bookatop.frontend.tar"
+                    GString sourceRelease = "${jenkinsHome}/jobs/build-frontend-on-dev/branches/" +
+                            "${releaseBranch}/builds/${releaseNumber}/releases/com.bookatop.frontend.tar"
                     String destRelease = '/path/dev-env/fe-bookatop/deploy'
 
                     String file = 'deploy-frontend-on-dev.sh'
