@@ -43,8 +43,9 @@ pipeline {
             steps {
                 script {
                     String jenkinsHome = '/var/lib/jenkins'
-                    String sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/releases/${releaseName}"
-                    String destRelease = '/path/dev-env/be-bookatop/deploy'
+
+                    GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/releases/${releaseName}-service.jar"
+                    GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
 
                     String file = 'deploy-backend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
