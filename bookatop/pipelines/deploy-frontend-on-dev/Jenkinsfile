@@ -32,7 +32,7 @@ pipeline {
     }
 
     stages {
-        stage('Build on DEV') {
+        stage('Deploy on DEV') {
             steps {
                 script {
                     String jenkinsHome = '/var/lib/jenkins'
