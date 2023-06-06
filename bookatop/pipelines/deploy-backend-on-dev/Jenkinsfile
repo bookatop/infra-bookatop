@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
+    }
+
+    parameters {
+        choice(
+                name: 'releaseBranch',
+                choices: branches(),
+                description: 'Choose branch name*'
+        )
+        validatingString(
+                name: 'releaseName',
+                defaultValue: 'auth',
+                description: 'Put the service name*',
+                failedValidationMessage: 'Service name is empty',
+                regex: /^.+$/
+        )
+        validatingString(
+                name: 'releaseNumber',
+                defaultValue: '1',
+                description: 'Put the build number*',
+                failedValidationMessage: 'Build number is invalid',
+                regex: /^[0-9]+$/
+        )
+    }
+
+    stages {
+        stage('Build on DEV') {
+            steps {
+                script {
+                    String environment = 'dev'
+                    String projectName = 'deploy-backend-on-dev'
+                    String jenkinsHome = '/var/lib/jenkins'
+                    String backendUrl  = 'http://93.84.112.114:8081'
+
+                    String file = 'deploy-backend-on-dev.sh'
+                    String script = libraryResource "com/bookatop/scripts/${file}"
+
+                    writeFile(file: file, text: script)
+                    sh "chmod +x ./${file}"
+                    sh "./${file} ${environment} ${backendUrl} ${projectName} ${jenkinsHome} ${releaseBranch} ${releaseName} ${releaseNumber} ${BUILD_NUMBER}"
+                }
+            }
+        }
+    }
+}
