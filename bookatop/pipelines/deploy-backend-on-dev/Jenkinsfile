@@ -42,17 +42,16 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
-                    String environment = 'dev'
-                    String projectName = 'deploy-backend-on-dev'
                     String jenkinsHome = '/var/lib/jenkins'
-                    String backendUrl  = 'http://93.84.112.114:8081'
+                    String sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/releases/${releaseName}"
+                    String destRelease = '/path/dev-env/be-bookatop/deploy'
 
                     String file = 'deploy-backend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
 
                     writeFile(file: file, text: script)
                     sh "chmod +x ./${file}"
-                    sh "./${file} ${environment} ${backendUrl} ${projectName} ${jenkinsHome} ${releaseBranch} ${releaseName} ${releaseNumber} ${BUILD_NUMBER}"
+                    sh "./${file}"
                 }
             }
         }
