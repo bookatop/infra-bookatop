@@ -10,10 +10,10 @@ pipeline {
             steps {
                 script {
                     sh 'export ENVIRONMENT=DEV'
-                    sh 'export PROJECT_NAME=build-backend-on-dev'
+                    sh 'export PROJECT_NAME=build-frontend-on-dev'
                     sh 'export JENKINS_HOME=/var/lib/jenkins'
 
-                    file = 'build-backend-on-dev.sh'
+                    file = 'build-frontend-on-dev.sh'
                     script = libraryResource "com/bookatop/scripts/$file"
 
                     writeFile(file: file, text: script)
