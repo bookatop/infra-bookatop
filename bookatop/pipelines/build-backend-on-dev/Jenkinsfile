@@ -9,8 +9,13 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
+                    sh 'export ENVIRONMENT=DEV'
+                    sh 'export PROJECT_NAME=build-backend-on-dev'
+                    sh 'export JENKINS_HOME=/var/lib/jenkins'
+
                     def file = 'build-backend-on-dev.sh'
                     def script = libraryResource "com/bookatop/scripts/$file"
+
                     writeFile(file: file, text: script)
                     sh "chmod +x ./$file"
                     sh "./$file $WORKSPACE $BRANCH_NAME $BUILD_NUMBER"
