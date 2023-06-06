@@ -13,8 +13,8 @@ pipeline {
                     sh 'export PROJECT_NAME=build-frontend-on-dev'
                     sh 'export JENKINS_HOME=/var/lib/jenkins'
 
-                    file = 'build-frontend-on-dev.sh'
-                    script = libraryResource "com/bookatop/scripts/$file"
+                    String file = 'build-frontend-on-dev.sh'
+                    String script = libraryResource "com/bookatop/scripts/$file"
 
                     writeFile(file: file, text: script)
                     sh "chmod +x ./$file"
