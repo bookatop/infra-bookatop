@@ -46,8 +46,9 @@ pipeline {
                     String script = libraryResource "com/bookatop/scripts/${file}"
 
                     writeFile(file: file, text: script)
-                    sh "chmod +x ./${file} ${sourceRelease} ${destRelease}"
-                    sh "./${file}"
+                    sh "chmod +x ./${file}"
+
+                    sh "./${file} ${sourceRelease} ${destRelease}"
                 }
             }
         }
