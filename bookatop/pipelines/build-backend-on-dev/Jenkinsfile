@@ -13,10 +13,6 @@ pipeline {
                     String projectName = 'build-backend-on-dev'
                     String jenkinsHome = '/var/lib/jenkins'
 
-//                    sh 'export ENVIRONMENT=DEV'
-//                    sh 'export PROJECT_NAME=build-backend-on-dev'
-//                    sh 'export JENKINS_HOME=/var/lib/jenkins'
-
                     String file = 'build-backend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
 

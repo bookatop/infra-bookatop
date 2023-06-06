@@ -9,16 +9,16 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
-                    sh 'export ENVIRONMENT=DEV'
-                    sh 'export PROJECT_NAME=build-frontend-on-dev'
-                    sh 'export JENKINS_HOME=/var/lib/jenkins'
+                    String environment = 'dev'
+                    String projectName = 'build-frontend-on-dev'
+                    String jenkinsHome = '/var/lib/jenkins'
 
                     String file = 'build-frontend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
 
                     writeFile(file: file, text: script)
                     sh "chmod +x ./${file}"
-                    sh "./${file} ${BRANCH_NAME} ${BUILD_NUMBER}"
+                    sh "./${file} ${environment} ${projectName} ${jenkinsHome} ${BRANCH_NAME} ${BUILD_NUMBER}"
                 }
             }
         }
