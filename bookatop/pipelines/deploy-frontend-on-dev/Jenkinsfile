@@ -40,8 +40,6 @@ pipeline {
                     GString sourceRelease = "${jenkinsHome}/jobs/build-frontend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/releases/com.bookatop.frontend.tar"
                     String destRelease = '/path/dev-env/fe-bookatop/deploy'
 
-                    println("sourceRelease=${sourceRelease}")
-
                     String file = 'deploy-frontend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
 
