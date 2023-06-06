@@ -11,7 +11,7 @@ pipeline {
                 script {
                     String projectName = 'build-frontend-on-dev'
                     String jenkinsHome = '/var/lib/jenkins'
-                    GString destRelease = "${jenkinsHome}/jobs/${projectName}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/releases"
+                    GString destRelease = "${jenkinsHome}/jobs/${projectName}/branches/${BRANCH_NAME}/builds/${BUILD_NUMBER}/release"
 
                     String file = 'build-frontend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
