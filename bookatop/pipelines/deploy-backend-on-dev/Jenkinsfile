@@ -52,7 +52,7 @@ pipeline {
 
                     writeFile(file: file, text: script)
                     sh "chmod +x ./${file}"
-                    sh "./${file} ${sourceRelease} ${destRelease}"
+                    sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
                 }
             }
         }
