@@ -16,7 +16,7 @@ pipeline {
     }
 
     stages {
-        stage('Build on DEV') {
+        stage('Build on PROD') {
             steps {
                 script {
                     String jenkinsHome = '/var/lib/jenkins'
