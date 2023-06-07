@@ -5,13 +5,15 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
     }
 
-    validatingString(
-            name: 'releaseName',
-            defaultValue: 'auth',
-            description: 'Put the service name*',
-            failedValidationMessage: 'Service name is empty',
-            regex: /^.+$/
-    )
+    parameters {
+        validatingString(
+                name: 'releaseName',
+                defaultValue: 'auth',
+                description: 'Put the service name*',
+                failedValidationMessage: 'Service name is empty',
+                regex: /^.+$/
+        )
+    }
 
     stages {
         stage('Build on DEV') {
