@@ -24,14 +24,14 @@ pipeline {
         )
         validatingString(
                 name: 'releaseName',
-                defaultValue: 'auth',
+                defaultValue: '',
                 description: 'Put the service name*',
                 failedValidationMessage: 'Service name is empty',
                 regex: /^.+$/
         )
         validatingString(
                 name: 'releaseNumber',
-                defaultValue: '1',
+                defaultValue: '',
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
                 regex: /^[0-9]+$/

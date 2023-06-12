@@ -8,7 +8,7 @@ pipeline {
     parameters {
         validatingString(
                 name: 'releaseName',
-                defaultValue: 'auth',
+                defaultValue: '',
                 description: 'Put the service name*',
                 failedValidationMessage: 'Service name is empty',
                 regex: /^.+$/

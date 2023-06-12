@@ -24,7 +24,7 @@ pipeline {
         )
         validatingString(
                 name: 'releaseNumber',
-                defaultValue: '1',
+                defaultValue: '',
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
                 regex: /^[0-9]+$/
