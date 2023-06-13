@@ -28,36 +28,6 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
     }
 
-    parameters {
-        choice(
-                $class: ChoiceParameter,
-                choiceType: 'PT_SINGLE_SELECT',
-                name: 'releaseBranch',
-                script: [
-                        $class: 'GroovyScript',
-                        script: "branches()"
-                ]
-        )
-        choice(
-                $class: ChoiceParameter,
-                choiceType: 'PT_SINGLE_SELECT',
-                name: 'releaseName',
-                script: [
-                        $class: 'GroovyScript',
-                        script: "releases($releaseBranch)"
-                ]
-        )
-        string(
-                $class: StringParameterDefinition,
-                choiceType: 'PT_TEXTBOX',
-                name: 'releaseNumber',
-                script: [
-                        $class: 'GroovyScript',
-                        script: "lastRelease($releaseBranch)"
-                ]
-        )
-    }
-
 //    parameters {
 //        choice(
 //                name: 'releaseBranch',
@@ -79,6 +49,44 @@ pipeline {
 //    }
 
     stages {
+        stage('Parameters') {
+            steps {
+                script {
+                    properties([
+                            parameters([
+                                    [
+                                            $class    : ChoiceParameter,
+                                            choiceType: 'PT_SINGLE_SELECT',
+                                            name      : 'releaseBranch',
+                                            script    : [
+                                                    $class: 'GroovyScript',
+                                                    script: "branches()"
+                                            ]
+                                    ],
+                                    [
+                                            $class    : ChoiceParameter,
+                                            choiceType: 'PT_SINGLE_SELECT',
+                                            name      : 'releaseName',
+                                            script    : [
+                                                    $class: 'GroovyScript',
+                                                    script: "releases($releaseBranch)"
+                                            ]
+                                    ],
+                                    [
+                                            $class    : StringParameterDefinition,
+                                            choiceType: 'PT_TEXTBOX',
+                                            name      : 'releaseNumber',
+                                            script    : [
+                                                    $class: 'GroovyScript',
+                                                    script: "lastRelease($releaseBranch)"
+                                            ]
+                                    ]
+                            ])
+                    ])
+                }
+            }
+        }
+
         stage('Build on DEV') {
             steps {
                 script {
