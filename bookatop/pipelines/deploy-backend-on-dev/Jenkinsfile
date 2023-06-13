@@ -61,8 +61,7 @@ pipeline {
                                             script    : [
                                                     $class: 'GroovyScript',
                                                     script: '''
-                                                        def branches = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches").execute()
-                                                        branches.text.readLines()
+                                                        releaseBranch
                                                     '''
                                             ]
                                     ],
