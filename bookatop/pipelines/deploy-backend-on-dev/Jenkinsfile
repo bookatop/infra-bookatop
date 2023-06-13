@@ -34,7 +34,7 @@ pipeline {
                 choices: branches(),
                 description: 'Choose branch name*'
         )
-        choose(
+        choice(
                 name: 'releaseName',
                 choices: releases(releaseBranch),
                 description: 'Choose release name*'
