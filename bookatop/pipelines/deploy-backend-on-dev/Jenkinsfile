@@ -31,7 +31,6 @@ pipeline {
     parameters {
         choice(
                 name: 'releaseBranch',
-                defaultValue: 'main',
                 choices: branches(),
                 description: 'Choose branch name*'
         )
