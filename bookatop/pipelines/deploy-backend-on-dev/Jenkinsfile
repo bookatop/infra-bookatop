@@ -26,40 +26,36 @@ pipeline {
 
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
-    }
 
-    properties([
-            parameters([
-                    [
-                            $class    : 'ChoiceParameter',
-                            choiceType: 'PT_SINGLE_SELECT',
-                            name      : 'releaseBranch',
-                            script    : [
-                                    $class: 'GroovyScript',
-                                    script: "branches()"
-                            ]
-                    ],
-                    [
-                            $class    : 'ChoiceParameter',
-                            choiceType: 'PT_SINGLE_SELECT',
-                            name      : 'releaseName',
-                            script    : [
-                                    $class: 'GroovyScript',
-                                    script: "releases($releaseBranch)"
-                            ]
-                    ],
-                    [
-                            $class    : 'StringParameterDefinition',
-                            choiceType: 'PT_TEXTBOX',
-                            name      : 'releaseNumber',
-                            script    : [
-                                    $class: 'GroovyScript',
-                                    script: "lastRelease($releaseBranch)"
-                            ]
-                    ]
-            ])
-    ])
-
+        parameters([
+                [
+                        $class    : 'ChoiceParameter',
+                        choiceType: 'PT_SINGLE_SELECT',
+                        name      : 'releaseBranch',
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: "branches()"
+                        ]
+                ],
+                [
+                        $class    : 'ChoiceParameter',
+                        choiceType: 'PT_SINGLE_SELECT',
+                        name      : 'releaseName',
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: "releases($releaseBranch)"
+                        ]
+                ],
+                [
+                        $class    : 'StringParameterDefinition',
+                        choiceType: 'PT_TEXTBOX',
+                        name      : 'releaseNumber',
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: "lastRelease($releaseBranch)"
+                        ]
+                ]
+        ])
 
 //    parameters {
 //        choice(
@@ -81,23 +77,23 @@ pipeline {
 //        )
 //    }
 
-    stages {
-        stage('Build on DEV') {
-            steps {
-                script {
-                    String jenkinsHome = '/var/lib/jenkins'
+        stages {
+            stage('Build on DEV') {
+                steps {
+                    script {
+                        String jenkinsHome = '/var/lib/jenkins'
 
-                    GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/release/${releaseName}-service.jar"
-                    GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
+                        GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/release/${releaseName}-service.jar"
+                        GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
 
-                    String file = 'deploy-backend-on-dev.sh'
-                    String script = libraryResource "com/bookatop/scripts/${file}"
+                        String file = 'deploy-backend-on-dev.sh'
+                        String script = libraryResource "com/bookatop/scripts/${file}"
 
-                    writeFile(file: file, text: script)
-                    sh "chmod +x ./${file}"
-                    sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
+                        writeFile(file: file, text: script)
+                        sh "chmod +x ./${file}"
+                        sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
+                    }
                 }
             }
         }
     }
-}
