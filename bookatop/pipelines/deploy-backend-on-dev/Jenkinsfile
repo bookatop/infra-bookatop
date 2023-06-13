@@ -29,7 +29,8 @@ pipeline {
     }
 
     parameters {
-        ChoiceParameter(
+        choice(
+                $class: ChoiceParameter,
                 choiceType: 'PT_SINGLE_SELECT',
                 name: 'releaseBranch',
                 script: [
@@ -37,7 +38,8 @@ pipeline {
                         script: "branches()"
                 ]
         )
-        ChoiceParameter(
+        choice(
+                $class: ChoiceParameter,
                 choiceType: 'PT_SINGLE_SELECT',
                 name: 'releaseName',
                 script: [
@@ -45,7 +47,8 @@ pipeline {
                         script: "releases($releaseBranch)"
                 ]
         )
-        StringParameterDefinition(
+        string(
+                $class: StringParameterDefinition,
                 choiceType: 'PT_TEXTBOX',
                 name: 'releaseNumber',
                 script: [
