@@ -60,9 +60,7 @@ pipeline {
                                             name      : 'releaseBranch',
                                             script    : [
                                                     $class: 'GroovyScript',
-                                                    script: '''
-                                                        releaseBranch
-                                                    '''
+                                                    script: "return['dev','stage','prod']"
                                             ]
                                     ],
                                     [
@@ -72,9 +70,7 @@ pipeline {
                                             referencedParameters: 'releaseBranch',
                                             script              : [
                                                     $class: 'GroovyScript',
-                                                    script: '''
-                                                       releaseBranch     
-                                                    '''
+                                                    script: "return['dev','stage','prod']"
                                             ]
                                     ],
                                     [
@@ -84,9 +80,7 @@ pipeline {
                                             referencedParameters: 'releaseBranch',
                                             script              : [
                                                     $class: 'GroovyScript',
-                                                    script: '''
-                                                       releaseBranch
-                                                    '''
+                                                    script: "return['dev','stage','prod']"
                                             ]
                                     ]
                             ])
