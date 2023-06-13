@@ -56,6 +56,7 @@ pipeline {
                         ]
                 ]
         ])
+    }
 
 //    parameters {
 //        choice(
@@ -77,23 +78,23 @@ pipeline {
 //        )
 //    }
 
-        stages {
-            stage('Build on DEV') {
-                steps {
-                    script {
-                        String jenkinsHome = '/var/lib/jenkins'
+    stages {
+        stage('Build on DEV') {
+            steps {
+                script {
+                    String jenkinsHome = '/var/lib/jenkins'
 
-                        GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/release/${releaseName}-service.jar"
-                        GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
+                    GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/release/${releaseName}-service.jar"
+                    GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
 
-                        String file = 'deploy-backend-on-dev.sh'
-                        String script = libraryResource "com/bookatop/scripts/${file}"
+                    String file = 'deploy-backend-on-dev.sh'
+                    String script = libraryResource "com/bookatop/scripts/${file}"
 
-                        writeFile(file: file, text: script)
-                        sh "chmod +x ./${file}"
-                        sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
-                    }
+                    writeFile(file: file, text: script)
+                    sh "chmod +x ./${file}"
+                    sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
                 }
             }
         }
     }
+}
