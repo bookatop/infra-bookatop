@@ -1,5 +1,5 @@
 static String branchesPath() {
-    '/var/lib/jenkins/jobs/build-backend-on-dev'
+    '/var/lib/jenkins/jobs/build-backend-on-dev/branches'
 }
 
 def static branches() {
