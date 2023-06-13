@@ -80,7 +80,7 @@ pipeline {
                                             referencedParameters: 'releaseBranch',
                                             script              : [
                                                     $class: 'GroovyScript',
-                                                    script: "return['dev','stage','prod']"
+                                                    script: ""
                                             ]
                                     ]
                             ])
