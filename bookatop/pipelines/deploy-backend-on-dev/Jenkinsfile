@@ -36,12 +36,12 @@ pipeline {
         )
         choice(
                 name: 'releaseName',
-                choices: releases(releaseBranch),
+                choices: releases(${releaseBranch}),
                 description: 'Choose release name*'
         )
         validatingString(
                 name: 'releaseNumber',
-                defaultValue: lastRelease(releaseBranch),
+                defaultValue: lastRelease(${releaseBranch}),
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
                 regex: /^[0-9]+$/
