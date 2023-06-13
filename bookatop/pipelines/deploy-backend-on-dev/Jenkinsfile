@@ -26,33 +26,33 @@ pipeline {
 
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
+    }
 
-        parameters {
-            ChoiceParameter(
-                    choiceType: 'PT_SINGLE_SELECT',
-                    name: 'releaseBranch',
-                    script: [
-                            $class: 'GroovyScript',
-                            script: "branches()"
-                    ]
-            )
-            ChoiceParameter(
-                    choiceType: 'PT_SINGLE_SELECT',
-                    name: 'releaseName',
-                    script: [
-                            $class: 'GroovyScript',
-                            script: "releases($releaseBranch)"
-                    ]
-            )
-            StringParameterDefinition(
-                    choiceType: 'PT_TEXTBOX',
-                    name: 'releaseNumber',
-                    script: [
-                            $class: 'GroovyScript',
-                            script: "lastRelease($releaseBranch)"
-                    ]
-            )
-        }
+    parameters {
+        ChoiceParameter(
+                choiceType: 'PT_SINGLE_SELECT',
+                name: 'releaseBranch',
+                script: [
+                        $class: 'GroovyScript',
+                        script: "branches()"
+                ]
+        )
+        ChoiceParameter(
+                choiceType: 'PT_SINGLE_SELECT',
+                name: 'releaseName',
+                script: [
+                        $class: 'GroovyScript',
+                        script: "releases($releaseBranch)"
+                ]
+        )
+        StringParameterDefinition(
+                choiceType: 'PT_TEXTBOX',
+                name: 'releaseNumber',
+                script: [
+                        $class: 'GroovyScript',
+                        script: "lastRelease($releaseBranch)"
+                ]
+        )
     }
 
 //    parameters {
