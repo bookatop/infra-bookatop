@@ -28,25 +28,56 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
     }
 
-    parameters {
-        choice(
-                name: 'releaseBranch',
-                choices: branches(),
-                description: 'Choose branch name*'
-        )
-        choice(
-                name: 'releaseName',
-                choices: releases(${releaseBranch}),
-                description: 'Choose release name*'
-        )
-        validatingString(
-                name: 'releaseNumber',
-                defaultValue: lastRelease(${releaseBranch}),
-                description: 'Put the build number*',
-                failedValidationMessage: 'Build number is invalid',
-                regex: /^[0-9]+$/
-        )
-    }
+    properties([
+            [
+                    $class    : 'ChoiceParameter',
+                    choiceType: 'PT_SINGLE_SELECT',
+                    name      : 'releaseBranch',
+                    script    : [
+                            $class: 'GroovyScript',
+                            script: "branches()"
+                    ]
+            ],
+            [
+                    $class    : 'ChoiceParameter',
+                    choiceType: 'PT_SINGLE_SELECT',
+                    name      : 'releaseName',
+                    script    : [
+                            $class: 'GroovyScript',
+                            script: "releases($releaseBranch)"
+                    ]
+            ],
+            [
+                    $class    : 'StringParameterDefinition',
+                    choiceType: 'PT_TEXTBOX',
+                    name      : 'releaseNumber',
+                    script    : [
+                            $class: 'GroovyScript',
+                            script: "lastRelease($releaseBranch)"
+                    ]
+            ]
+    ])
+
+
+//    parameters {
+//        choice(
+//                name: 'releaseBranch',
+//                choices: branches(),
+//                description: 'Choose branch name*'
+//        )
+//        choice(
+//                name: 'releaseName',
+//                choices: releases(${releaseBranch}),
+//                description: 'Choose release name*'
+//        )
+//        validatingString(
+//                name: 'releaseNumber',
+//                defaultValue: lastRelease(${releaseBranch}),
+//                description: 'Put the build number*',
+//                failedValidationMessage: 'Build number is invalid',
+//                regex: /^[0-9]+$/
+//        )
+//    }
 
     stages {
         stage('Build on DEV') {
