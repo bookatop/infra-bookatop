@@ -1,12 +1,24 @@
+static String branchesPath() {
+    '/var/lib/jenkins/jobs/build-backend-on-dev'
+}
 
 def static branches() {
-    /*
-    def getTags = ("git ls-remote -t -h git@github.com:bookatop/be-bookatop.git").execute()
-    return getTags.text.readLines().collect {
-        it.split()[1].replaceAll('refs/heads/', '').replaceAll('refs/tags/', '').replaceAll("\\^\\{\\}", '')
+    def branches = ("ls ${branchesPath()}").execute()
+    branches.text.readLines()
+}
+
+def static releases(String branch) {
+    def releases = ("ls ${branchesPath()}/\${branch}/builds/${lastRelease(branch)}/release").execute()
+    releases.text.readLines().collect {
+        it.replace('-service.jar', '')
     }
-    */
-    return ['main']
+}
+
+def static lastRelease(String branch) {
+    def builds = ("ls ${branchesPath()}/\${branch}/builds").execute()
+    builds.text.readLines().findAll() {
+        it.isNumber()
+    }.max()
 }
 
 pipeline {
@@ -19,19 +31,18 @@ pipeline {
     parameters {
         choice(
                 name: 'releaseBranch',
+                defaultValue: 'main',
                 choices: branches(),
                 description: 'Choose branch name*'
         )
-        validatingString(
+        choose(
                 name: 'releaseName',
-                defaultValue: '',
-                description: 'Put the service name*',
-                failedValidationMessage: 'Service name is empty',
-                regex: /^.+$/
+                choices: releases(${releaseBranch}),
+                description: 'Choose release name*'
         )
         validatingString(
                 name: 'releaseNumber',
-                defaultValue: '',
+                defaultValue: lastRelease(${releaseBranch}),
                 description: 'Put the build number*',
                 failedValidationMessage: 'Build number is invalid',
                 regex: /^[0-9]+$/
