@@ -62,14 +62,15 @@ properties([
                                          script   : """
                                              def branches = ${branchesPath()}
                                              def builds = ("ls \$branches/main/builds").execute()
-                                             def releases = builds.text.readLines().findAll() {
+                                             return builds.text.readLines().findAll() {
                                                 it.isNumber()
                                              }.collect {
                                                 it.toInteger()
                                              }.sort {
                                                c1, c2 -> (c1 <=> c2)
+                                             }.collect {
+                                               "'".concat(it.toString()).concat("'")
                                              }
-                                             return releases
                                          """
                                 ]
                         ]
