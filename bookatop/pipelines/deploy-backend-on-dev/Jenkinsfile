@@ -13,7 +13,6 @@ properties([
                         $class              : 'CascadeChoiceParameter',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseName',
-                        referencedParameters: 'releaseBranch',
                         script    : [
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
@@ -26,7 +25,6 @@ properties([
                 ],
                 [
                         $class              : 'CascadeChoiceParameter',
-                        referencedParameters: 'releaseBranch',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseNumber',
                         script    : [
