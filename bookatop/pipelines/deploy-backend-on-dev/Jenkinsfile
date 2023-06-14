@@ -10,7 +10,7 @@ def static branches() {
 }
 
 def static releases(String branch) {
-    def releases = ("ls ${branchesPath()}/\${branch}/builds/${lastRelease(branch)}/release").execute()
+    def releases = ("ls ${branchesPath()}/${branch}/builds/${lastRelease(branch)}/release").execute()
     releases.text.readLines().collect {
         "'".concat(it.replace('-service.jar', '')).concat("'")
     }
