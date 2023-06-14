@@ -6,7 +6,7 @@ properties([
                         name      : 'releaseBranch',
                         script    : [
                                 $class: 'ScriptlerScript',
-                                scriptlerScriptId: 'ReleaseLib.groovy',
+                                scriptlerScriptId: 'Branches.groovy',
                         ]
                 ],
                 [
