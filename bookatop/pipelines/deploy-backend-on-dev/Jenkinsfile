@@ -10,9 +10,8 @@ properties([
                                 script: [
                                     script: """
                                        def branches = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches").execute()
-                                       def sorter = branches.text.readLines()
-                                         .findAll { !it.equals('main') }
-                                       /* Top index value is default value */  
+                                       def sorter = branches.text.readLines().findAll { !it.equals('main') }
+                                       /* Top index is default value */  
                                        sorter.add(0, 'main')
                                        return sorter  
                                     """
