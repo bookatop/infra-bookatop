@@ -12,7 +12,7 @@ def static branches() {
 def static releases(String branch) {
     def releases = ("ls ${branchesPath()}/\${branch}/builds/${lastRelease(branch)}/release").execute()
     releases.text.readLines().collect {
-        it.replace('-service.jar', '')
+        "'".concat(it.replace('-service.jar', '')).concat("'")
     }
 }
 
@@ -34,7 +34,7 @@ properties([
                                 script: [classpath: [],
                                      script   : """                  
                                          return ${branches()}
-                                    """
+                                     """
                                 ]
                         ]
                 ],
@@ -46,7 +46,8 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                    """
+                                             return ${releases(releaseBranch)}
+                                         """
                                 ]
                         ]
                 ],
