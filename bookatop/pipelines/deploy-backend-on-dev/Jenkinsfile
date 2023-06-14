@@ -23,7 +23,7 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             def builds = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches/$releaseBranch/builds").execute()
+                                             def builds = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches/\$releaseBranch/builds").execute()
                                              builds.text.readLines().findAll() {
                                                it.isNumber()
                                              }.sort {
