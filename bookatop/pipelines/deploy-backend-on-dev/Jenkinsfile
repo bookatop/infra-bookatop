@@ -6,7 +6,7 @@ properties([
                         name      : 'releaseBranch',
                         script    : [
                                 $class: 'ScriptlerScript',
-                                scriptlerScriptId: 'Branches.groovy'
+                                scriptlerScriptId: 'Environments.groovy'
                         ]
                 ],
                 [
@@ -16,7 +16,7 @@ properties([
                         referencedParameters : 'releaseBranch',
                         script    : [
                                 $class: 'ScriptlerScript',
-                                scriptlerScriptId: 'Branches.groovy',
+                                scriptlerScriptId: 'HostsInEnv.groovy',
                                 parameters: [
                                         [name: 'releaseBranch', value: '$releaseBranch']
                                 ]
