@@ -9,7 +9,7 @@ properties([
                                 script: [classpath: [],
                                      script   : """                
                                          import ReleaseLib
-                                         return branches()
+                                         return ReleaseLib.branches()
                                      """
                                 ]
                         ]
