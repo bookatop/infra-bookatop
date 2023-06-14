@@ -53,13 +53,23 @@ properties([
                         ]
                 ],
                 [
-                        $class              : 'StringParameterDefinition',
+                        $class              : 'ChoiceParameter',
+                        choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseNumber',
                         script    : [
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             return '200'
+                                             def branches = ${branchesPath()}
+                                             def builds = ("ls branches/main/builds").execute()
+                                             def releases = builds.text.readLines().findAll() {
+                                                it.isNumber()
+                                             }.collect {
+                                                it.toInteger()
+                                             }.sort {
+                                               c1, c2 -> (c1 <=> c2)
+                                             }
+                                             return releases
                                          """
                                 ]
                         ]
