@@ -18,7 +18,7 @@ properties([
                                 $class: 'ScriptlerScript',
                                 scriptlerScriptId: 'HostsInEnv.groovy',
                                 parameters: [
-                                        [name: 'releaseBranch', value: '$releaseBranch']
+                                        [name: 'Environment', value: '$releaseBranch']
                                 ]
                         ]
                 ],
