@@ -15,6 +15,24 @@ properties([
                         ]
                 ],
                 [
+                        $class              : 'ChoiceParameter',
+                        choiceType          : 'PT_SINGLE_SELECT',
+                        name                : 'releaseNumber',
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: [classpath: [],
+                                         script   : """
+                                             def builds = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches/main/builds").execute()
+                                             builds.text.readLines().findAll() {
+                                               it.isNumber()
+                                             }.sort {
+                                                 c1, c2 -> (c2 <=> c1)
+                                             }
+                                         """
+                                ]
+                        ]
+                ],
+                [
                         $class              : 'CascadeChoiceParameter',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseName',
@@ -27,19 +45,6 @@ properties([
                                         script: """
                                            return []
                                         """
-                                ]
-                        ]
-                ],
-                [
-                        $class              : 'ChoiceParameter',
-                        choiceType          : 'PT_SINGLE_SELECT',
-                        name                : 'releaseNumber',
-                        script    : [
-                                $class: 'GroovyScript',
-                                script: [classpath: [],
-                                         script   : """
-                                             return []
-                                         """
                                 ]
                         ]
                 ]
