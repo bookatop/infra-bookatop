@@ -67,8 +67,6 @@ properties([
                                                 it.toInteger()
                                              }.sort {
                                                c1, c2 -> (c1 <=> c2)
-                                             }.collect {
-                                               "'".concat(it.toString()).concat("'")
                                              }
                                          """
                                 ]
