@@ -1,4 +1,4 @@
-load 'JenkinsParameters'
+load 'bookatop/pipelines/deploy-backend-on-dev/JenkinsParameters'
 
 pipeline {
     agent any
