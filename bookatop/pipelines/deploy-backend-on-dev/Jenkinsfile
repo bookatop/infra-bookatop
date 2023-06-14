@@ -40,14 +40,15 @@ properties([
                 ],
                 [
                         $class              : 'CascadeChoiceParameter',
-                        referencedParameters: 'releaseBranch',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseName',
+                        referencedParameters: 'releaseBranch',
                         script    : [
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             return ${releases(releaseBranch)}
+                                             def value = 'main'
+                                             return ${releases(value)}
                                          """
                                 ]
                         ]
@@ -61,7 +62,8 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             def builds = ("ls ${branchesPath()}/main/builds").execute()
+                                             def branchPath = '/var/lib/jenkins/jobs/build-backend-on-dev/branches'
+                                             def builds = ("ls ${branchPath}/main/builds").execute()
                                              return builds.text.readLines().findAll() {
                                                 it.isNumber()
                                              }.collect {
