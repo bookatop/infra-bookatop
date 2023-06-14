@@ -10,15 +10,14 @@ properties([
                         ]
                 ],
                 [
-                        $class              : 'ChoiceParameter',
+                        $class              : 'CascadeChoiceParameter',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseName',
                         script    : [
-                                $class: 'GroovyScript',
-                                script: [classpath: [],
-                                         script   : """                                             
-                                             return []
-                                         """
+                                $class: 'ScriptlerScript',
+                                scriptlerScriptId: 'Branches.groovy',
+                                parameters: [
+                                        [name: 'releaseBranch', value: $releaseBranch]
                                 ]
                         ]
                 ],
