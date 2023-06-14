@@ -54,7 +54,6 @@ properties([
                 ],
                 [
                         $class              : 'StringParameterDefinition',
-                        choiceType          : 'PT_TEXTBOX',
                         name                : 'releaseNumber',
                         script    : [
                                 $class: 'GroovyScript',
