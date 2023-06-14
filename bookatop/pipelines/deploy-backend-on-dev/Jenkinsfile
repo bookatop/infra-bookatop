@@ -61,7 +61,7 @@ properties([
                                 script: [classpath: [],
                                          script   : """
                                              def branches = ${branchesPath()}
-                                             def builds = ("ls branches/main/builds").execute()
+                                             def builds = ("ls \$branches/main/builds").execute()
                                              def releases = builds.text.readLines().findAll() {
                                                 it.isNumber()
                                              }.collect {
