@@ -37,14 +37,15 @@ properties([
                         $class              : 'CascadeChoiceParameter',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseName',
-                        referencedParameters : 'releaseBranch',
+                        referencedParameters : 'releaseBranch, releaseNumber',
                         script    : [
                                 $class: 'GroovyScript',
                                 script: [
                                         classpath: [],
                                         sandbox: false,
                                         script: """
-                                           return []
+                                             def releases = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches/\$releaseBranch/builds/\$releaseNumber/release").execute()
+                                             releases.text.readLines().collect { it.replace('-service.jar', '') }
                                         """
                                 ]
                         ]
