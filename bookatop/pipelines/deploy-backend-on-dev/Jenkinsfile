@@ -31,8 +31,7 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [], sandabox: false,
                                      script   : """
-                                         def list = []
-                                         return list
+                                         return branches()
                                     """
                                 ]
                         ]
