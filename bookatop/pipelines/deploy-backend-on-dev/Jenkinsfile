@@ -1,43 +1,3 @@
-properties([
-        parameters([
-                [
-                        $class    : 'ChoiceParameter',
-                        choiceType: 'PT_SINGLE_SELECT',
-                        name      : 'releaseBranch',
-                        script    : [
-                                $class: 'GroovyScript',
-                                script: [classpath: [], sandabox: false,
-                                     script   : """
-                                         def list = []
-                                         return list
-                                    """
-                                ]
-                        ]
-                ]
-        ])
-])
-
-//[
-//        $class              : 'ChoiceParameter',
-//        choiceType          : 'PT_SINGLE_SELECT',
-//        name                : 'releaseName',
-//        referencedParameters: 'releaseBranch',
-//        script              : [
-//                $class: 'GroovyScript',
-//                script: "return['dev','stage','prod']"
-//        ]
-//],
-//[
-//        $class              : 'StringParameterDefinition',
-//        choiceType          : 'PT_TEXTBOX',
-//        name                : 'releaseNumber',
-//        referencedParameters: 'releaseBranch',
-//        script              : [
-//                $class: 'GroovyScript',
-//                script: ""
-//        ]
-//]
-
 static String branchesPath() {
     '/var/lib/jenkins/jobs/build-backend-on-dev/branches'
 }
@@ -60,6 +20,49 @@ def static lastRelease(String branch) {
         it.isNumber()
     }.max()
 }
+
+properties([
+        parameters([
+                [
+                        $class    : 'ChoiceParameter',
+                        choiceType: 'PT_SINGLE_SELECT',
+                        name      : 'releaseBranch',
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: [classpath: [], sandabox: false,
+                                     script   : """
+                                         def list = []
+                                         return list
+                                    """
+                                ]
+                        ]
+                ],
+                [
+                        $class              : 'ChoiceParameter',
+                        choiceType          : 'PT_SINGLE_SELECT',
+                        name                : 'releaseName',
+                        referencedParameters: 'releaseBranch',
+                        script: [classpath: [], sandabox: false,
+                                 script   : """
+                                         def list = []
+                                         return list
+                                    """
+                        ]
+                ],
+                [
+                        $class              : 'StringParameterDefinition',
+                        choiceType          : 'PT_TEXTBOX',
+                        name                : 'releaseNumber',
+                        referencedParameters: 'releaseBranch',
+                        script: [classpath: [], sandabox: false,
+                                 script   : """
+                                         def list = []
+                                         return list
+                                    """
+                        ]
+                ]
+        ])
+])
 
 pipeline {
     agent any
