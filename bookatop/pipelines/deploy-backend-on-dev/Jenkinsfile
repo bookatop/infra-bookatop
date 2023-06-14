@@ -40,7 +40,7 @@ properties([
                                 script: [classpath: [],
                                          script   : """
                                              import ReleaseLib
-                                             def builds = ("ls ${branchPath()}/main/builds").execute()
+                                             def builds = ("ls \${branchPath()}/main/builds").execute()
                                              return builds.text.readLines().findAll() {
                                                 it.isNumber()
                                              }.collect {
