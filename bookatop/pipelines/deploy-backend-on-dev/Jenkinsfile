@@ -4,7 +4,9 @@ static String branchesPath() {
 
 def static branches() {
     def branches = ("ls ${branchesPath()}").execute()
-    branches.text.readLines()
+    branches.text.readLines().collect {
+        '"'.concat(it.toLowerCase()).concat('"')
+    }
 }
 
 def static releases(String branch) {
@@ -31,7 +33,8 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                      script   : """                  
-                                         return ['BKR-0001-add-actuator', 'BKR-002, BKT-004-Change-jenkinsfile', 'BKT-005-change-readme', 'BKT-change-login-controller', 'fix-123', 'J001-changes', 'main']
+                                         //return ['BKR-0001-add-actuator', 'BKR-002, BKT-004-Change-jenkinsfile', 'BKT-005-change-readme', 'BKT-change-login-controller', 'fix-123', 'J001-changes', 'main']
+                                         return ${branches()}
                                     """
                                 ]
                         ]
