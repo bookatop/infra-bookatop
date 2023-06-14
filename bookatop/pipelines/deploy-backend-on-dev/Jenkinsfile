@@ -17,7 +17,7 @@ def static releases(String branch) {
 }
 
 def static lastRelease(String branch) {
-    def builds = ("ls ${branchesPath()}/\${branch}/builds").execute()
+    def builds = ("ls ${branchesPath()}/${branch}/builds").execute()
     builds.text.readLines().findAll() {
         it.isNumber()
     }.max()
