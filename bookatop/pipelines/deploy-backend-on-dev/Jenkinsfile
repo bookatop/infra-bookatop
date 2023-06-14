@@ -8,7 +8,7 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [], sandbox: true,
                                      script   : '''               
-                                         return ReleaseLib.branches()
+                                         return ReleaseLib.branches1()
                                      '''
                                 ]
                         ]
