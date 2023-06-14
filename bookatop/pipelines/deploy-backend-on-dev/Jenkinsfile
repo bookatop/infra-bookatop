@@ -9,7 +9,7 @@ properties([
                                 script: [
                                     script: """
                                        def branches = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches").execute()
-                                       branches.text.readLines().collect { it.toLowerCase()) }
+                                       branches.text.readLines().collect { it.toLowerCase() }
                                     """
                                 ]
                         ]
