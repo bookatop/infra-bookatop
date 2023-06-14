@@ -5,7 +5,7 @@ static String branchesPath() {
 def static branches() {
     def branches = ("ls ${branchesPath()}").execute()
     branches.text.readLines().collect {
-        '"'.concat(it.toLowerCase()).concat('"')
+        "'".concat(it.toLowerCase()).concat("'")
     }
 }
 
