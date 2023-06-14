@@ -29,7 +29,7 @@ properties([
                         name      : 'releaseBranch',
                         script    : [
                                 $class: 'GroovyScript',
-                                script: [classpath: [], sandabox: false,
+                                script: [classpath: [],
                                      script   : """                        
                                          ${branches()}
                                     """
@@ -42,7 +42,7 @@ properties([
                         name                : 'releaseName',
                         script    : [
                                 $class: 'GroovyScript',
-                                script: [classpath: [], sandabox: false,
+                                script: [classpath: [],
                                          script   : """
                                          def list = []
                                          return list
@@ -56,7 +56,7 @@ properties([
                         name                : 'releaseNumber',
                         script    : [
                                 $class: 'GroovyScript',
-                                script: [classpath: [], sandabox: false,
+                                script: [classpath: [],
                                          script   : """
                                          return ''
                                     """
