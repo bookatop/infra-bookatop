@@ -7,10 +7,10 @@ properties([
                         script    : [
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
-                                     script   : """                
+                                     script   : '''               
                                          import ReleaseLib
                                          return ReleaseLib.branches()
-                                     """
+                                     '''
                                 ]
                         ]
                 ],
