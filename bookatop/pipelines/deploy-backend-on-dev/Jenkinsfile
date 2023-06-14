@@ -5,8 +5,17 @@ properties([
                         choiceType: 'PT_SINGLE_SELECT',
                         name      : 'releaseBranch',
                         script    : [
-                                $class: 'ScriptlerScript',
-                                scriptlerScriptId: 'Environments.groovy'
+                                $class: 'GroovyScript',
+                                script: [
+                                    classpath: [],
+                                    sandbox: false,
+                                    script: """
+                                       def branches = ("ls '/var/lib/jenkins/jobs/build-backend-on-dev/branches'").execute()
+                                       return branches.text.readLines().collect {
+                                                "'".concat(it.toLowerCase()).concat("'")
+                                       }
+                                    """
+                                ]
                         ]
                 ],
                 [
@@ -15,10 +24,13 @@ properties([
                         name                : 'releaseName',
                         referencedParameters : 'releaseBranch',
                         script    : [
-                                $class: 'ScriptlerScript',
-                                scriptlerScriptId: 'HostsInEnv.groovy',
-                                parameters: [
-                                        [name: 'Environment', value: '$releaseBranch']
+                                $class: 'GroovyScript',
+                                script: [
+                                        classpath: [],
+                                        sandbox: false,
+                                        script: """
+                                           return []
+                                        """
                                 ]
                         ]
                 ],
