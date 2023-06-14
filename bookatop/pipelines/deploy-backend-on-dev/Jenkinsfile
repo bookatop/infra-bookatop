@@ -6,10 +6,12 @@ properties([
                         name      : 'releaseBranch',
                         script    : [
                                 $class: 'GroovyScript',
-                                script: """
-                                    def list = []
-                                    return list
-                                """
+                                script: [classpath: [], sandabox: false,
+                                     script   : """
+                                         def list = []
+                                         return list
+                                    """
+                                ]
                         ]
                 ]
         ])
