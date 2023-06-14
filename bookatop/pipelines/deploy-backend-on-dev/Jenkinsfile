@@ -48,7 +48,7 @@ properties([
                                 script: [classpath: [],
                                          script   : """
                                              def value = 'main'
-                                             return ${releases(value)}
+                                             return ${releases(${value})}
                                          """
                                 ]
                         ]
