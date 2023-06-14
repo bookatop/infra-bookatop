@@ -47,7 +47,7 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             return ${releases(releaseBranch)}
+                                             return ${releases('main')}
                                          """
                                 ]
                         ]
