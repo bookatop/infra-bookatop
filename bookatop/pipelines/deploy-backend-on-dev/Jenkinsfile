@@ -4,6 +4,7 @@ static String branchesPath() {
 
 def static branches() {
     def branches = ("ls ${branchesPath()}").execute()
+    println branches
     branches.text.readLines()
 }
 
