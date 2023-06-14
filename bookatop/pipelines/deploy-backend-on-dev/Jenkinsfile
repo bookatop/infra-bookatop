@@ -41,21 +41,27 @@ properties([
                         $class              : 'ChoiceParameter',
                         choiceType          : 'PT_SINGLE_SELECT',
                         name                : 'releaseName',
-                        script: [classpath: [], sandabox: false,
-                                 script   : """
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: [classpath: [], sandabox: false,
+                                         script   : """
                                          def list = []
                                          return list
                                     """
+                                ]
                         ]
                 ],
                 [
                         $class              : 'StringParameterDefinition',
                         choiceType          : 'PT_TEXTBOX',
                         name                : 'releaseNumber',
-                        script: [classpath: [], sandabox: false,
-                                 script   : """
+                        script    : [
+                                $class: 'GroovyScript',
+                                script: [classpath: [], sandabox: false,
+                                         script   : """
                                          return ''
                                     """
+                                ]
                         ]
                 ]
         ])
