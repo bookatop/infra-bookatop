@@ -8,7 +8,6 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                      script   : '''               
-                                         import ReleaseLib
                                          return ReleaseLib.branches()
                                      '''
                                 ]
@@ -23,7 +22,6 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             import ReleaseLib
                                              def value = 'main'
                                              return releases(value)
                                          """
@@ -39,7 +37,6 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             import ReleaseLib
                                              def builds = ("ls \${branchPath()}/main/builds").execute()
                                              return builds.text.readLines().findAll() {
                                                 it.isNumber()
