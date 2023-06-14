@@ -1,4 +1,4 @@
-load 'Parameters.groovy'
+load 'JenkinsParameters'
 
 pipeline {
     agent any
