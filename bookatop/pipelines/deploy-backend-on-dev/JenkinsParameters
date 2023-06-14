@@ -1,11 +1,11 @@
 properties([
         parameters([
                 [
-                        $class    : 'ChoiceParameter',
-                        choiceType: 'PT_SINGLE_SELECT',
-                        name      : 'releaseBranch',
+                        $class     : 'ChoiceParameter',
+                        choiceType : 'PT_SINGLE_SELECT',
+                        name       : 'releaseBranch',
                         description: 'Choose branch name*',
-                        script    : [
+                        script     : [
                                 $class: 'GroovyScript',
                                 script: [
                                         script: """
@@ -24,10 +24,10 @@ properties([
                         name                : 'releaseNumber',
                         description         : 'Put the release number*',
                         referencedParameters: 'releaseBranch',
-                        script    : [
+                        script              : [
                                 $class: 'GroovyScript',
                                 script: [
-                                        script   : """
+                                        script: """
                                     def builds = ("ls /var/lib/jenkins/jobs/build-backend-on-dev/branches/\$releaseBranch/builds").execute()
                                     builds.text.readLines().findAll() { it.isNumber() }.sort { c1, c2 -> (c2 <=> c1) }
                                 """
@@ -35,12 +35,12 @@ properties([
                         ]
                 ],
                 [
-                        $class               : 'CascadeChoiceParameter',
-                        choiceType           : 'PT_SINGLE_SELECT',
-                        name                 : 'releaseName',
-                        referencedParameters : 'releaseBranch, releaseNumber',
-                        description          : 'Choose release name*',
-                        script    : [
+                        $class              : 'CascadeChoiceParameter',
+                        choiceType          : 'PT_SINGLE_SELECT',
+                        name                : 'releaseName',
+                        referencedParameters: 'releaseBranch, releaseNumber',
+                        description         : 'Choose release name*',
+                        script              : [
                                 $class: 'GroovyScript',
                                 script: [
                                         script: """
