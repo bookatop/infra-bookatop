@@ -30,8 +30,8 @@ properties([
                         script    : [
                                 $class: 'GroovyScript',
                                 script: [classpath: [], sandabox: false,
-                                     script   : """
-                                         return ${branches()}
+                                     script   : """                        
+                                         ${branches()}
                                     """
                                 ]
                         ]
