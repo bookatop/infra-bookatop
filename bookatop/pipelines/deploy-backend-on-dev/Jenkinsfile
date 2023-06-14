@@ -6,7 +6,7 @@ properties([
                         name      : 'releaseBranch',
                         script    : [
                                 $class: 'GroovyScript',
-                                script: [classpath: [],
+                                script: [classpath: [], sandbox: true,
                                      script   : '''               
                                          return ReleaseLib.branches()
                                      '''
