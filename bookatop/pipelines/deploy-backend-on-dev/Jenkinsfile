@@ -33,7 +33,6 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                      script   : """                  
-                                         //return ['BKR-0001-add-actuator', 'BKR-002, BKT-004-Change-jenkinsfile', 'BKT-005-change-readme', 'BKT-change-login-controller', 'fix-123', 'J001-changes', 'main']
                                          return ${branches()}
                                     """
                                 ]
