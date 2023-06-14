@@ -5,12 +5,8 @@ properties([
                         choiceType: 'PT_SINGLE_SELECT',
                         name      : 'releaseBranch',
                         script    : [
-                                $class: 'GroovyScript',
-                                script: [classpath: [], sandbox: true,
-                                     script   : '''               
-                                         return ReleaseLib.branches1333333()
-                                     '''
-                                ]
+                                $class: 'ScriptlerScript',
+                                scriptlerScriptId: 'ReleaseLib.groovy',
                         ]
                 ],
                 [
