@@ -39,8 +39,8 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             def branchPath = '/var/lib/jenkins/jobs/build-backend-on-dev/branches'
-                                             def builds = ("ls ${branchPath}/main/builds").execute()
+                                             import ReleaseLib
+                                             def builds = ("ls ${branchPath()}/main/builds").execute()
                                              return builds.text.readLines().findAll() {
                                                 it.isNumber()
                                              }.collect {
