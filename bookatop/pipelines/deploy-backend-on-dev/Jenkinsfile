@@ -60,7 +60,7 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             return ${lastRelease('main')}
+                                             return '200'
                                          """
                                 ]
                         ]
