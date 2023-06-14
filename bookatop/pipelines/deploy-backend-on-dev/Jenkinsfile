@@ -59,7 +59,7 @@ properties([
                                 $class: 'GroovyScript',
                                 script: [classpath: [],
                                          script   : """
-                                             return '200'
+                                             return "200"
                                          """
                                 ]
                         ]
