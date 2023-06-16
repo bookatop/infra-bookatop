@@ -53,6 +53,8 @@ properties([
    ])
 ])
 
+import com.bookatop.pipeline.NameUtils
+
 pipeline {
     agent any
 
@@ -64,8 +66,6 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
-                    import com.bookatop.pipeline.NameUtils
-
                     String jenkinsHome = '/var/lib/jenkins'
                     GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/release/${releaseName}-service.jar"
                     GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
