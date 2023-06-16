@@ -64,17 +64,19 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
-                    String jenkinsHome = '/var/lib/jenkins'
+                    import com.bookatop.pipeline.NameUtils
 
+                    String jenkinsHome = '/var/lib/jenkins'
                     GString sourceRelease = "${jenkinsHome}/jobs/build-backend-on-dev/branches/${releaseBranch}/builds/${releaseNumber}/release/${releaseName}-service.jar"
                     GString destRelease = "/path/dev-env/be-bookatop/deploy/${releaseName}-service.jar"
 
                     String file = 'deploy-backend-on-dev.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
+                    String daemonName = NameUtils.serviceToDaemon(releaseName)
 
                     writeFile(file: file, text: script)
                     sh "chmod +x ./${file}"
-                    sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
+                    sh "./${file} ${sourceRelease} ${destRelease} ${daemonName}"
                 }
             }
         }
