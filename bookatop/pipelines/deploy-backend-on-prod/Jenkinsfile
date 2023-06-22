@@ -1,3 +1,5 @@
+import com.bookatop.pipeline.NameUtils
+
 pipeline {
     agent any
 
@@ -26,10 +28,11 @@ pipeline {
 
                     String file = 'deploy-backend-on-prod.sh'
                     String script = libraryResource "com/bookatop/scripts/${file}"
+                    String daemonName = NameUtils.serviceToDaemon(releaseName)
 
                     writeFile(file: file, text: script)
                     sh "chmod +x ./${file}"
-                    sh "./${file} ${sourceRelease} ${destRelease} ${releaseName}"
+                    sh "./${file} ${sourceRelease} ${destRelease} ${releaseName} ${daemonName}"
                 }
             }
         }
