@@ -9,6 +9,7 @@ pipeline {
         stage('Build on DEV') {
             steps {
                 script {
+                    echo "JAVA_HOME is ${JAVA_HOME}"
                     String environment = 'dev'
                     String projectName = 'build-backend-on-dev'
                     String jenkinsHome = '/var/lib/jenkins'
