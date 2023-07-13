@@ -6,7 +6,7 @@ pipeline {
     }
 
     tools {
-        jdk 'openjdk11'
+        jdk 'openjdk-17'
     }
 
     stages {
